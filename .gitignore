@@ -1,0 +1,23 @@
+# data never lives in git — see scripts/bootstrap.sh
+/data/
+verification.json
+*.npz
+*.ndjson
+*.ndjson.gz
+
+# build output
+site/.next/
+site/out/
+site/node_modules/
+site/.wrangler/
+site/tsconfig.tsbuildinfo
+
+# secrets and deploy env — nothing here is ever committed
+.env
+*.env
+.secrets/
+site/public/*.txt
+
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,7 @@
+/api/*
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: *
+
+/embed.js
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: *

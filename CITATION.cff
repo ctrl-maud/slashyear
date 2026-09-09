@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this dataset or pipeline, please cite it as below."
+title: "slashyear: the year-by-year historical record, sourced line by line"
+abstract: >-
+  A corpus of dated historical events extracted from English Wikipedia year articles, in which
+  every entry is quoted verbatim from a specific numbered revision and carries that revision id,
+  article title and section anchor, so each row is mechanically checkable against its source.
+  Includes the extraction pipeline, the published site, and the verification gates that prove
+  every published sentence appears in the revision it cites.
+type: dataset
+license: CC-BY-SA-4.0
+url: "https://slashyear.com"
+repository-code: "https://github.com/ctrl-maud/slashyear"
+keywords:
+  - history
+  - chronology
+  - timeline
+  - wikipedia
+  - open data
+  - provenance
+  - retrieval augmented generation
+authors:
+  - name: "slashyear"
+    website: "https://slashyear.com"
