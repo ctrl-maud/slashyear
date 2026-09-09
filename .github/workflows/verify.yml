@@ -14,10 +14,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: install
-        run: python -m pip install --quiet requests numpy huggingface_hub
+        run: python -m pip install --quiet requests numpy
       - name: compile every stage
-        run: python -m compileall -q pipeline trainfilter
-      - name: fetch a sampled snapshot
+        run: python -m compileall -q pipeline trainfilter tools
+      - name: fetch the published snapshot
         run: scripts/bootstrap.sh
       - name: rebuild and run the gates
         run: scripts/reproduce.sh

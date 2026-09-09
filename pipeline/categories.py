@@ -14,7 +14,6 @@ are requested.
 Usage:
   categories.py [--claims data/claims] [--out data/categories.json] [--workers 8]
 """
-import os
 from __future__ import annotations
 import argparse, glob, json, os, sys, time, threading
 from concurrent.futures import ThreadPoolExecutor
