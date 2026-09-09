@@ -153,8 +153,12 @@ def main() -> int:
         url = url_of(path, a.out)
         doc = open(path, encoding="utf-8").read()
 
-        if url in ("/_not-found", "/500"):
-            continue  # Next internals: not linked from anywhere and not in the sitemap
+        if url == "/_not-found":
+            continue  # a genuine Next internal: not linked from anywhere, not in the sitemap
+        # /500 used to be skipped here as another "Next internal". It is not one: it is the
+        # year page for 500 CE, it is linked from /499 and /501, and postbuild puts it in the
+        # sitemap like every other year. The exemption is what let Next's noindex sit on a
+        # published page unnoticed, so /500 is now audited exactly like /499.
         if url == "__notfound__":
             if not NOINDEX.search(doc):
                 fail["robots"].append("404.html is missing noindex")

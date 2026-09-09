@@ -187,6 +187,38 @@ def fix_404(out: str, site: str, base: str) -> str:
     return "404.html = not-found page, /404 -> /404/ = the year 404 CE page"
 
 
+ROBOTS_INDEXABLE = ('<meta name="robots" content="index, follow, '
+                    'max-image-preview:large, max-snippet:-1"/>')
+
+
+def fix_500(out: str) -> str:
+    """THE 500 COLLISION — the twin of the 404 one above, and quieter, because nothing
+    breaks visibly.
+
+    Next reserves /500 for its server-error page, and for a static export it stamps
+    `robots: noindex` onto whatever ends up at that path. What ends up there is the year
+    page for 500 CE: the title, description and canonical are all correct, the body is
+    Theodoric's Arian Baptistry, and the noindex is the only thing wrong with it. So the
+    page looks perfect in a browser and is invisible to every search engine, while sitting
+    in the sitemap asking to be indexed -- which reads to Search Console as a contradiction
+    rather than as a page.
+
+    Cloudflare Pages does not reserve /500 the way it reserves 404.html, so unlike the 404
+    case there is nothing to move: the file stays where it is and only the robots meta is
+    corrected."""
+    page = os.path.join(out, "500.html")
+    if not os.path.exists(page):
+        return "no 500.html in export — nothing to do"
+    body = open(page, encoding="utf-8").read()
+    if "500 CE" not in body:
+        return "500.html is not the year page — leaving it alone"
+    fixed = body.replace('<meta name="robots" content="noindex"/>', ROBOTS_INDEXABLE, 1)
+    if fixed == body:
+        return "500.html already indexable"
+    open(page, "w", encoding="utf-8").write(fixed)
+    return "500.html = the year 500 CE page, now indexable (Next had stamped it noindex)"
+
+
 # Cloudflare Pages accepts 2,100 static rules in _redirects and silently ignores the rest,
 # so the alias redirects are ranked by how much timeline they represent and capped well
 # under the ceiling.
@@ -386,7 +418,7 @@ def write_entities_api(out: str, site: str) -> str:
 def write_search_index(out: str, site: str) -> str:
     """One small file the search endpoint holds in memory.
 
-    Full-text search over 86,902 sentences would need a database; this does the useful
+    Full-text search over 85,753 sentences would need a database; this does the useful
     half without one. Every sentence on the site is already filed under the subjects
     Wikipedia linked in it, so resolving a query to subjects and then reading their
     timelines answers "what happened to X" exactly, and costs one 400 KB file plus one
@@ -442,7 +474,7 @@ def write_text_index(out: str, site: str) -> str:
     Matching a query to subjects only answers questions about subjects big enough to have
     earned a page. Krakatoa is in three years, has no page, and returned nothing -- which
     is the exact moment a machine gives up on you and goes back to scraping an
-    encyclopedia. This indexes the words themselves: 86,902 sentences, postings bucketed
+    encyclopedia. This indexes the words themselves: 85,753 sentences, postings bucketed
     by first letter so a query loads two or three files, and the sentences themselves in
     256-row shards so a result set hydrates from about a dozen small reads. No database,
     nothing running, and it cannot drift from the site because it is built from the same
@@ -898,6 +930,7 @@ def main() -> int:
     a = ap.parse_args()
     base = a.base.rstrip("/")
     print(" ", fix_404(a.out, a.site, base))
+    print(" ", fix_500(a.out))
     print(" ", write_redirects(a.out, base, a.site))
     print(" ", write_api(a.out, a.site))
     print(" ", write_entities_api(a.out, a.site))
