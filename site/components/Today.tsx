@@ -39,12 +39,31 @@ export default function Today() {
             g.items.map((it) => ({ ...it, kind: g.title })))
           .sort((a: Item, b: Item) => a.year - b.year);
         if (!all.length) return;
-        // Four picks spread evenly across the whole range, oldest first.
+        // Four picks spread across the whole range, oldest first — but a teaser row has
+        // to stand alone. "Died: Marcus Annius Verus, Roman co-ruler" is a fragment with
+        // no story; near each spread position, prefer a row that carries an actual
+        // clause: an event sentence, or a birth/death saying more than name and title.
+        const standsAlone = (it: Item) =>
+          it.kind === "Events" ||
+          it.text.replace(/\((?:born|died|b\.|d\.)[^)]*\)/g, "").trim().length >= 70;
         const want = Math.min(4, all.length);
-        const picks = Array.from(new Set(
-          Array.from({ length: want }, (_, i) =>
-            Math.round((i * (all.length - 1)) / Math.max(1, want - 1))),
-        ));
+        const picks: number[] = [];
+        for (let i = 0; i < want; i++) {
+          const target = Math.round((i * (all.length - 1)) / Math.max(1, want - 1));
+          const radius = Math.max(1, Math.floor(all.length / (want * 2)));
+          let fallback = -1;
+          let best = -1;
+          for (let off = 0; off <= radius && best < 0; off++) {
+            for (const j of [target - off, target + off]) {
+              if (j < 0 || j >= all.length || picks.includes(j)) continue;
+              if (fallback < 0) fallback = j;
+              if (standsAlone(all[j])) { best = j; break; }
+            }
+          }
+          const pick = best >= 0 ? best : fallback;
+          if (pick >= 0 && !picks.includes(pick)) picks.push(pick);
+        }
+        picks.sort((a, b) => a - b);
         setDay({
           label: d.label,
           slug,
@@ -76,9 +95,12 @@ export default function Today() {
             >
               {year(item.year_label)}
             </a>
-            {item.kind === "Births" ? (
+            {/* The label makes a bare "Aurelian, Roman emperor" read as the death it is,
+                but next to a row that already says "…is assassinated…" it is noise. */}
+            {item.kind === "Births" && !/\bis born\b/.test(item.text) ? (
               <span className="mr-1 text-muted-foreground">Born:</span>
-            ) : item.kind === "Deaths" ? (
+            ) : item.kind === "Deaths" &&
+              !/\b(dies|is (assassinated|killed|executed|murdered))\b/.test(item.text) ? (
               <span className="mr-1 text-muted-foreground">Died:</span>
             ) : null}
             {readable(item.text)}

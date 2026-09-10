@@ -43,7 +43,9 @@ MONTHS = ["January", "February", "March", "April", "May", "June",
 DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 DAY_DATE = re.compile(r"^(" + "|".join(MONTHS) + r") (\d{1,2})$")
 # "January 5 - Edward the Confessor dies..." -> the sentence without its date prefix.
-LEAD_IN = re.compile(r"^\s*[–—-]\s*")
+# The colon is a separator too: "1 April: Economic Minister Domingo Cavallo..." (929
+# rows used it, or led with a year like "15 April – 1969 EC-121 shootdown incident").
+LEAD_IN = re.compile(r"^\s*[–—:-]\s*")
 _M = "|".join(MONTHS)
 # The trailing (?![\d,]) is load-bearing: without it "November 5 - 11,000 scientists
 # publish a study" reads as the span 5-11 and the study lands on the 6th through the 11th.
@@ -91,18 +93,36 @@ def slug(month: str, day: int) -> str:
 
 def strip_prefix(text: str, date: str) -> str:
     """Drop the date the source printed at the head of the sentence, since the page is
-    that date. Anything that does not actually start with the date is left alone."""
-    if not text.startswith(date):
-        return text
-    rest = text[len(date):]
-    # "August 13-29 - The 2004 Summer Olympics are held in Athens": the sentence prints a
-    # range longer than span_days will file (an Olympics runs 16 days, the span cap is
-    # 14), so it is filed on its first day only -- and stripping "August 13" off the front
-    # leaves "29 - The 2004 Summer Olympics". Never cut a printed range in half.
-    if re.match(r"^\s*[–—-]\s*\d", rest):
-        return text
-    stripped = LEAD_IN.sub("", rest)
-    return stripped if stripped and stripped != rest else text
+    that date. Anything that does not actually start with the date is left alone.
+
+    `date` is stored month-first ("September 10") but older articles print the same date
+    day-first ("10 September – Hugh Roe O'Donnell..."), so both spellings are tried:
+    14,447 rows sat on their calendar page repeating the date the heading already says."""
+    month, day = date.rsplit(" ", 1)
+    for form in (date, f"{day} {month}"):
+        if not text.startswith(form):
+            continue
+        rest = text[len(form):]
+        # "August 13-29 - The 2004 Summer Olympics are held in Athens": the sentence
+        # prints a range longer than span_days will file (an Olympics runs 16 days, the
+        # span cap is 14), so it is filed on its first day only -- and stripping
+        # "August 13" off the front leaves "29 - The 2004 Summer Olympics". Never cut a
+        # printed range in half. Day-first ranges ("10-12 September") never reach here:
+        # their text starts with the range, not with either single-date form.
+        # A digit here is only a range's other half when it is genuinely day-shaped
+        # AND what follows reads like a range: another dash into the sentence
+        # ("-29 - The 2004 Summer Olympics"), a month ("–3 November - Exposition
+        # Universelle", "– October 2 –"), or nothing at all. "– 94 fans are killed",
+        # "– 16-year old Robert II", "– 2,000 people die", "– 17th Congress" and
+        # "– 18 April 2007 Baghdad bombings" (an article title, month then a year)
+        # are all sentences, and the date must still come off their front.
+        m2 = re.match(rf"^\s*[–—-]\s*(\d{{1,2}})(?!\d|,|st|nd|rd|th)"
+                      rf"(\s*$|\s*[–—-]\s|\s+(?:{_M})(?:\s+\d{{1,2}}(?!\d))?\s*(?:[–—-]|$))", rest)
+        if m2 and 1 <= int(m2.group(1)) <= 31:
+            return text
+        stripped = LEAD_IN.sub("", rest)
+        return stripped if stripped and stripped != rest else text
+    return text
 
 
 def kind(section_title: str) -> str:
