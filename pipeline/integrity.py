@@ -45,7 +45,10 @@ def strip_raw(raw: str) -> str:
     disagrees, which is the only way a cleaner bug shows up."""
     s = raw
     for _ in range(8):                                   # [[File:...]] with nested links
-        s2 = re.sub(r"\[\[(?:File|Image):(?:[^\[\]]|\[\[[^\]]*\]\])*\]\]", "", s, flags=re.I)
+        # The caption may also carry a single-bracket aside — "[of the Mandate]" in the
+        # 1930 Palestine row — which is neither a plain char nor a [[link]].
+        s2 = re.sub(r"\[\[(?:File|Image):(?:[^\[\]]|\[\[[^\]]*\]\]|\[[^\[\]]*\])*\]\]",
+                    "", s, flags=re.I)
         if s2 == s:
             break
         s = s2
@@ -65,6 +68,7 @@ def strip_raw(raw: str) -> str:
     s = re.sub(r"\[\[(?:[^\]|]*\|)?([^\]|]*)\]\]", r"\1", s)   # piped links
     s = re.sub(r"\[https?://\S+\s+([^\]]*)\]", r"\1", s)       # labelled external
     s = re.sub(r"\[https?://\S+\]", "", s)
+    s = re.sub(r"\[https?://.*$", "", s, flags=re.S)     # an external link that never closes
     s = re.sub(r"</?(?:small|big|sup|sub|i|b|span|div|br\s*/?)[^>]*>", "", s)
     s = s.replace("'''", "").replace("''", "")
     s = s.replace("&nbsp;", " ").replace("&ndash;", "–").replace("&amp;", "&")
@@ -258,19 +262,40 @@ def main() -> int:
                                      f"{clause[:90]!r}")
 
         # -- ANCHOR: the cite anchor must be a heading in the source revision
+        # Headings PER REVISION, not per year: a row quoted from "1969 in Japan" or from
+        # "Deaths in October 2011" cites that article's revision, and checking its anchor
+        # against the year article's headings marks every one of them wrong -- 6,802 rows
+        # the first time the country harvest was built.
+        def headings(wt: str) -> set:
+            hs = {re.sub(r"\s+", " ", h.strip()).replace(" ", "_")
+                  for h in re.findall(r"^=+\s*(.+?)\s*=+\s*$", wt, flags=re.M)}
+            return {re.sub(r"\[\[(?:[^\]|]*\|)?([^\]|]*)\]\]", r"\1", h) for h in hs}
+
+        heads_by_revid = {}
         rpath = os.path.join(a.raw, f"{y}.json")
         if os.path.exists(rpath):
-            wt = load(rpath).get("wikitext", "")
-            heads = {re.sub(r"\s+", " ", h.strip()).replace(" ", "_")
-                     for h in re.findall(r"^=+\s*(.+?)\s*=+\s*$", wt, flags=re.M)}
-            heads = {re.sub(r"\[\[(?:[^\]|]*\|)?([^\]|]*)\]\]", r"\1", h) for h in heads}
+            rec = load(rpath)
+            heads_by_revid[rec["source"]["revid"]] = headings(rec.get("wikitext", ""))
+        dpath = os.path.join(a.raw, "deaths", f"{y}.json")
+        if os.path.exists(dpath):
+            for d in load(dpath)["docs"]:
+                heads_by_revid[d["source"]["revid"]] = headings(d["wikitext"])
+        for cpath in glob.glob(os.path.join(a.raw, "places", "*", f"{y}.json")):
+            d = load(cpath)
+            heads_by_revid[d["source"]["revid"]] = headings(d["wikitext"])
+        if heads_by_revid:
             for section in doc.get("sections", []):
                 for item in section["items"]:
-                    url = (item.get("cite") or {}).get("url", "")
+                    cite = item.get("cite") or {}
+                    url = cite.get("url", "")
                     if "#" not in url:
                         continue
                     anchor = url.split("#", 1)[1]
-                    if anchor and anchor not in heads:
+                    heads = heads_by_revid.get(cite.get("revid"))
+                    if heads is None:
+                        flag("ANCHOR", f"{where}: cites revision {cite.get('revid')} "
+                                       f"which is in no harvested article")
+                    elif anchor and anchor not in heads:
                         flag("ANCHOR", f"{where}: #{anchor} is not a heading in the revision")
 
     stats["year_pages"] = len(year_paths)

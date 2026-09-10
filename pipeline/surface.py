@@ -12,7 +12,7 @@ with nothing underneath them: the data was empty, the build was green, and no te
 
 Five checks, each mechanical, each exiting non-zero on failure:
 
-  KIND      a case list per page kind -- topic hubs, decades, centuries, entity
+  KIND      a case list per page kind -- topic hubs, decades, centuries, countries, entity
             timelines -- of the sort of row a reader would expect to find there.
   SHAPE     no published sentence, on any page kind, may open on punctuation, on a bare
             "30 - ", or be shorter than a clause. This is the class verify.py structurally
@@ -117,6 +117,27 @@ ENTITY_CASES: dict[str, str] = {
     "johannes-gutenberg": "Gutenberg",
 }
 
+# country slug -> a phrase that must appear somewhere on that country's page. Deliberately
+# broad: each century on a country page shows a sample spread across it, so pinning the
+# test to one specific event would fail on the sampling rather than on a defect. What this
+# catches is the page being empty, being built from the wrong articles, or a country whose
+# harvest silently stopped -- and the list is chosen to span the regions the corpus was
+# measured thin in, not the ones it was already fat in.
+PLACE_CASES: dict[str, str] = {
+    "japan": "Japan|Tokyo|Japanese",
+    "india": "India|Indian|Delhi",
+    "china": "China|Chinese|Beijing|Peking",
+    "brazil": "Brazil|Brazilian",
+    "nigeria": "Nigeria|Nigerian|Lagos",
+    "south-africa": "South Africa|African",
+    "mexico": "Mexico|Mexican",
+    "egypt": "Egypt|Egyptian|Cairo",
+    "south-korea": "Korea|Korean|Seoul",
+    "indonesia": "Indonesia|Indonesian|Jakarta",
+    "canada": "Canada|Canadian",
+    "france": "France|French|Paris",
+}
+
 # ---------------------------------------------------------------------------- shape --
 
 _MONTH = ("January|February|March|April|May|June|July|August|September|October|"
@@ -138,6 +159,13 @@ UNITS_SPELLED = r"foot|feet|metres|meters|miles|kilometres|kilometers|inches|yar
 TWO_UNITS = re.compile(rf"\b\d[\d,.]*\s*(?:{UNITS_SPELLED}{UNITS})\s+(?:{UNITS})\b(?![a-z])")
 # An editor's note about the ARTICLE, printed as though it were part of the statement.
 EDITOR_NOTE = re.compile(r"\b(?:clarification|citation|verification|dubious)\s+needed", re.I)
+# An editor commented a line OUT of the article and we published it, sometimes still
+# carrying the "-->" that closed the comment. The cleaner strips a comment that opens and
+# closes on one line, which is precisely why a multi-line one was invisible for 250 rows.
+COMMENTED = re.compile(r"<!--|-->")
+# "September 18– – The island of Møn is divided into estates": a nested bullet whose parent
+# printed the date with a trailing dash, joined to the child with another one.
+DOUBLE_SEP = re.compile(r"^[^–—-]{0,30}[–—-]\s*[–—-]")
 
 
 def shape_problem(text: str) -> str | None:
@@ -159,6 +187,10 @@ def shape_problem(text: str) -> str | None:
         return "a measurement printed with two units -- a convert template lost its number"
     if EDITOR_NOTE.search(text):
         return "an editor's maintenance note published as part of the sentence"
+    if COMMENTED.search(text):
+        return "an HTML comment marker -- this line was commented OUT of the article"
+    if DOUBLE_SEP.match(text):
+        return "two separators after the date -- a parent bullet's dash was joined twice"
     if len(text) < 12:
         return "shorter than a clause"
     return None
@@ -257,6 +289,34 @@ def main() -> int:
             fails.append(f"TIMELINE /timeline/{found['slug']} carries no row matching {phrase!r}")
     stats["entity_cases"] = len(ENTITY_CASES)
 
+    # ---- KIND: country pages ----------------------------------------------------
+    # This page kind did not exist before the country-year harvest, and the lesson this
+    # file was written for is that a page kind no test names is exactly where the next
+    # defect sits.
+    misfiled = 0
+    for slug, phrase in PLACE_CASES.items():
+        path = os.path.join(a.site, "cross", "place", f"{slug}.json")
+        if not os.path.exists(path):
+            fails.append(f"PLACE /in/{slug} does not exist")
+            continue
+        page = load(path)
+        blob = " ".join(i["text"] for c in page["centuries"] for i in c["items"])
+        if not hit(blob, phrase):
+            fails.append(f"PLACE /in/{slug} carries no row matching {phrase!r}")
+    for path in sorted(glob.glob(os.path.join(a.site, "cross", "place", "*.json"))):
+        page = load(path)
+        for c in page["centuries"]:
+            for i in c["items"]:
+                # A row filed under the wrong country is invisible to every other test:
+                # it is correctly quoted, correctly cited, and on a page about a nation it
+                # has nothing to do with.
+                if i.get("country") != page["label"]:
+                    misfiled += 1
+    if misfiled:
+        fails.append(f"PLACE {misfiled} rows sit on a country page that is not their own country")
+    stats["place_cases"] = len(PLACE_CASES)
+    stats["place_pages"] = len(glob.glob(os.path.join(a.site, "cross", "place", "*.json")))
+
     # ---- SHAPE + TRACE ----------------------------------------------------------
     years = year_rows(a.site)
     stats["year_rows"] = sum(len(v) for v in years.values())
@@ -314,6 +374,10 @@ def main() -> int:
         doc = load(path)
         if "items" in doc:
             check_rows("timeline", doc["slug"], doc["items"])
+    for path in sorted(glob.glob(os.path.join(a.site, "cross", "place", "*.json"))):
+        doc = load(path)
+        for c in doc["centuries"]:
+            check_rows("place", doc["slug"], c["items"])
 
     stats["cross_rows"] = cross_rows
     for label, n in shape.items():
@@ -365,7 +429,9 @@ def main() -> int:
 
     # ---- SPAN: a calendar row printing a range must contain the day of the page it is on --
     span_bad = 0
-    span_rx = re.compile(r"^([A-Z][a-z]+) (\d{1,2})\s*[–—-]\s*(?:([A-Z][a-z]+) )?(\d{1,2})(?![\d,])")
+    # (?!\d|st|nd|rd|th) so that "February 10 — 17th Congress of the All-Union Communist
+    # Party" is not read as the range 10-17: an ordinal is a count, not a day.
+    span_rx = re.compile(r"^([A-Z][a-z]+) (\d{1,2})\s*[–—-]\s*(?:([A-Z][a-z]+) )?(\d{1,2})(?!\d|,|st|nd|rd|th)")
     for path in sorted(glob.glob(os.path.join(a.site, "dates", "*.json"))):
         doc = load(path)
         if "groups" not in doc:
@@ -472,7 +538,7 @@ def main() -> int:
             print("  ." + line)
         print(f"surface: {stats.get('year_rows', 0):,} year rows and "
               f"{stats.get('cross_rows', 0):,} cross-cut rows checked; "
-              f"{stats.get('topic_cases', 0) + stats.get('decade_cases', 0) + stats.get('century_cases', 0) + stats.get('entity_cases', 0)} "
+              f"{stats.get('topic_cases', 0) + stats.get('decade_cases', 0) + stats.get('century_cases', 0) + stats.get('entity_cases', 0) + stats.get('place_cases', 0)} "
               f"page-kind cases", flush=True)
     if a.report:
         json.dump({"stats": stats, "failures": fails},

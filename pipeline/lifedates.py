@@ -39,11 +39,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 WDQS = "https://query.wikidata.org/sparql"
-# Wikimedia's User-Agent policy wants a way to reach the operator. A URL satisfies it;
-# set SLASHYEAR_CONTACT to add your own address when running the pipeline yourself.
-UA = "slashyear-lifedates/1.0 (https://www.slashyear.com" + (
-    "; " + os.environ["SLASHYEAR_CONTACT"] if os.environ.get("SLASHYEAR_CONTACT") else ""
-) + ")"
+UA = "slashyear-lifedates/1.0 (https://www.slashyear.com; ahmadopsr@gmail.com)"
 MONTHS = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
 MI = {m: i + 1 for i, m in enumerate(MONTHS)}

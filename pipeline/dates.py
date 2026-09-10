@@ -47,8 +47,10 @@ LEAD_IN = re.compile(r"^\s*[–—-]\s*")
 _M = "|".join(MONTHS)
 # The trailing (?![\d,]) is load-bearing: without it "November 5 - 11,000 scientists
 # publish a study" reads as the span 5-11 and the study lands on the 6th through the 11th.
-SPAN_SAME = re.compile(rf"^({_M})\s+(\d{{1,2}})\s*[–—-]\s*(\d{{1,2}})(?![\d,])")
-SPAN_CROSS = re.compile(rf"^({_M})\s+(\d{{1,2}})\s*[–—-]\s*({_M})\s+(\d{{1,2}})(?![\d,])")
+# (?!\d|,|st|nd|rd|th): "February 10 - 17th Congress of the All-Union Communist Party"
+# is not the range 10-17. An ordinal is a count of congresses, not a day of the month.
+SPAN_SAME = re.compile(rf"^({_M})\s+(\d{{1,2}})\s*[–—-]\s*(\d{{1,2}})(?!\d|,|st|nd|rd|th)")
+SPAN_CROSS = re.compile(rf"^({_M})\s+(\d{{1,2}})\s*[–—-]\s*({_M})\s+(\d{{1,2}})(?!\d|,|st|nd|rd|th)")
 MAX_SPAN_DAYS = 14
 
 

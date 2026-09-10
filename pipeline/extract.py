@@ -54,7 +54,23 @@ SKIP_TOP = {"references", "external links", "see also", "notes", "sources",
             # re-filed under our own section taxonomy. Every bullet on this site has to
             # stand on its own, so these do not qualify.
             "nobel prizes", "fields medal", "templeton prize",
-            "right livelihood award", "other academic awards"}
+            "right livelihood award", "other academic awards",
+            # Country-year articles ("1969 in Japan") open with a table of who held which
+            # office that year -- "Prime Minister: Eisaku Sato", "Governors" underneath
+            # it. True, but it is a state of affairs and not something that happened, and
+            # stripped of the heading that says which office it is, the line names a
+            # person and nothing else. Added 2026-09-09 with places.py.
+            "incumbents", "incumbent", "incumbents and office holders",
+            "government", "federal government", "state governments",
+            "monarch", "heads of state", "office holders",
+            # Catalogue sections, the same judgement as the Nobel tables above: their lines
+            # are a maker and a title and nothing else -- "Peter Paul Rubens - The Origin of
+            # the Milky Way, now in the Museo del Prado", "Alexander Pope's satirical poem
+            # The Dunciad" -- and once our own section taxonomy replaces the heading that
+            # said these were works made that year, the row states nothing. The prose
+            # culture sections ("Arts and literature", "Culture", "Literature") are kept:
+            # their lines are sentences and they survive the move.
+            "works of art", "new books", "publications", "poetry and songs", "prose"}
 
 # ---------------------------------------------------------------- {{convert}} --------
 # The input side of a convert call is "<number> [joiner <number>...] <unit>", optionally a
@@ -522,6 +538,9 @@ def wanted_tops(wikitext: str) -> set[str]:
 
 # Not DATE_LEAD: that one is defined above with named groups and parse_date depends on it.
 DAY_LEAD = re.compile(rf"^((?:{MONTH_RE})\s+\d{{1,2}}|\d{{1,2}}\s+(?:{MONTH_RE}))\b")
+# A month AND a day, never a bare month: "June Gilmore, 57, American baseball player" opens
+# on a month only because June is also a first name, and 345 death lines look like that.
+OWN_DAY = re.compile(rf"^(?:{MONTH_RE})\s+\d{{1,2}}\b")
 
 
 def date_header(bare: str) -> str | None:
@@ -545,17 +564,83 @@ def date_header(bare: str) -> str | None:
                   s[m.end():].strip(" \u2013\u2014-")).strip()
     if rest and not (rest.endswith(":") and len(rest.split()) <= 4):
         return None
-    return m.group(1)
+    # "September 18-" as the parent bullet of a run: keep the date, drop the dangling
+    # separator, or the join below prints "September 18- - The island of Mon is divided".
+    return m.group(1).rstrip(" \u2013\u2014-")
 
 
-def iter_sections(wikitext: str):
-    """Yield (heading_trail, line) for every top-level list item under a wanted section."""
+def header_context(bare: str) -> str | None:
+    """What a grouping header says beyond its date, so its children can carry it.
+
+    "September 9 (killed at the Battle of Flodden)" is a header for a run of eleven
+    people. The children inherit the date, but until 2026-09-10 the parenthetical went
+    nowhere: each child published as "Alexander Stewart, Scottish archbishop (b. 1493)"
+    with nothing saying how he died, and the header itself (colon-free in the source)
+    shipped as a standalone bullet that means nothing on its own — reported in issue #1.
+
+    A parenthetical tail is context unless it opens with a month, which is the alternate-
+    date shape ("December 7 (December 8 - 3:18 a.m., Japan Standard Time)"). A topic tail
+    ("WWII:", "In the United States:") is a label, not a sentence fragment the children
+    can wear — except a lowercase one ("executed:"), which reads as a predicate and is
+    kept. The text returned here is already cleaned, so it is the source's own words.
+    """
+    s = bare.strip()
+    m = DAY_LEAD.match(s)
+    if not m:
+        return None
+    tail = s[m.end():].strip(" \u2013\u2014-").strip()
+    pm = re.match(r"^\((.+)\)\s*:?\s*$", tail)
+    if pm:
+        inner = pm.group(1).strip()
+        if re.match(rf"^(?:{MONTH_RE})\b", inner):
+            return None
+        return inner or None
+    if tail.endswith(":"):
+        t = tail.rstrip(":").strip()
+        if t and t[0].islower() and len(t.split()) <= 4:
+            return t
+    return None
+
+
+# A month written as a definition-list term rather than a heading:
+#   ==Events==
+#   ;February
+#   * 28 &ndash; At midnight Walvis Bay ... is handed over to Namibia.
+# The world-year articles never do this, but the country-year articles do it constantly --
+# 63 of the 95 lines in "1994 in South Africa" hang under one of these, and read without it
+# every one of them is a sentence that begins with a bare number and belongs to no month.
+SOFT_MONTH = re.compile(rf"^;\s*'{{0,3}}\[?\[?\s*({MONTH_RE})\s*\]?\]?'{{0,3}}\s*:?\s*$")
+
+
+def iter_sections(wikitext: str, month_markers: bool = False):
+    """Yield (heading_trail, line) for every top-level list item under a wanted section.
+
+    `month_markers` treats a ";February" term line as if it were a sub-heading, which is
+    what it means on the page. It is off by default so that the world-year corpus this
+    site was built from is parsed byte-identically to the way it always has been; only
+    places.py turns it on."""
     wanted = wanted_tops(wikitext)
     trail: list[str] = []
     top = None
     pending_date = None
+    pending_ctx = None
+    soft: str | None = None
+    in_comment = False
     for raw in wikitext.split("\n"):
         line = raw.rstrip()
+        # A line inside <!-- ... --> is content an editor took OFF the page, and it can
+        # run for dozens of lines. Reading it line by line published 250 of them, several
+        # still carrying the "-->" that closed the comment: "October 18 - Alberto G.
+        # Romualdez, 73, DOH Secretary, lymphoma -->". The comment is stripped per line by
+        # the cleaner, which is exactly why a MULTI-line one was invisible.
+        opened = line.count("<!--")
+        closed = line.count("-->")
+        if in_comment:
+            in_comment = closed < opened + 1
+            continue
+        if opened > closed:
+            in_comment = True
+            continue
         hm = re.match(r"^(={2,6})\s*(.+?)\s*\1\s*$", line)
         if hm:
             level, name = len(hm.group(1)), hm.group(2)
@@ -563,7 +648,13 @@ def iter_sections(wikitext: str):
             name = re.sub(r"\s+", " ", name)
             trail = trail[: level - 2] + [name]
             top = trail[0].lower() if trail else None
+            soft = None
             continue
+        if month_markers:
+            sm = SOFT_MONTH.match(line)
+            if sm:
+                soft = sm.group(1)
+                continue
         if not top or top in SKIP_TOP or top not in wanted:
             continue
         # Colon-indented bullets (":*", "::*") are the same nesting written another way,
@@ -574,7 +665,7 @@ def iter_sections(wikitext: str):
         if re.match(r"^:+\*", line):
             body = re.sub(r"^:+\**", "", line).strip()
             if len(body) >= 40:
-                yield trail[:], body, pending_date
+                yield (trail + [soft] if soft else trail[:]), body, pending_date, pending_ctx
             continue
         if not line.startswith("*"):
             continue
@@ -584,14 +675,22 @@ def iter_sections(wikitext: str):
             body = line.lstrip("*").strip()
             if len(body) < 40:
                 continue
-            yield trail[:], body, pending_date
+            yield (trail + [soft] if soft else trail[:]), body, pending_date, pending_ctx
             continue
         body = line[1:].strip()
         bare, _, _ = clean_line(body)
         pending_date = date_header(bare)
+        pending_ctx = header_context(bare) if pending_date else None
+        if pending_date is not None:
+            # A recognized date header is furniture for the run nested under it: the
+            # date and any context travel to the children, and the line itself is never
+            # a claim. Colon-terminated headers were already dropped by clean_line's
+            # fragment rule, but a colon-free one ("September 9 (killed at the Battle
+            # of Flodden)") passed every gate and published as a bullet (issue #1).
+            continue
         if len(body) < 25:
             continue
-        yield trail[:], body, None
+        yield (trail + [soft] if soft else trail[:]), body, None, None
 
 
 # --- year scoping -------------------------------------------------------------------
@@ -669,16 +768,38 @@ def kind_of(trail: list[str]) -> str:
     return "event"
 
 
-def extract(rec: dict) -> list[dict]:
-    scoped = is_year_scoped(rec["source"]["title"], rec["year"])
+def extract(rec: dict, scoped: bool | None = None,
+            month_markers: bool = False) -> list[dict]:
+    # `scoped` is normally derived from the title: a claim off a century article is kept
+    # only when the article itself attributes it to this year. places.py passes True,
+    # because "1969 in Japan" is about exactly one year the way "1969" is, and no title
+    # rule can know that without hard-coding the shape here.
+    if scoped is None:
+        scoped = is_year_scoped(rec["source"]["title"], rec["year"])
     out, seen = [], set()
-    for trail, body, inherited_date in iter_sections(rec["wikitext"]):
+    for trail, body, inherited_date, inherited_ctx in iter_sections(rec["wikitext"], month_markers):
         sentence, links, ok = clean_line(body)
         # A nested bullet's own line carries no date; the date is the parent bullet.
         # Prefix it for display but keep `raw` the untouched source line, so verify.py
         # can still find it verbatim in the revision.
-        if inherited_date and sentence:
+        # ... unless the child already prints a day of its own, which is how the 1934
+        # article writes "January 26" over a bullet that says "February 10 - 17th Congress
+        # of the All-Union Communist Party". Inheriting there produced a sentence carrying
+        # two different dates, and the calendar filed it under the first one.
+        if inherited_date and sentence and not OWN_DAY.match(sentence):
             sentence = f"{inherited_date} – {sentence}"
+        else:
+            # A prefix that was not applied must not be stored either: verify.py replays
+            # `date_prefix` onto the re-derived line, so storing it for a child that kept
+            # its own day ("October 13 O.S: ..." under an "October 26" parent, 1905 in
+            # Russia) makes the replay add a date the published text never had.
+            inherited_date = None
+        # The header's own context, appended the same way the date is prefixed: display
+        # only, never in `raw`. "James IV of Scotland (b. 1473)" becomes "James IV of
+        # Scotland (b. 1473) — killed at the Battle of Flodden", which is the sentence
+        # standing on its own the way every bullet here is required to.
+        if inherited_ctx and sentence:
+            sentence = f"{sentence} — {inherited_ctx}"
         # The cap exists to reject a runaway parse, not to edit history. At 600 it cut the
         # September 11 attacks out of 2001 (631 characters) because Wikipedia writes the
         # biggest event of a year at the greatest length -- the ceiling was selecting
@@ -710,6 +831,7 @@ def extract(rec: dict) -> list[dict]:
             "links": links[:12],
             "raw": body,            # the exact wikitext line, for verify.py
             "date_prefix": inherited_date,  # added for display, not present in `raw`
+            "context_suffix": inherited_ctx,  # ditto: the grouping header's context
         })
     return out
 

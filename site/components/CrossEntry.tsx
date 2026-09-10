@@ -1,5 +1,6 @@
 import type { CrossItem } from "@/lib/cross";
-import { yearPath } from "@/lib/cross";
+import { hasPlace, placeSlug, yearPath } from "@/lib/cross";
+import { readable } from "@/lib/display";
 
 /** One re-filed sentence, as it appears on a topic page: the year it belongs to as a
  *  link back to its own page, the sentence exactly as the source wrote it, and the
@@ -13,7 +14,15 @@ export default function CrossEntry({ item }: { item: CrossItem }) {
       >
         {item.year_label.replace(/ CE$/, "")}
       </a>
-      {item.text}
+      {readable(item.text)}
+      {item.country && hasPlace(item.country) && (
+        <a
+          className="ml-1 whitespace-nowrap rounded-sm border border-border px-1 text-[10px] text-muted-foreground hover:text-foreground"
+          href={`/in/${placeSlug(item.country)}`}
+        >
+          {item.country}
+        </a>
+      )}
       <a
         href={item.cite.url}
         target="_blank"

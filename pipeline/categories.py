@@ -22,11 +22,7 @@ import requests
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 API = "https://en.wikipedia.org/w/api.php"
-# Wikimedia's User-Agent policy wants a way to reach the operator. A URL satisfies it;
-# set SLASHYEAR_CONTACT to add your own address when running the pipeline yourself.
-UA = "slashyear-categories/1.0 (https://www.slashyear.com" + (
-    "; " + os.environ["SLASHYEAR_CONTACT"] if os.environ.get("SLASHYEAR_CONTACT") else ""
-) + ")"
+UA = "slashyear-categories/1.0 (https://www.slashyear.com; ahmadopsr@gmail.com)"
 LOCK = threading.Lock()
 
 

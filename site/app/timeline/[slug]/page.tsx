@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import { entityIndex, readEntity, type EntityPage } from "@/lib/entities";
+import { readable } from "@/lib/display";
 import { yearPath } from "@/lib/cross";
 import { breadcrumb, canonical, JsonLd, SITE, trim } from "@/lib/seo";
 
@@ -149,7 +150,7 @@ export default async function Timeline({ params }: { params: Promise<{ slug: str
                   >
                     {it.year_label.replace(/ CE$/, "")}
                   </a>
-                  {it.text}
+                  {readable(it.text)}
                   <a
                     href={it.cite.url}
                     target="_blank"

@@ -36,6 +36,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
+sys.path.insert(0, HERE)
+from famous import PEOPLE as CANON_PEOPLE  # noqa: E402
+
 SECTION_ORDER = [
     "Geopolitics & Diplomacy",
     "Conflict & Security",
@@ -54,6 +57,21 @@ SECTION_ORDER = [
 ]
 MIN_PER_SECTION = 2  # default; --min-per-section overrides
 
+# Two shapes that must never reach a page, held here as well as fixed in extract.py
+# because a fix in the extractor only reaches the corpus on a full re-extract, and a
+# re-extract erases every theme (see README). Both were found by surface.py after the
+# country-year harvest changed which rows rank high enough to be published.
+COMMENTED = re.compile(r"<!--|-->")          # a line an editor took off the page
+DOUBLE_SEP = re.compile(r"^[^–—-]{0,30}[–—-]\s*[–—-]")   # "September 18– – The island of Møn"
+# The same editorial notes integrity.py refuses to see on a page ("[sic]", "citation
+# needed"): they are the source editor talking about the sentence, not the sentence.
+EDITORIAL = re.compile(r"citation needed|clarification needed|\[when\?\]|\[who\?\]|\[sic\]",
+                       re.I)
+
+
+def UNPUBLISHABLE(text: str) -> bool:
+    return bool(COMMENTED.search(text) or DOUBLE_SEP.match(text) or EDITORIAL.search(text))
+
 DATEISH = re.compile(
     r"^(January|February|March|April|May|June|July|August|September|October|November|"
     r"December)\s+\d{1,2}$|^\d{1,4}s?(\s+(BC|AD|BCE|CE))?$|"
@@ -62,14 +80,29 @@ DATEISH = re.compile(
     r"^\d{1,2}(st|nd|rd|th)\s+century(\s+(BC|BCE|AD|CE))?$",
     re.I)
 
+# "August 24 – " / "August 28-30 – " at the head of a published row; what a place-article
+# twin of the same sentence lacks. Used only to fold duplicates, never to edit text.
+DATE_LEAD = re.compile(
+    r"^(January|February|March|April|May|June|July|August|September|October|November|"
+    r"December)\s+\d{1,2}(\s*[–—-]\s*\d{1,2})?\s*[–—:-]\s*")
+
 
 def prominence_table(docs: list[dict]) -> dict[str, int]:
     """How many distinct year articles link each entity. Calendar links ("January 1")
     appear in hundreds of year articles and mean nothing about importance, so they are
-    excluded."""
+    excluded.
+
+    Counted over the WORLD year articles only. This table is a divisor in weigh(), so
+    letting the country-year harvest into it silently re-ranked every existing page: the
+    attack on Pearl Harbor and the September 11 attacks both fell off pages they had held
+    through sixteen review rounds, because 426,058 new claims moved the prominence of the
+    entities they link. The country rows are chosen in their own pool and must not change
+    the arithmetic of the pool they were never meant to compete in."""
     link_years: dict[str, set[int]] = {}
     for d in docs:
         for c in d["claims"]:
+            if c.get("from_place"):
+                continue
             for l in c["links"]:
                 if DATEISH.match(l.strip()):
                     continue
@@ -171,12 +204,17 @@ def build_lead(doc: dict, picked: list[dict], label: str) -> tuple[str, str, lis
         # it to pick which three published entries stand for the year on the decade and
         # century pages: the highest-weighted three for 1969 are two John Lennon bed-ins,
         # while the caption names Apollo 11, Woodstock and Stonewall. Nothing is written
-        # here -- the caption only reorders entries we already publish.
-        key = set(re.findall(r"[a-z0-9]{4,}", doc["highlights"].lower()))
-        def overlap(c):
-            words = set(re.findall(r"[a-z0-9]{4,}", c["text"].lower()))
-            return (len(words & key), c["weight"])
-        top = sorted(events, key=overlap, reverse=True)[:3]
+        # here -- the caption only reorders entries we already publish. Matching is
+        # clause by clause (the same matcher the montage pins use), not one bag of words
+        # over the whole caption: bagged, every candidate shares three-odd words with a
+        # nine-image caption and the tie falls back to weight, whose genericness discount
+        # ranked foot-and-mouth above September 11 on the 2001 page.
+        ordered = caption_clause_matches(doc["highlights"], events, min_keys=2)
+        by_id = {c["id"]: c for c in events}
+        top = [by_id[i] for i in ordered if i in by_id][:3]
+        if len(top) < 3:
+            pool = sorted((c for c in events if c not in top), key=lambda c: -c["weight"])
+            top += pool[:3 - len(top)]
         top.sort(key=sort_key)
         return doc["highlights"], doc["highlights_from"], [c["text"] for c in top]
     events = sorted(events, key=lambda c: -c["weight"])[:3]
@@ -213,15 +251,19 @@ def _caption_words(text: str) -> set[str]:
     return {w for w in re.findall(r"[a-z0-9']{4,}", text.lower()) if w not in CAPTION_STOP}
 
 
-def montage_picks(doc: dict, claims: list[dict], floor: float = 0.25) -> set[str]:
-    """ids of the claims that the montage caption is talking about."""
-    caption = doc.get("highlights")
-    if not caption or doc.get("highlights_from") != "article image footer":
-        return set()
-    picks: set[str] = set()
+def caption_clause_matches(caption: str, claims: list[dict], floor: float = 0.25,
+                           min_keys: int = 3) -> list[str]:
+    """ids of the claims the caption's clauses are talking about, in caption order.
+
+    `min_keys` guards against junk clauses. The montage pins keep 3; the lead picker
+    passes 2, because a real clause can be nearly all short words \u2014 "The UK votes to
+    leave the EU" carries only {votes, leave} \u2014 and a two-key clause still needs BOTH
+    words in the matched row (shared >= 2), which is as specific as three-of-many.
+    """
+    picks: list[str] = []
     for clause in re.split(r"[;\u2013]|\s+\u2014\s+", caption):
         keys = _caption_words(clause)
-        if len(keys) < 3:
+        if len(keys) < min_keys:
             continue
         best, score, shared = None, 0.0, 0
         for c in claims:
@@ -231,15 +273,62 @@ def montage_picks(doc: dict, claims: list[dict], floor: float = 0.25) -> set[str
                 best, score, shared = c, hit, len(common)
         # One word in common is a coincidence -- "Rudolph the Red-Nosed Reindeer premieres"
         # against "Rudolph Mate, Polish cinematographer" scores 0.25 on the name alone.
-        if best is not None and score >= floor and shared >= 2:
-            picks.add(best["id"])
+        if best is not None and score >= floor and shared >= 2 and best["id"] not in picks:
+            picks.append(best["id"])
     return picks
+
+
+def montage_picks(doc: dict, claims: list[dict], floor: float = 0.25) -> set[str]:
+    """ids of the claims that the montage caption is talking about."""
+    caption = doc.get("highlights")
+    if not caption or doc.get("highlights_from") != "article image footer":
+        return set()
+    return set(caption_clause_matches(caption, claims, floor))
+
+
+def place_picks(items: list[dict], cap: int, published: dict[str, int]) -> list[dict]:
+    """The best country rows for one section, spread across countries.
+
+    Two levers, and the second one is the point of the whole harvest. Within a section the
+    pick is breadth-first: one country's best row, then the next country's, and only once
+    every country present has had a turn does anyone get a second row. Across the corpus
+    the order of those turns is by how little each country has been published SO FAR --
+    `published` is a running count carried through the whole build.
+
+    Without the running count, breadth-first inside one year is not enough. Wikipedia has
+    a year article for 897 separate years of Ireland and 38 of Nigeria, and inside any one
+    section the countries that win the ties are the ones whose sentences link the biggest
+    English articles, which is the same bias measured in COVERAGE-AUDIT.md arriving by a
+    different door. Ordering by scarcity means a country with a handful of rows in the
+    whole corpus takes its slot ahead of one that has already had thousands.
+
+    It makes the build order-dependent, which is fine because the order is deterministic:
+    years are processed in ascending order, every time."""
+    by_country: dict[str, list[dict]] = {}
+    for c in items:
+        by_country.setdefault(c.get("country") or "", []).append(c)
+    for v in by_country.values():
+        v.sort(key=lambda c: -c["weight"])
+    order = sorted(by_country, key=lambda k: (published.get(k, 0), -by_country[k][0]["weight"]))
+    out: list[dict] = []
+    depth = 0
+    while len(out) < cap and any(len(v) > depth for v in by_country.values()):
+        for k in order:
+            if len(out) >= cap:
+                break
+            if len(by_country[k]) > depth:
+                out.append(by_country[k][depth])
+                published[k] = published.get(k, 0) + 1
+        depth += 1
+    return out
 
 
 def build_year(doc: dict, prom: dict[str, int], nota: dict[str, int],
                per_section: int, min_per_section: int = MIN_PER_SECTION,
-               bd_cap: int | None = None) -> dict:
-    claims = [c for c in doc["claims"] if not DANGLING.match(c["body"].strip())]
+               bd_cap: int | None = None, place_cap: int = 0,
+               published: dict[str, int] | None = None) -> dict:
+    claims = [c for c in doc["claims"]
+              if not DANGLING.match(c["body"].strip()) and not UNPUBLISHABLE(c["text"])]
     for c in claims:
         c["weight"] = weigh(c, prom, nota)
 
@@ -256,17 +345,76 @@ def build_year(doc: dict, prom: dict[str, int], nota: dict[str, int],
         sections, used = [], []
         for name in SECTION_ORDER:
             items = buckets.get(name, [])
-            if len(items) < min_per:
+            # Country-year rows are ADDITIVE, never competitive. Ranked in the same pool
+            # they would displace the world-year rows this site is built on -- 1969 has
+            # more than 24 Japanese entries alone, and the Moon landing would have lost
+            # its slot to them. So the world rows are chosen exactly as before, from the
+            # same pool as before, and the country rows are appended under their own cap.
+            world = [c for c in items if not c.get("from_place")]
+            place = [c for c in items if c.get("from_place")]
+            if len(world) < min_per and len(place) < min_per:
                 continue
             cap = (per_section if name not in ("Births", "Deaths")
                    else min(per_section, bd_cap or 8))
-            chosen = sorted(items, key=lambda c: -c["weight"])[:cap]
+            chosen = sorted(world, key=lambda c: -c["weight"])[:cap]
             have = {c["id"] for c in chosen}
             chosen += [c for c in items if c["id"] in picks and c["id"] not in have]
+            # famous.py's canon is the same kind of signal as the montage caption: a
+            # person whose absence from their own year is a defect rides on top of the
+            # cap rather than competing under it. 2014 has 10,646 sourced deaths and a
+            # cap of 14; García Márquez ranked 15th and fell off the page.
+            if name in ("Births", "Deaths"):
+                want = "b" if name == "Births" else "d"
+                have = {c["id"] for c in chosen}
+                for cy, ck, cname in CANON_PEOPLE:
+                    if cy != doc["year"] or ck != want:
+                        continue
+                    if any(cname in c["text"] for c in chosen):
+                        continue
+                    cands = [c for c in items if cname in c["text"] and c["id"] not in have]
+                    if cands:
+                        chosen.append(max(cands, key=lambda c: c["weight"]))
+            if place_cap:
+                pcap = (place_cap if name not in ("Births", "Deaths")
+                        else max(1, place_cap // 2))
+                chosen += place_picks(place, pcap, published if published is not None else {})
             chosen.sort(key=sort_key)
             used += chosen
             sections.append((name, chosen))
-        return sections, used
+        # A montage pick and a country pick can be the same row, and the same sentence can
+        # reach two different themes through two different claims -- one quoted from the
+        # world article and one from a country article. Either way the page prints it
+        # twice, which reads as a mistake whatever the provenance says. The twins are not
+        # always letter-identical: the year article writes "August 24 – Gaspard de
+        # Coligny..." and "1572 in France" writes the same sentence with no date lead, so
+        # the key folds the lead away — and of the twins we keep the longest text, which
+        # is the one that carries the date.
+        # Punctuation folds away too (same normalization integrity.py polices): the
+        # claims can hold the same sentence from two revisions of the article that
+        # differ by one comma, and both variants must not reach the page.
+        def dedup_key(t: str) -> str:
+            return re.sub(r"\W+", " ", DATE_LEAD.sub("", t).lower()).strip()
+
+        best: dict[str, str] = {}
+        for _n, chosen in sections:
+            for c in chosen:
+                k = dedup_key(c["text"])
+                if k not in best or len(c["text"]) > len(best[k][1]):
+                    best[k] = (c["id"], c["text"])
+        seen_text: set[str] = set()
+        deduped = []
+        for name, chosen in sections:
+            keep = []
+            for c in chosen:
+                key = dedup_key(c["text"])
+                if key in seen_text or best[key][0] != c["id"]:
+                    continue
+                seen_text.add(key)
+                keep.append(c)
+            if keep:
+                deduped.append((name, keep))
+        used = [c for _n, ch in deduped for c in ch]
+        return deduped, used
 
     raw_sections, used = assemble(min_per_section)
     if not raw_sections:
@@ -277,7 +425,11 @@ def build_year(doc: dict, prom: dict[str, int], nota: dict[str, int],
     # and merged into the same claims file carrying their own source.
     def cite_for(c: dict) -> dict:
         cs = c.get("source") or src
-        anchor = anchor_for(c["section_trail"]) if not c.get("from_deaths_list") else ""
+        # No anchor when the deepest heading is not a real heading on the source page:
+        # deaths lists are re-filed, and a country article's ";February" month term has no
+        # id to link to, so a fragment would be a link to somewhere that does not exist.
+        anchor = ("" if c.get("from_deaths_list") or c.get("soft_month")
+                  else anchor_for(c["section_trail"]))
         return {
             "url": f"{cs['permalink']}#{anchor}" if anchor else cs["permalink"],
             "title": cs["title"],
@@ -293,6 +445,9 @@ def build_year(doc: dict, prom: dict[str, int], nota: dict[str, int],
                 "date": c["date"],
                 "text": c["text"],
                 "cite": cite_for(c),
+                # Only country rows carry this. Writing "country": null onto the other
+                # 86,000 rows would put a megabyte of nothing into the payload.
+                **({"country": c["country"]} if c.get("country") else {}),
             } for c in chosen],
         })
     extra_sources = []
@@ -325,6 +480,9 @@ def main() -> int:
                     help="maximum bullets shown in the Births and Deaths sections")
     ap.add_argument("--min-per-section", type=int, default=MIN_PER_SECTION,
                     help="a section needs this many entries before it gets a heading")
+    ap.add_argument("--per-section-place", type=int, default=8,
+                    help="country-year bullets appended to each section, spread across "
+                         "countries; 0 publishes none of them")
     a = ap.parse_args()
 
     os.makedirs(a.out, exist_ok=True)
@@ -338,12 +496,21 @@ def main() -> int:
     print("biggest:", sorted(nota.items(), key=lambda kv: -kv[1])[:6])
 
     index, empty = [], []
+    # The /data page is prose ABOUT this dataset and states its size in words. Those
+    # numbers were hand-written once and were already wrong by 580 entries and 118 years
+    # before this run: the page claiming every row can be checked is the last page on the
+    # site that should carry a number nobody re-derives. They are counted here instead.
+    totals = {"entries": 0, "events": 0, "people": 0, "country_entries": 0}
+    countries: set[str] = set()
+    # Carried across every year so that a country's turn depends on how little of it has
+    # been published so far -- see place_picks().
+    published_per_country: dict[str, int] = {}
     for f in os.listdir(a.out):            # stale pages from an earlier, smaller run
         if f.endswith(".json"):
             os.remove(os.path.join(a.out, f))
     for d in docs:
         page = build_year(d, prom, nota, a.per_section, a.min_per_section,
-                          a.births_deaths)
+                          a.births_deaths, a.per_section_place, published_per_country)
         # A handful of the thinnest ancient years yield no usable entry at all. An empty
         # page is worse than no page: it is a heading with nothing under it, so the year
         # is left out of the site rather than published blank.
@@ -355,10 +522,20 @@ def main() -> int:
         index.append({"year": d["year"], "label": d["label"],
                       "sections": len(page["sections"]),
                       "entries": page["counts"]["shown"]})
+        for sec in page["sections"]:
+            for it in sec["items"]:
+                totals["entries"] += 1
+                totals["people" if sec["title"] in ("Births", "Deaths") else "events"] += 1
+                if it.get("country"):
+                    totals["country_entries"] += 1
+                    countries.add(it["country"])
 
     index.sort(key=lambda r: -r["year"])
+    totals["years"] = len(index)
+    totals["countries"] = len(countries)
     json.dump({"years": index,
                "total": len(index),
+               "totals": totals,
                "span": [index[0]["label"], index[-1]["label"]]},
               open(os.path.join(a.out, "index.json"), "w", encoding="utf-8"),
               ensure_ascii=False)
@@ -370,6 +547,8 @@ def main() -> int:
 
     shown = sum(r["entries"] for r in index)
     print(f"pages={len(index)} bullets={shown} avg={shown / len(index):.1f} empty={len(empty)}")
+    print(f"  of those: {totals['events']:,} events, {totals['people']:,} births/deaths, "
+          f"{totals['country_entries']:,} carry a country ({totals['countries']} countries)")
     if empty:
         print("  empty:", empty)
     return 0

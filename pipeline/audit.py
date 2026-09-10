@@ -49,7 +49,10 @@ HREF = re.compile(r'href="(/[^"#?]*)"')
 
 def flatten(fragment: str) -> str:
     """The visible words of one bullet: tags gone, entities decoded, the trailing
-    'source' link dropped, whitespace normalised."""
+    'source' link dropped, whitespace normalised. The country chip (an /in/ link the
+    page renders after a place row's sentence) is furniture, not sentence, and it is
+    the only /in/ anchor a bullet can carry — drop it whole before untagging."""
+    fragment = re.sub(r'<a[^>]*href="/in/[^"]*"[^>]*>.*?</a>', "", fragment, flags=re.S)
     text = html.unescape(TAG.sub("", fragment))
     text = re.sub(r"\s+", " ", text).strip()
     return text[:-6].strip() if text.endswith("source") else text
@@ -83,11 +86,19 @@ def servable(out: str) -> set[str]:
     return paths
 
 
+def display(text: str) -> str:
+    """The same shorthand expansion site/lib/display.ts applies at render time:
+    "(b. 1473)" reads "(born 1473)", "(d. 275)" reads "(died 275)". The audit compares
+    against what the reader sees, so the expectation must go through the same lens."""
+    return re.sub(r"\((b|d)\.\s+(?=[^)\s])",
+                  lambda m: "(born " if m.group(1) == "b" else "(died ", text)
+
+
 def yearline(item: dict) -> str:
     """A cross-cut bullet reads "1066Edward the Confessor dies…" once the tags are gone:
     the year is its own element and the gap before the sentence is a CSS margin, not a
     space in the document. Comparing against a space here would fail all 655 of them."""
-    return item["year_label"].removesuffix(" CE") + item["text"]
+    return item["year_label"].removesuffix(" CE") + display(item["text"])
 
 
 def expected_bullets(site: str) -> dict[str, list[str]]:
@@ -98,7 +109,7 @@ def expected_bullets(site: str) -> dict[str, list[str]]:
             continue
         page = json.load(open(os.path.join(site, f), encoding="utf-8"))
         url = "/404/" if page["year"] == 404 else f"/{page['year']}"
-        want[url] = [i["text"] for s in page["sections"] for i in s["items"]]
+        want[url] = [display(i["text"]) for s in page["sections"] for i in s["items"]]
 
     dates = os.path.join(site, "dates")
     if os.path.isdir(dates):

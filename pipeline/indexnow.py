@@ -5,7 +5,7 @@ IndexNow is the one submission channel that needs no login: publish a key as a f
 the site root, then POST the URL list. Bing, Yandex, Seznam and Naver share the same
 endpoint, so one call reaches all of them. Google does not participate -- Google
 discovery still comes from robots.txt, the sitemap and inbound links, and adding the
-property in Search Console is the only step here that needs the maintainer's Google account.
+property in Search Console is the only step here that needs the owner's Google account.
 
 Run it after a deploy, so every URL submitted is already live.
 

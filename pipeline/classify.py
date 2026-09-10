@@ -375,7 +375,10 @@ def main() -> int:
     if os.path.exists(cache_path) and not a.recompute:
         z = np.load(cache_path, allow_pickle=True)
         if list(z["themes"]) == THEME_NAMES:
-            cache = {cid: z["sims"][i] for i, cid in enumerate(z["ids"])}
+            # Bind the array once: indexing the NpzFile re-decompresses the whole
+            # matrix on every access, so doing it per-row is O(n) full copies.
+            sims_arr = z["sims"]
+            cache = {cid: sims_arr[i] for i, cid in enumerate(z["ids"])}
             print(f"cached similarities available for {len(cache)} claims")
         else:
             print("prototype set changed; recomputing everything")

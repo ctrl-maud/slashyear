@@ -27,6 +27,8 @@ def rerender(c: dict) -> dict | None:
     sentence, links, ok = clean_line(c["raw"])
     if c.get("date_prefix") and sentence:
         sentence = f"{c['date_prefix']} – {sentence}"
+    if c.get("context_suffix") and sentence:
+        sentence = f"{sentence} — {c['context_suffix']}"
     if not ok or len(sentence) < 30 or len(sentence) > 1200:
         return None
     if not re.search(r"[a-zA-Z]{3}", sentence):

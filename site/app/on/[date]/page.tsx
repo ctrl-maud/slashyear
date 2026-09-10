@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import { readDate, readDateIndex } from "@/lib/dates";
+import { readable } from "@/lib/display";
 import { breadcrumb, canonical, JsonLd, SITE, trim } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -96,7 +97,7 @@ export default async function DatePage({ params }: { params: Promise<{ date: str
                   >
                     {item.year_label.replace(/ CE$/, "")}
                   </a>
-                  {item.text}
+                  {readable(item.text)}
                   <a
                     href={item.cite.url}
                     target="_blank"

@@ -22,6 +22,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import os
 import random
@@ -29,16 +30,12 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from extract import clean_line, plausible_sources  # noqa: E402
+from extract import OWN_DAY, clean_line, plausible_sources  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 API = "https://en.wikipedia.org/w/api.php"
-# Wikimedia's User-Agent policy wants a way to reach the operator. A URL satisfies it;
-# set SLASHYEAR_CONTACT to add your own address when running the pipeline yourself.
-UA = "slashyear-verify/1.0 (https://www.slashyear.com" + (
-    "; " + os.environ["SLASHYEAR_CONTACT"] if os.environ.get("SLASHYEAR_CONTACT") else ""
-) + ")"
+UA = "slashyear-verify/1.0 (https://www.slashyear.com; ahmadopsr@gmail.com)"
 
 
 def live_revision(revid: int) -> str | None:
@@ -100,6 +97,13 @@ def main() -> int:
         if os.path.exists(dpath):
             for doc in json.load(open(dpath, encoding="utf-8"))["docs"]:
                 extra_text[doc["source"]["revid"]] = doc["wikitext"]
+        # Same again for the country-year articles places.py harvests: "1969 in Japan" is
+        # a different article from "1969", and its rows cite its revision, so the line has
+        # to be looked for there. Without this the check reports every country row as
+        # "not in revision" -- 34,559 of them on the first run.
+        for cpath in glob.glob(os.path.join(a.raw, "places", "*", fn)):
+            doc = json.load(open(cpath, encoding="utf-8"))
+            extra_text[doc["source"]["revid"]] = doc["wikitext"]
         by_text = {c["text"]: c for c in claims}
 
         for section in page["sections"]:
@@ -111,8 +115,23 @@ def main() -> int:
                                      "text": item["text"][:160]})
                     continue
                 redone, _links, ok = clean_line(claim["raw"])
-                if claim.get("date_prefix") and redone:
+                # Mirror extract.py exactly: a child that already opens with its own
+                # day never had the parent's date prefixed (the 1934 two-dates rule),
+                # even when older corpus rows still carry the unapplied `date_prefix`.
+                if claim.get("date_prefix") and redone and not OWN_DAY.match(redone):
                     redone = f"{claim['date_prefix']} – {redone}"
+                # A country-year article often writes the month once as ";February" and
+                # then lists bare days under it, so the published sentence carries a month
+                # the source line does not. Inserting it in front of the leading day number
+                # is exactly reversible, which is the whole requirement here: the check is
+                # still "re-derive the published text from the stored wikitext, mechanically".
+                if claim.get("month_prefix") and redone:
+                    redone = f"{claim['month_prefix']} {redone}"
+                # The grouping header's context, appended by extract() the way the date
+                # is prefixed — "— killed at the Battle of Flodden" on each of the
+                # eleven people filed under that header. Equally reversible.
+                if claim.get("context_suffix") and redone:
+                    redone = f"{redone} — {claim['context_suffix']}"
                 if ok and redone == item["text"]:
                     rendered_ok += 1
                 else:
@@ -173,6 +192,10 @@ def main() -> int:
                 for doc in json.load(open(dpath, encoding="utf-8"))["docs"]:
                     if doc["source"]["revid"] in cited_revids:
                         jobs.append((y, doc["source"]["revid"], doc["wikitext"]))
+            for cpath in glob.glob(os.path.join(a.raw, "places", "*", f"{y}.json")):
+                doc = json.load(open(cpath, encoding="utf-8"))
+                if doc["source"]["revid"] in cited_revids:
+                    jobs.append((y, doc["source"]["revid"], doc["wikitext"]))
         print(f"    ({len(jobs)} revisions in total)")
 
         by_revid = {j[1]: j for j in jobs}

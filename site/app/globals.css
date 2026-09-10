@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: 40 10% 97.5%;
-  --foreground: 24 5% 13%;
-  --muted: 40 6% 93%;
-  --muted-foreground: 24 3% 46%;
-  --border: 36 6% 89%;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 12%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 42%;
+  --border: 0 0% 89%;
   --radius: 0.25rem;
 }
 

@@ -1,5 +1,10 @@
 import SiteNav from "@/components/SiteNav";
 import { canonical, JsonLd, SITE } from "@/lib/seo";
+import { totals, words } from "@/lib/counts";
+
+/** Counted by the build, never typed by hand -- see lib/counts.ts. */
+const T = totals();
+const N = (n: number) => n.toLocaleString("en-US");
 
 /** The dataset's own page, and the only page on the site written in prose.
  *
@@ -16,9 +21,9 @@ import { canonical, JsonLd, SITE } from "@/lib/seo";
  *  paths — because a page of prose is the only shape of ours those pipelines keep.
  */
 
-const title = "The dataset: 86,322 dated entries, each with its source revision";
+const title = `The dataset: ${N(T.entries)} dated entries, each with its source revision`;
 const description =
-  "A free, openly licensed dataset of 86,322 dated entries spanning 2,960 years, extracted from " +
+  `A free, openly licensed dataset of ${N(T.entries)} dated entries spanning ${N(T.years)} years, extracted from ` +
   "English Wikipedia. Every row is a sentence quoted verbatim from one numbered revision and " +
   "carries that revision id, so any claim built on it can be checked against a source that will " +
   "still read the same way next year. 2,799 subjects carry Wikidata identifiers. Bulk NDJSON " +
@@ -57,11 +62,12 @@ export default function Data() {
         data={{
           "@context": "https://schema.org",
           "@type": "Dataset",
-          name: "slashyear: 86,322 dated historical entries with source revision ids",
+          name: `slashyear: ${N(T.entries)} dated historical entries with source revision ids`,
           description:
-            "A dataset of 86,322 dated historical entries covering 2,960 years, from roughly 3000 " +
-            "BCE to the present, extracted from English Wikipedia's year, decade and century " +
-            "articles. Each row holds the event sentence quoted verbatim, the astronomical year " +
+            `A dataset of ${N(T.entries)} dated historical entries covering ${N(T.years)} years, from roughly 3000 ` +
+            "BCE to the present, extracted from English Wikipedia's year, decade, century and " +
+            `per-country articles. ${N(T.country_entries)} of the rows name the country they belong to, ` +
+            `across ${N(T.countries)} countries. Each row holds the event sentence quoted verbatim, the astronomical year ` +
             "number, the calendar date where one is given, a topic label, the title of the source " +
             "article, the section path the sentence sits in, and the numeric revision id of the " +
             "exact Wikipedia revision it was taken from. A companion table gives 3,029 subject " +
@@ -82,12 +88,13 @@ export default function Data() {
           publisher: { "@type": "Organization", name: "slashyear", url: SITE.base },
           temporalCoverage: "-3000-01-01/2025-12-31",
           measurementTechnique:
-            "Deterministic extraction from the wikitext of English Wikipedia year, decade and " +
-            "century articles at a pinned revision id, followed by mechanical cleaning; topic " +
+            "Deterministic extraction from the wikitext of English Wikipedia year, decade, " +
+            "century and per-country year articles at a pinned revision id, followed by " +
+            "mechanical cleaning; topic " +
             "labels assigned per sentence, wording never altered.",
           isBasedOn: "https://en.wikipedia.org/",
           citation:
-            "slashyear (2026). 86,322 dated historical entries with source revision ids. " +
+            `slashyear (2026). ${N(T.entries)} dated historical entries with source revision ids. ` +
             "https://slashyear.com/data",
           keywords: [
             "history", "historical events", "timeline", "chronology", "dated events",
@@ -106,13 +113,13 @@ export default function Data() {
           distribution: [
             {
               "@type": "DataDownload",
-              name: "All 86,322 dated entries (gzipped NDJSON)",
+              name: `All ${N(T.entries)} dated entries (gzipped NDJSON)`,
               encodingFormat: "application/x-ndjson",
               contentUrl: canonical("/dump/events.ndjson.gz"),
             },
             {
               "@type": "DataDownload",
-              name: "2,960 year records with lead summaries (gzipped NDJSON)",
+              name: `${N(T.years)} year records with lead summaries (gzipped NDJSON)`,
               encodingFormat: "application/x-ndjson",
               contentUrl: canonical("/dump/years.ndjson.gz"),
             },
@@ -138,12 +145,21 @@ export default function Data() {
         </h1>
 
         <P>
-          This site publishes a dataset of eighty-six thousand three hundred and twenty-two
-          dated entries, covering two thousand nine hundred and sixty years from
-          roughly three thousand years before the common era to the present day. Forty-nine
-          thousand six hundred and eighty-five of those entries are events; the remaining
-          thirty-six thousand six hundred and thirty-seven record a birth or a death, which
-          the source articles list separately and so does this. It is free,
+          This site publishes a dataset of {words(T.entries)}{" "}
+          dated entries, covering {words(T.years)} years from
+          roughly three thousand years before the common era to the present day. {words(T.events).replace(/^./, (c) => c.toUpperCase())}{" "}
+          of those entries are events; the remaining{" "}
+          {words(T.people)} record a birth or a death, which
+          the source articles list separately and so does this.{" "}
+          {T.country_entries > 0 && (
+            <>
+              {words(T.country_entries).replace(/^./, (c) => c.toUpperCase())} of the rows name the
+              country they happened in, across {words(T.countries)} countries, because English
+              Wikipedia writes a separate article for every country in every year and those have
+              been read as well as the world ones.{" "}
+            </>
+          )}
+          It is free,
           openly licensed, and available as a bulk download, as a REST API, as a full-text
           search endpoint and as a Model Context Protocol server. There is no key to request,
           no rate limit to negotiate and no account to create.

@@ -15,6 +15,8 @@ export type CrossItem = {
   date: string | null;
   text: string;
   cite: Cite;
+  /** Only rows harvested from a country-year article ("1969 in Japan") carry this. */
+  country?: string;
 };
 type Ref = { slug: string; label: string } | null;
 
@@ -44,10 +46,21 @@ export type TopicCentury = {
   items: CrossItem[];
   prev: Ref; next: Ref;
 };
+export type PlaceCentury = {
+  slug: string; label: string; key: number;
+  count: number; span: [string, string];
+  items: CrossItem[];
+};
+export type PlaceHub = {
+  slug: string; label: string; total: number;
+  span: [string, string];
+  centuries: PlaceCentury[];
+};
 export type CrossIndex = {
   centuries: { slug: string; label: string; years: number; entries: number; key: number }[];
   decades: { slug: string; label: string; years: number; entries: number; key: number; century: string | null }[];
   topics: { slug: string; label: string; total: number; centuries: number }[];
+  places: { slug: string; label: string; total: number; centuries: number; span: [string, string] }[];
 };
 
 function read<T>(...parts: string[]): T | null {
@@ -62,6 +75,20 @@ export const readCentury = (slug: string) => read<CenturyPage>("century", `${slu
 export const readTopic = (slug: string) => read<TopicHub>("topic", `${slug}.json`);
 export const readTopicCentury = (topic: string, century: string) =>
   read<TopicCentury>("topic", topic, `${century}.json`);
+export const readPlace = (slug: string) => read<PlaceHub>("place", `${slug}.json`);
+
+/** The same slug rule as slugify() in pipeline/cross.py. Written twice on purpose --
+ *  the build has no shared runtime with the pipeline -- so any change goes in both. */
+export const placeSlug = (country: string) =>
+  country.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+/** Countries that actually got a page. A row can carry a country whose total fell under
+ *  PLACE_MIN, and linking that row to /in/<slug> would be a 404 in our own graph. */
+let placeSlugs: Set<string> | null = null;
+export function hasPlace(country: string): boolean {
+  placeSlugs ??= new Set((crossIndex().places ?? []).map((p) => p.slug));
+  return placeSlugs.has(placeSlug(country));
+}
 
 /** year -> the decade and century page that actually exist for it, either possibly null. */
 export type YearParents = { decade: Ref; century: Ref };

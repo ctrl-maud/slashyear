@@ -47,11 +47,7 @@ from extract import clean_line, LINK_RE  # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 API = "https://en.wikipedia.org/w/api.php"
-# Wikimedia's User-Agent policy wants a way to reach the operator. A URL satisfies it;
-# set SLASHYEAR_CONTACT to add your own address when running the pipeline yourself.
-UA = "slashyear-deaths/1.0 (https://www.slashyear.com" + (
-    "; " + os.environ["SLASHYEAR_CONTACT"] if os.environ.get("SLASHYEAR_CONTACT") else ""
-) + ")"
+UA = "slashyear-deaths/1.0 (https://www.slashyear.com; ahmadopsr@gmail.com)"
 MONTHS = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
 DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]

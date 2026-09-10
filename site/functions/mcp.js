@@ -96,6 +96,31 @@ const TOOLS = [
     },
   },
   {
+    name: "get_country",
+    description:
+      "One country's dated record, century by century, harvested from the per-country year " +
+      "articles English Wikipedia writes separately ('1969 in Japan') and never indexes " +
+      "together. Use this when the question is about a nation rather than a year or a subject.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        country: { type: "string", description: "country name or slug, e.g. 'Japan', 'south-africa'" },
+        from_year: { type: "integer", description: "earliest year; astronomical numbering" },
+        to_year: { type: "integer", description: "latest year" },
+        limit: { type: "integer", description: "default 200, max 2000" },
+      },
+      required: ["country"],
+    },
+  },
+  {
+    name: "list_countries",
+    description: "Browse the countries that have a record of their own, largest first.",
+    inputSchema: {
+      type: "object",
+      properties: { limit: { type: "integer", description: "default 100, max 500" } },
+    },
+  },
+  {
     name: "list_subjects",
     description: "Browse the subjects that have a timeline, largest record first.",
     inputSchema: {
@@ -159,6 +184,45 @@ async function call(name, args, env, request) {
     const page = await asset(env, request, `/api/date/${slug}.json`);
     if (!page) return text({ error: `nothing published for ${slug}` });
     return text({ ...page, page: `${origin}/on/${slug}` });
+  }
+
+  if (name === "get_country" || name === "list_countries") {
+    const cross = await asset(env, request, "/api/cross.json");
+    const places = cross?.places || [];
+    if (name === "list_countries") {
+      return text({
+        countries_total: places.length,
+        countries: places.slice(0, cap(args?.limit, 100, 500)).map((p) => ({
+          country: p.label, slug: p.slug, entries: p.total, span: p.span,
+          page: `${origin}/in/${p.slug}`,
+        })),
+      });
+    }
+    const want = norm(String(args?.country || ""));
+    const hit = places.find((p) => p.slug === want.replace(/ /g, "-"))
+      || places.find((p) => norm(p.label) === want)
+      || places.find((p) => norm(p.label).includes(want) && want.length > 2);
+    if (!hit) return text({ error: `no record for "${args?.country}"`, hint: "try list_countries" });
+    const page = await asset(env, request, `/api/place/${hit.slug}.json`);
+    if (!page) return text({ error: `no record for "${args?.country}"` });
+    const limit = cap(args?.limit, 200, 2000);
+    const items = [];
+    for (const c of page.centuries) {
+      for (const it of c.items) if (inRange(it.year, from, to)) items.push(it);
+    }
+    return text({
+      country: page.label, slug: page.slug, span: page.span,
+      entries_total: page.total,
+      entries_shown: Math.min(items.length, limit),
+      note: "each century shows a sample spread across it; open the year page for everything held for that year",
+      entries: items.slice(0, limit).map((it) => ({
+        year: it.year, year_label: it.year_label, date: it.date, section: it.section, text: it.text,
+        source: { wikipedia_article: it.cite.title, revision_id: it.cite.revid, url: it.cite.url },
+        page: `${origin}/${it.year === 404 ? "404/" : it.year}`,
+      })),
+      page: `${origin}/in/${page.slug}`,
+      license: "CC BY-SA 4.0. Attribute the Wikipedia article and revision id on each entry.",
+    });
   }
 
   if (name === "get_timeline") {

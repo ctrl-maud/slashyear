@@ -10,7 +10,14 @@ export type Cite = {
   section: string;
 };
 
-export type Item = { date: string | null; text: string; cite: Cite };
+export type Item = {
+  date: string | null;
+  text: string;
+  cite: Cite;
+  /** Set only on rows harvested from a country-year article ("1969 in Japan"), which is
+      what lets a year page say which nation a line belongs to and link the country. */
+  country?: string;
+};
 export type Section = { title: string; items: Item[] };
 
 export type Source = {

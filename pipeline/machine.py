@@ -50,11 +50,7 @@ import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-# Wikimedia's User-Agent policy wants a way to reach the operator. A URL satisfies it;
-# set SLASHYEAR_CONTACT to add your own address when running the pipeline yourself.
-UA = "slashyear-machine/1.0 (https://www.slashyear.com" + (
-    "; " + os.environ["SLASHYEAR_CONTACT"] if os.environ.get("SLASHYEAR_CONTACT") else ""
-) + ")"
+UA = "slashyear-machine/1.0 (https://www.slashyear.com; ahmadopsr@gmail.com)"
 
 # Query -> a pattern that must appear in the top five entries. Every case here is a
 # thing a person types into a history site, and the answer is the row anyone would mean.
@@ -443,6 +439,7 @@ def check_live(out: str, site: str, base: str) -> None:
         defaults = {"year": 1969, "years": "1969", "query": "Apollo 11", "q": "Apollo 11",
                     "date": "july-20", "day": "july-20", "slug": "apollo-11",
                     "subject": "apollo-11", "topic": "science-and-discovery",
+                    "country": "japan",
                     "century": 20, "decade": 1960, "limit": 3, "from": 1960, "to": 1970}
         for t in tools:
             schema = t.get("inputSchema", {}) or {}

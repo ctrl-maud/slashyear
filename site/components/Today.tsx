@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 
+import { readable } from "@/lib/display";
+
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August",
   "September", "October", "November", "December"];
 
-type Item = { year: number; year_label: string; text: string; cite: { url: string } };
+type Item = { year: number; year_label: string; text: string; kind?: string; cite: { url: string } };
 type Day = { label: string; slug: string; count: number; span: [string, string]; items: Item[] };
 
 /** The directory is 2,960 numbers and never changes. This puts the current calendar date's
@@ -29,8 +31,12 @@ export default function Today() {
       .then((d) => {
         // /api groups by events / births / deaths, so the flattened list is not in year
         // order; sort it before spreading picks across it or the four jump eras.
+        // Keep each group's title on its rows: a teaser line pulled out of the
+        // Births group has to SAY it is a birth once the heading is gone, or
+        // "Aurelian, Roman emperor (died 275)" under today's date reads as an event.
         const all: Item[] = (d.groups ?? [])
-          .flatMap((g: { items: Item[] }) => g.items)
+          .flatMap((g: { title: string; items: Item[] }) =>
+            g.items.map((it) => ({ ...it, kind: g.title })))
           .sort((a: Item, b: Item) => a.year - b.year);
         if (!all.length) return;
         // Four picks spread evenly across the whole range, oldest first.
@@ -70,7 +76,12 @@ export default function Today() {
             >
               {year(item.year_label)}
             </a>
-            {item.text}
+            {item.kind === "Births" ? (
+              <span className="mr-1 text-muted-foreground">Born:</span>
+            ) : item.kind === "Deaths" ? (
+              <span className="mr-1 text-muted-foreground">Died:</span>
+            ) : null}
+            {readable(item.text)}
           </li>
         ))}
       </ul>

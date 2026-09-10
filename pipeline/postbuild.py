@@ -284,6 +284,9 @@ def write_sitemap(out: str, site: str, base: str) -> str:
                  (f"{base}/embed", newest)]
         urls += [(f"{base}/century/{c['slug']}", newest) for c in cross["centuries"]]
         urls += [(f"{base}/decade/{d['slug']}", newest) for d in cross["decades"]]
+        if cross.get("places"):
+            urls.append((f"{base}/in", newest))
+            urls += [(f"{base}/in/{p['slug']}", newest) for p in cross["places"]]
         for t in cross["topics"]:
             urls.append((f"{base}/topic/{t['slug']}", newest))
             with open(os.path.join(cross_dir, "topic", f"{t['slug']}.json"), encoding="utf-8") as fh:
@@ -367,7 +370,7 @@ def write_api(out: str, site: str) -> str:
     k = 0
     cross_dir = os.path.join(site, "cross")
     if os.path.isdir(cross_dir):
-        for axis in ("decade", "century"):
+        for axis in ("decade", "century", "place"):
             src = os.path.join(cross_dir, axis)
             if not os.path.isdir(src):
                 continue
@@ -392,6 +395,8 @@ def write_api(out: str, site: str) -> str:
                     k += 1
         shutil.copyfile(os.path.join(cross_dir, "index.json"),
                         os.path.join(api, "cross.json"))
+        # /api/place/<slug>.json is the country page's own payload; the index of them
+        # rides inside /api/cross.json under "places".
     return f"/api: {n} year files, {m} date files, {k} cross-cut files, 3 indexes"
 
 
@@ -732,6 +737,7 @@ by us and no language model touches the wording.
 - [One year]({base}/api/year/1969.json): `/api/year/{{year}}.json`, astronomical numbering, so -43 is 44 BCE
 - [One calendar day across all years]({base}/api/date/july-4.json): `/api/date/{{month-day}}.json`
 - [One subject timeline]({base}/api/entity/constantinople.json): `/api/entity/{{slug}}.json`
+- [One country]({base}/api/place/japan.json): `/api/place/{{country}}.json`, harvested from the per-country year articles
 - [Subject index]({base}/api/entities.json), [year index]({base}/api/years.json), [date index]({base}/api/dates.json)
 - [Search]({base}/api/search?q=plague): `/api/search?q=&from=&to=&limit=` returns matching subjects and their dated entries
 - [MCP server]({base}/mcp): streamable HTTP, no auth, tools for years, days, subjects and search
@@ -776,7 +782,8 @@ def write_manifest(out: str, base: str) -> str:
         ("/api/year/{year}.json", "one year; astronomical numbering, so -43 is 44 BCE"),
         ("/api/dates.json", "index of all 366 calendar dates"),
         ("/api/date/{month-day}.json", "one calendar day across every year"),
-        ("/api/cross.json", "index of every century, decade and subject"),
+        ("/api/cross.json", "index of every century, decade, subject and country"),
+        ("/api/place/{country}.json", "one country's record, century by century"),
         ("/api/century/{slug}.json", "one century: its decades, subjects and highlights"),
         ("/api/decade/{slug}.json", "one decade: its years and their leading entries"),
         ("/api/topic/{slug}.json", "one subject across every century"),

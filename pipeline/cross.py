@@ -10,7 +10,11 @@ answers a question no single article answers is not a duplicate of anything.
      site was missing. Every year was reachable only from one 1MB index page, which is
      the worst possible shape for a crawler: 2,909 links deep on a single URL and no
      hierarchy at all. Century -> decade -> year is three hops with ~50 links each.
-  2. TOPICS. This is the half of the site that is genuinely ours. The section a sentence
+  2. PLACES. Every row harvested from a country-year article ("1969 in Japan") carries
+     the country it belongs to, so the corpus can be cut by nation -- an axis English
+     Wikipedia has no single page for, because its own country coverage is 14,294
+     separate articles with no index across them.
+  3. TOPICS. This is the half of the site that is genuinely ours. The section a sentence
      files under (Conflict & Security, Science & Discovery, ...) was decided here, not by
      Wikipedia, so "Science & Discovery in the 3rd century" is an aggregate that exists
      nowhere else. Births and Deaths are excluded: they are people, not subjects, and a
@@ -40,6 +44,8 @@ SKIP_TOPICS = {"Births", "Deaths"}
 DECADE_MIN = 12      # entries; below this a decade page is thinner than one year page
 CENTURY_MIN = 20
 TOPIC_MIN = 8        # entries in one topic-century
+PLACE_MIN = 12       # published rows before a country gets a page of its own
+PLACE_PER_CENTURY = 25   # rows shown per century on a country page, evenly sampled
 
 
 def ordinal(n: int) -> str:
@@ -98,7 +104,20 @@ def entry(page: dict, section: str, item: dict) -> dict:
         "date": item.get("date"),
         "text": item["text"],
         "cite": item["cite"],
+        **({"country": item["country"]} if item.get("country") else {}),
     }
+
+
+def spread(items: list, cap: int) -> list:
+    """A sample of `items` taken across the whole list rather than off the front.
+
+    Taking the first N off a chronological list makes every country page open in the
+    year its article coverage begins and stop there -- the century pages had exactly
+    this bug and it made each of them look like a page about its first decade."""
+    if len(items) <= cap:
+        return items
+    step = len(items) / cap
+    return [items[int(i * step)] for i in range(cap)]
 
 
 def write(path: str, obj) -> None:
@@ -121,6 +140,7 @@ def main() -> int:
     decades: dict[str, dict] = {}
     centuries: dict[str, dict] = {}
     topics: dict[str, dict] = {}
+    places: dict[str, dict] = {}
     year_map: dict[str, dict] = {}
 
     for page in pages:
@@ -148,6 +168,19 @@ def main() -> int:
 
         year_map[str(y)] = {"decade": {"slug": dslug, "label": dlabel},
                             "century": {"slug": cslug, "label": clabel}}
+
+        for section in page["sections"]:
+            for item in section["items"]:
+                country = item.get("country")
+                if not country:
+                    continue
+                pslug = slugify(country)
+                pl = places.setdefault(pslug, {"slug": pslug, "label": country,
+                                               "total": 0, "by_century": {}})
+                pl["total"] += 1
+                b = pl["by_century"].setdefault(cslug, {"slug": cslug, "label": clabel,
+                                                        "key": ckey, "items": []})
+                b["items"].append(entry(page, section["title"], item))
 
         for section in page["sections"]:
             title = section["title"]
@@ -231,6 +264,28 @@ def main() -> int:
         topic_index.append({"slug": t["slug"], "label": t["label"], "total": hub["total"],
                             "centuries": len(buckets)})
 
+    # ---- places -----------------------------------------------------------------
+    place_index = []
+    for pl in sorted(places.values(), key=lambda p: -p["total"]):
+        if pl["total"] < PLACE_MIN:
+            continue
+        buckets = sorted(pl["by_century"].values(), key=lambda b: b["key"])
+        for b in buckets:
+            b["items"].sort(key=lambda r: r["year"])
+            b["count"] = len(b["items"])
+            b["span"] = [b["items"][0]["year_label"], b["items"][-1]["year_label"]]
+            b["items"] = spread(b["items"], PLACE_PER_CENTURY)
+        hub = {
+            "slug": pl["slug"], "label": pl["label"], "total": pl["total"],
+            "span": [buckets[0]["items"][0]["year_label"],
+                     buckets[-1]["items"][-1]["year_label"]],
+            "centuries": buckets,
+        }
+        write(os.path.join(a.out, "place", f"{pl['slug']}.json"), hub)
+        place_index.append({"slug": pl["slug"], "label": pl["label"],
+                            "total": pl["total"], "centuries": len(buckets),
+                            "span": hub["span"]})
+
     # A year (or a decade) whose parent page fell under the floor must not link to a URL
     # that was never built. Null it out rather than publish a 404 in the link graph.
     for rec in year_map.values():
@@ -251,12 +306,15 @@ def main() -> int:
                      "century": d["century"]["slug"] if d["century"] else None}
                     for d in kept_decades],
         "topics": topic_index,
+        "places": place_index,
     }
     write(os.path.join(a.out, "index.json"), index)
     write(os.path.join(a.out, "years.json"), year_map)
 
     print(f"cross: {len(kept_centuries)} centuries, {len(kept_decades)} decades, "
-          f"{len(topic_index)} topic hubs, {n_topic_pages} topic-century pages")
+          f"{len(topic_index)} topic hubs, {n_topic_pages} topic-century pages, "
+          f"{len(place_index)} country pages "
+          f"({sum(p['total'] for p in place_index):,} rows carry a country)")
     return 0
 
 

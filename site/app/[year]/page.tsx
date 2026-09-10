@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import YearNav from "@/components/YearNav";
 import { allYears, readYear, type Item } from "@/lib/data";
+import { readable } from "@/lib/display";
 import { dateHref } from "@/lib/dates";
-import { hasTopicCentury, yearParents } from "@/lib/cross";
+import { hasPlace, hasTopicCentury, placeSlug, yearParents } from "@/lib/cross";
 import { breadcrumb, canonical, JsonLd, SITE, trim } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -43,14 +44,22 @@ function Entry({ item }: { item: Item }) {
         <a className="underline decoration-dotted underline-offset-2 hover:decoration-solid" href={href}>
           {item.date}
         </a>
-        {item.text.slice(item.date.length)}
+        {readable(item.text.slice(item.date.length))}
       </>
     ) : (
-      item.text
+      readable(item.text)
     );
   return (
     <li className="text-sm leading-relaxed text-foreground/85">
       {body}
+      {item.country && hasPlace(item.country) && (
+        <a
+          className="ml-1 whitespace-nowrap rounded-sm border border-border px-1 text-[10px] text-muted-foreground hover:text-foreground"
+          href={`/in/${placeSlug(item.country)}`}
+        >
+          {item.country}
+        </a>
+      )}
       <a
         href={item.cite.url}
         target="_blank"

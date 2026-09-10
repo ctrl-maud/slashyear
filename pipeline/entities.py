@@ -269,6 +269,9 @@ def main() -> None:
     # /api/entity JSON). Measured 2026-09-08: 14,819 files at 3,114 entities.
     ap.add_argument("--max", type=int, default=4900, help="cap on published entity pages (Cloudflare Pages allows 20,000 files total)")
     ap.add_argument("--no-wikidata", action="store_true")
+    ap.add_argument("--protect", default="https://slashyear.com/api/entities.json",
+                    help="index of the entity pages that are LIVE right now; those slugs "
+                         "keep their page whatever the ranking says. Pass '' to disable.")
     args = ap.parse_args()
 
     print("reading wikitext links...")
@@ -358,8 +361,39 @@ def main() -> None:
             continue
         ranked.append((len(yrs), len(items), slug))
     ranked.sort(reverse=True)
-    keep = [s for _, _, s in ranked[: args.max]]
-    print(f"  {len(ranked):,} clear the {args.min_years}-year floor; publishing {len(keep):,}")
+
+    # A page that is live and indexed does not get to disappear because a new source added
+    # competitors for the file budget. The country-year harvest put 1,180 fresh entities
+    # over the floor and the cap silently dropped the Berlin Wall, Anne Frank and Johannes
+    # Gutenberg -- all three had pages yesterday. The ranking decides who fills what is
+    # LEFT of the cap; it does not get to retire a URL.
+    protected: set[str] = set()
+    if args.protect:
+        try:
+            if args.protect.startswith("http"):
+                import urllib.request
+                # Cloudflare answers a bare urllib request with 403; it wants a UA.
+                req = urllib.request.Request(
+                    args.protect, headers={"User-Agent": "slashyear-build/1.0 "
+                                           "(https://www.slashyear.com)"})
+                with urllib.request.urlopen(req, timeout=30) as fh:
+                    live = json.load(fh)
+                # Keep a copy so a rebuild without network still protects the same URLs.
+                json.dump(live, open(os.path.join(ROOT, "data", "live-entities.json"),
+                                     "w", encoding="utf-8"))
+            else:
+                live = json.load(open(args.protect, encoding="utf-8"))
+            protected = {e["slug"] for e in live.get("entities", [])} & set(hits)
+            print(f"  {len(protected):,} entity pages are live now and are kept whatever "
+                  f"the ranking says")
+        except Exception as e:
+            print(f"  WARNING: could not read {args.protect} ({e.__class__.__name__}); "
+                  f"publishing on rank alone, which may retire live URLs")
+    keep = [s for _, _, s in ranked if s in protected]
+    room = max(0, args.max - len(keep))
+    keep += [s for _, _, s in ranked if s not in protected][:room]
+    print(f"  {len(ranked):,} clear the {args.min_years}-year floor; publishing {len(keep):,} "
+          f"({len(protected):,} of them protected as live)")
 
     wd = {}
     if not args.no_wikidata:
