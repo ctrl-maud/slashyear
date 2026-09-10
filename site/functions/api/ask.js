@@ -223,15 +223,28 @@ function buildPassages(entries) {
     .join("\n");
 }
 
-/* GET /api/ask — the status the page shows and the owner can check: what the route is
- * spending this month against its cap. No secrets, nothing per-user. */
-export async function onRequestGet({ env }) {
+/* GET /api/ask — public callers learn only whether the route is up. The spend/limits
+ * view is operational detail: it needs the status key (ASK_STATUS_KEY, sent as ?key= or
+ * an x-status-key header), because budget and traffic numbers are nobody's business. */
+export async function onRequestGet({ request, env }) {
   const c = cfg(env);
-  if (!env.ASK_KV) return json({ enabled: false, reason: "storage not bound" }, 200);
+  if (!env.ASK_KV) return json({ enabled: false }, 200);
   const spent = await spentUsd(env.ASK_KV);
+  const enabled = Boolean(env.AZURE_DS_KEY) && spent < c.budgetUsd;
+
+  const url = new URL(request.url);
+  const given = url.searchParams.get("key") || request.headers.get("x-status-key");
+  const authed = Boolean(env.ASK_STATUS_KEY) && given === env.ASK_STATUS_KEY;
+  if (!authed) {
+    return json({
+      enabled,
+      note: "Answers are composed only from sentences published on this site; each carries the Wikipedia revision id it was frozen from.",
+    });
+  }
+
   const used = await env.ASK_KV.get(`g:${dayKey()}`);
   return json({
-    enabled: Boolean(env.AZURE_DS_KEY) && spent < c.budgetUsd,
+    enabled,
     month: monthKey().slice(6),
     budget_usd: c.budgetUsd,
     spent_usd: Math.round(spent * 10000) / 10000,
@@ -244,7 +257,6 @@ export async function onRequestGet({ env }) {
       max_question_chars: c.maxQuestion,
     },
     model: env.AZURE_DS_MODEL || "DeepSeek-V4-Flash",
-    note: "Answers are composed only from sentences published on this site; each carries the Wikipedia revision id it was frozen from.",
   });
 }
 
@@ -281,8 +293,6 @@ export async function onRequestPost({ request, env }) {
   if (spent >= c.budgetUsd)
     return json({
       error: "Ask History has reached its budget for this month and will come back at the start of the next one.",
-      spent_usd: Math.round(spent * 100) / 100,
-      budget_usd: c.budgetUsd,
       alternative: `${here}/api/search?q=${encodeURIComponent(question)}`,
     }, 503);
 
