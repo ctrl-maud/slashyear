@@ -2,7 +2,7 @@
 license: cc-by-sa-4.0
 language:
   - en
-pretty_name: "slashyear: 86,902 dated historical events with source revision ids"
+pretty_name: "slashyear: dated historical events with source revision ids"
 size_categories:
   - 10K<n<100K
 task_categories:
@@ -34,8 +34,8 @@ configs:
 
 # slashyear — the dated historical record, with the source revision on every row
 
-86,902 dated historical events spanning 3,078 years, from roughly 3000 BCE to the
-present, extracted from English Wikipedia's year, decade and century articles.
+Every dated historical event we could extract from English Wikipedia's year, decade
+and century articles, spanning from roughly 3000 BCE to the present.
 
 **The point of this dataset is the last column.** Every row carries `source_revid`,
 the numeric id of the exact Wikipedia revision the sentence was quoted from. A
@@ -49,12 +49,12 @@ Live API, full-text search and MCP server: **https://slashyear.com/data**
 
 ## Configs
 
-| config | rows | one row is |
-|---|---|---|
-| `events` | 86,902 | one dated event, quoted verbatim, with its source revision |
-| `years` | 3,078 | one year, with its lead summary |
-| `subjects` | 4,868 | one subject (person, place, institution), 2,722 with a Wikidata QID |
-| `subject_events` | ~250k | the join: one (subject, event) pair, so "every dated line mentioning Rome" is a filter |
+| config | one row is |
+|---|---|
+| `events` | one dated event, quoted verbatim, with its source revision |
+| `years` | one year, with its lead summary |
+| `subjects` | one subject (person, place, institution), most with a Wikidata QID |
+| `subject_events` | the join: one (subject, event) pair, so "every dated line mentioning Rome" is a filter |
 
 ```python
 from datasets import load_dataset
@@ -72,7 +72,7 @@ rome.filter(lambda r: r["slug"] == "rome")
 `topic`, `text`, `source_title`, `source_revid`, `source_section`, `source_url`, `page`.
 
 `subjects`: `slug`, `label`, `qid`, `description`, `entries`, `years`, `first_year`,
-`last_year`, `wikipedia`, `wikidata`, `page`. The 2,722 rows with a `qid` are joinable
+`last_year`, `wikipedia`, `wikidata`, `page`. The rows carrying a `qid` are joinable
 against any other database keyed on Wikidata, with no name matching.
 
 `subject_events`: `slug`, `label`, `qid`, `year`, `year_label`, `date`, `topic`, `text`,
