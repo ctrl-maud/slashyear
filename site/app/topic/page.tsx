@@ -1,6 +1,6 @@
 import SiteNav from "@/components/SiteNav";
 import { crossIndex } from "@/lib/cross";
-import { breadcrumb, canonical, JsonLd, SITE } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "Subjects — one thread of history at a time";
 const description =
@@ -9,7 +9,7 @@ const description =
 export const metadata = {
   title, description,
   alternates: { canonical: canonical("/topic") },
-  openGraph: { title, description, url: canonical("/topic") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/topic") },
 };
 
 export default function Topics() {

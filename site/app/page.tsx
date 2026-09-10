@@ -1,7 +1,7 @@
 import SiteNav from "@/components/SiteNav";
 import Today from "@/components/Today";
 import { readIndex, type IndexRow } from "@/lib/data";
-import { canonical, JsonLd, SITE } from "@/lib/seo";
+import { canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 import { crossIndex } from "@/lib/cross";
 
 /** "20th century" / "5th century BC" for the year an entry belongs to. Site URLs use
@@ -33,7 +33,7 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: canonical("/") },
-  openGraph: { title, description, url: canonical("/") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/") },
 };
 
 export default function Directory() {

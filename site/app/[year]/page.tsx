@@ -4,7 +4,7 @@ import { allYears, readYear, type Item } from "@/lib/data";
 import { readable } from "@/lib/display";
 import { dateHref } from "@/lib/dates";
 import { hasPlace, hasTopicCentury, placeSlug, yearParents } from "@/lib/cross";
-import { breadcrumb, canonical, JsonLd, SITE, trim } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE, trim , OG_IMAGE } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -27,8 +27,8 @@ export async function generateMetadata({ params }: { params: Promise<{ year: str
     title,
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, type: "article" },
-    twitter: { title, description },
+    openGraph: { title, description, images: OG_IMAGE, url, type: "article" },
+    twitter: { card: "summary_large_image", title, description, images: OG_IMAGE },
   };
 }
 

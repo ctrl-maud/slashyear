@@ -1,6 +1,6 @@
 import AskBox from "@/components/AskBox";
 import SiteNav from "@/components/SiteNav";
-import { breadcrumb, canonical, JsonLd, SITE } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "Ask History — a sourced answer to a question about the past";
 const description =
@@ -10,7 +10,7 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: canonical("/ask") },
-  openGraph: { title, description, url: canonical("/ask") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/ask") },
 };
 
 export default function Ask() {

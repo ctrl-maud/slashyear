@@ -46,3 +46,9 @@ export function breadcrumb(trail: { name: string; path: string }[]) {
     })),
   };
 }
+
+/** The share card every page declares. Explicit on each page because Next's file-based
+ *  opengraph-image does not survive a child segment defining its own openGraph. */
+export const OG_IMAGE = [
+  { url: "/og.png", width: 1200, height: 630, alt: "slashyear — every recorded year, every line sourced" },
+];

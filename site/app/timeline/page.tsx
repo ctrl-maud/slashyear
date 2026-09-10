@@ -1,6 +1,6 @@
 import SiteNav from "@/components/SiteNav";
 import { entityIndex } from "@/lib/entities";
-import { breadcrumb, canonical, JsonLd, SITE } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "Timelines — every subject the record names, in date order";
 const description =
@@ -10,7 +10,7 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: canonical("/timeline") },
-  openGraph: { title, description, url: canonical("/timeline") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/timeline") },
 };
 
 export default function Timelines() {

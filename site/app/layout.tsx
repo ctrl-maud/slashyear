@@ -18,8 +18,12 @@ export const metadata: Metadata = {
   description: SITE.blurb,
   applicationName: SITE.name,
   robots: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
+  icons: {
+    icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.png", type: "image/png" }],
+    apple: "/icon.png",
+  },
   openGraph: { siteName: SITE.name, type: "website", locale: "en_US" },
-  twitter: { card: "summary" },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

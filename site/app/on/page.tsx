@@ -1,6 +1,6 @@
 import SiteNav from "@/components/SiteNav";
 import { readDateIndex, MONTHS } from "@/lib/dates";
-import { breadcrumb, canonical, JsonLd, SITE } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "On this day — every calendar date in recorded history";
 const description =
@@ -10,7 +10,7 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: canonical("/on") },
-  openGraph: { title, description, url: canonical("/on") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/on") },
 };
 
 export default function Calendar() {

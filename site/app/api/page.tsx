@@ -1,5 +1,5 @@
 import SiteNav from "@/components/SiteNav";
-import { canonical, JsonLd, SITE } from "@/lib/seo";
+import { canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "API, bulk download and MCP server — sourced history as data";
 const description =
@@ -9,7 +9,7 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: canonical("/api") },
-  openGraph: { title, description, url: canonical("/api") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/api") },
 };
 
 function Row({ path, note }: { path: string; note: string }) {

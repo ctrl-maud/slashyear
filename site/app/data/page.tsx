@@ -1,5 +1,5 @@
 import SiteNav from "@/components/SiteNav";
-import { canonical, JsonLd, SITE } from "@/lib/seo";
+import { canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 import { totals, words } from "@/lib/counts";
 
 /** Counted by the build, never typed by hand -- see lib/counts.ts. */
@@ -33,7 +33,7 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: canonical("/data") },
-  openGraph: { title, description, url: canonical("/data") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/data") },
 };
 
 function P({ children }: { children: React.ReactNode }) {

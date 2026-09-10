@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import CrossEntry from "@/components/CrossEntry";
 import { readTopicCentury, topicCenturyParams } from "@/lib/cross";
-import { breadcrumb, canonical, JsonLd, SITE, trim } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE, trim , OG_IMAGE } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ topic: st
   return {
     title, description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, type: "article" },
-    twitter: { title, description },
+    openGraph: { title, description, images: OG_IMAGE, url, type: "article" },
+    twitter: { card: "summary_large_image", title, description, images: OG_IMAGE },
   };
 }
 

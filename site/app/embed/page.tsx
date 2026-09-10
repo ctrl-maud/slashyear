@@ -1,5 +1,5 @@
 import SiteNav from "@/components/SiteNav";
-import { canonical, JsonLd, SITE, breadcrumb } from "@/lib/seo";
+import { canonical, JsonLd, SITE, breadcrumb , OG_IMAGE } from "@/lib/seo";
 
 const title = "Embed — put today in history on your own site";
 const description =
@@ -9,7 +9,7 @@ export const metadata = {
   title,
   description,
   alternates: { canonical: canonical("/embed") },
-  openGraph: { title, description, url: canonical("/embed") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/embed") },
 };
 
 const TAG = `<script src="${SITE.base}/embed.js" async></script>`;

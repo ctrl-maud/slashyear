@@ -1,6 +1,6 @@
 import SiteNav from "@/components/SiteNav";
 import { crossIndex } from "@/lib/cross";
-import { breadcrumb, canonical, JsonLd, SITE } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "Countries — the same history, one nation at a time";
 const description =
@@ -9,7 +9,7 @@ const description =
 export const metadata = {
   title, description,
   alternates: { canonical: canonical("/in") },
-  openGraph: { title, description, url: canonical("/in") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/in") },
 };
 
 export default function Places() {

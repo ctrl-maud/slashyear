@@ -1,6 +1,6 @@
 import SiteNav from "@/components/SiteNav";
 import { crossIndex } from "@/lib/cross";
-import { breadcrumb, canonical, JsonLd, SITE } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "Centuries — the whole record, three clicks deep";
 const description =
@@ -9,7 +9,7 @@ const description =
 export const metadata = {
   title, description,
   alternates: { canonical: canonical("/century") },
-  openGraph: { title, description, url: canonical("/century") },
+  openGraph: { title, description, images: OG_IMAGE, url: canonical("/century") },
 };
 
 export default function Centuries() {
