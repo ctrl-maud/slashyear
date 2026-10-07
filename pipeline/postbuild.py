@@ -187,6 +187,10 @@ def fix_404(out: str, site: str, base: str) -> str:
     return "404.html = not-found page, /404 -> /404/ = the year 404 CE page"
 
 
+# Timelines under this many entries are noindexed by the page and left out of the sitemap.
+# Same number as THIN_TIMELINE in site/lib/entities.ts and pipeline/audit.py.
+THIN_TIMELINE = 20
+
 ROBOTS_INDEXABLE = ('<meta name="robots" content="index, follow, '
                     'max-image-preview:large, max-snippet:-1"/>')
 
@@ -300,7 +304,7 @@ def write_sitemap(out: str, site: str, base: str) -> str:
         with open(ent_index, encoding="utf-8") as fh:
             urls.append((f"{base}/timeline", newest))
             urls += [(f"{base}/timeline/{e['slug']}", newest)
-                     for e in json.load(fh)["entities"]]
+                     for e in json.load(fh)["entities"] if e["entries"] >= THIN_TIMELINE]
 
     body = "".join(
         "<url><loc>" + html.escape(u) + "</loc>"

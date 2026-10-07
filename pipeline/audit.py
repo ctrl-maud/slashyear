@@ -17,7 +17,9 @@ Four things, all of them mechanical:
      floor, so a link to a page that was never written is the easy mistake here.
   3. HEAD. Title, description and canonical must exist, be unique across the site, and
      the canonical must be the page's own URL. Duplicate descriptions were a real defect.
-  4. ROBOTS. Nothing but the not-found page may carry noindex.
+  4. ROBOTS. Nothing but the not-found page and the thin subject timelines (under
+     THIN_TIMELINE entries) may carry noindex, every thin timeline must carry it, and
+     no noindexed page may sit in the sitemap.
 
 Exit code is non-zero if any check fails, so a deploy can be gated on it.
 
@@ -44,6 +46,7 @@ TITLE = re.compile(r"<title>(.*?)</title>", re.S)
 DESC = re.compile(r'<meta name="description" content="(.*?)"', re.S)
 CANON = re.compile(r'<link rel="canonical" href="(.*?)"', re.S)
 NOINDEX = re.compile(r'<meta name="robots" content="[^"]*noindex')
+THIN_TIMELINE = 20  # same number as site/lib/entities.ts and pipeline/postbuild.py
 HREF = re.compile(r'href="(/[^"#?]*)"')
 
 
@@ -159,6 +162,12 @@ def main() -> int:
     descs: dict[str, str] = {}
     checked_bullets = 0
     checked_links = 0
+    thin = set()
+    ent_index = os.path.join(a.site, "entities", "index.json")
+    if os.path.exists(ent_index):
+        thin = {f"/timeline/{e['slug']}" for e in json.load(open(ent_index, encoding="utf-8"))["entities"]
+                if e["entries"] < THIN_TIMELINE}
+    noindexed = set()
 
     for path in sorted(pages):
         url = url_of(path, a.out)
@@ -216,8 +225,20 @@ def main() -> int:
             fail["head"].append(f"{url}: canonical is {c.group(1)}")
 
         # 4. robots
-        if NOINDEX.search(doc):
+        if url in thin:
+            if NOINDEX.search(doc):
+                noindexed.add(url)
+            else:
+                fail["robots"].append(f"{url}: thin timeline without noindex")
+        elif NOINDEX.search(doc):
             fail["robots"].append(f"{url}: noindex on an indexable page")
+
+    sm = os.path.join(a.out, "sitemap.xml")
+    if os.path.exists(sm):
+        for loc in re.findall(r"<loc>(.*?)</loc>", open(sm, encoding="utf-8").read()):
+            u = html.unescape(loc)[len(base):] or "/"
+            if u in noindexed:
+                fail["robots"].append(f"{u}: noindexed but in the sitemap")
 
     report = {
         "pages": len(pages),

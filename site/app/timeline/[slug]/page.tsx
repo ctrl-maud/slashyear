@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
-import { entityIndex, readEntity, type EntityPage } from "@/lib/entities";
+import { entityIndex, readEntity, THIN_TIMELINE, type EntityPage } from "@/lib/entities";
 import { readable } from "@/lib/display";
 import { yearPath } from "@/lib/cross";
 import { breadcrumb, canonical, JsonLd, SITE, trim , OG_IMAGE } from "@/lib/seo";
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title,
     description,
     alternates: { canonical: url },
+    ...(p.entries < THIN_TIMELINE ? { robots: { index: false, follow: true } } : {}),
     openGraph: { title, description, images: OG_IMAGE, url, type: "article" },
     twitter: { card: "summary_large_image", title, description, images: OG_IMAGE },
   };

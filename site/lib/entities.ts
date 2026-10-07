@@ -35,6 +35,13 @@ export type EntityPage = {
   items: EntityItem[];
 };
 
+/** Timelines under this many entries are published and crawlable but carry
+ *  `noindex, follow` and stay out of the sitemap. Search Console (2026-09-28) had every
+ *  URL discovered and few indexed: thousands of near-empty timelines were diluting the
+ *  site. pipeline/postbuild.py and pipeline/audit.py hold the same number as
+ *  THIN_TIMELINE, and audit fails if the three ever disagree. */
+export const THIN_TIMELINE = 20;
+
 export type EntityRow = {
   slug: string;
   label: string;
