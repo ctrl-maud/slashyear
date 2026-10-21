@@ -149,7 +149,8 @@ def trim(text: str, limit: int = 155) -> str:
 def remeta(body: str, page: dict, url: str) -> str:
     """Give the moved year page the head it would have had if Next had not written it as
     the not-found route."""
-    title = f"{page['label']} \u2014 events, births and deaths"
+    name = page["label"].removesuffix(" CE") if page["year"] >= 1000 else page["label"]
+    title = f"What happened in {name}? Events, births and deaths"
     desc = trim(page["lead"])
     t, d, u = (html.escape(x, quote=True) for x in (title, desc, url))
     tags = (

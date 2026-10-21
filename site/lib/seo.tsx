@@ -19,6 +19,13 @@ export const SITE = {
  *  directory index because the bare 404.html has to stay the not-found page. */
 export const canonical = (path: string) => SITE.base + path;
 
+/** Phrased the way people ask it ("what happened in 1970"). The era stays on years below
+ *  1000, where "64" alone does not read as a year. */
+export function yearTitle(page: { year: number; label: string }): string {
+  const name = page.year >= 1000 ? page.label.replace(/ CE$/, "") : page.label;
+  return `What happened in ${name}? Events, births and deaths`;
+}
+
 export function trim(text: string, max = 155): string {
   const flat = text.replace(/\s+/g, " ").trim();
   if (flat.length <= max) return flat;

@@ -4,7 +4,7 @@ import { allYears, readYear, type Item } from "@/lib/data";
 import { readable } from "@/lib/display";
 import { dateHref } from "@/lib/dates";
 import { hasPlace, hasTopicCentury, placeSlug, yearParents } from "@/lib/cross";
-import { breadcrumb, canonical, JsonLd, SITE, trim , OG_IMAGE } from "@/lib/seo";
+import { breadcrumb, canonical, JsonLd, SITE, trim, yearTitle, OG_IMAGE } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ year: str
   const { year } = await params;
   const page = readYear(year);
   if (!page) return { title: SITE.name };
-  const title = `${page.label} — events, births and deaths`;
+  const title = yearTitle(page);
   const description = trim(page.lead);
   const url = canonical(pathOf(page.year));
   return {
@@ -118,7 +118,7 @@ export default async function YearPage({ params }: { params: Promise<{ year: str
         data={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          name: `${page.label} — events, births and deaths`,
+          name: yearTitle(page),
           headline: page.label,
           description: trim(page.lead),
           url: canonical(pathOf(page.year)),

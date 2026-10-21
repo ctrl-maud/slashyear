@@ -1,10 +1,11 @@
 import SiteNav from "@/components/SiteNav";
+import Today from "@/components/Today";
 import { readDateIndex, MONTHS } from "@/lib/dates";
 import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
-const title = "On this day — every calendar date in recorded history";
+const title = "On this day in history — events, births and deaths for every date";
 const description =
-  "Every calendar date, each holding every sourced event, birth and death recorded on that day across recorded history.";
+  "What happened on this day in history: today's events, births and deaths, and every other calendar date, each line quoted from the Wikipedia revision it came from.";
 
 export const metadata = {
   title,
@@ -42,6 +43,7 @@ export default function Calendar() {
           Pick a date to see everything recorded on it, oldest first, each line quoted from the
           revision it came from.
         </p>
+        <Today />
         {MONTHS.map((month) => (
           <section className="mb-8" key={month}>
             <h2 className="mb-3 border-b border-border pb-2 text-lg font-medium text-foreground">
