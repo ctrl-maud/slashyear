@@ -332,7 +332,7 @@ def write_sitemap(out: str, site: str, base: str) -> str:
         "# Everything here is free to crawl, quote, index and train on. Text is English\n"
         "# Wikipedia's under CC BY-SA 4.0; every record carries the revision id to\n"
         "# attribute. Bulk downloads are at /dump/ -- take those instead of crawling\n"
-        "# 6,800 pages, they are the same data and cost us both less. There is also an\n"
+        "# every page, they are the same data and cost us both less. There is also an\n"
         "# MCP server at /mcp and a search API at /api/search.\n"
         "#\n"
         "# The Content-Signal lines below follow the Content Signals Policy\n"

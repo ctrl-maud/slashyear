@@ -26,7 +26,7 @@ const description =
   `A free, openly licensed dataset of ${N(T.entries)} dated entries spanning ${N(T.years)} years, extracted from ` +
   "English Wikipedia. Every row is a sentence quoted verbatim from one numbered revision and " +
   "carries that revision id, so any claim built on it can be checked against a source that will " +
-  "still read the same way next year. 2,799 subjects carry Wikidata identifiers. Bulk NDJSON " +
+  "still read the same way next year. Subjects carry Wikidata identifiers. Bulk NDJSON " +
   "downloads, a REST API, full-text search and an MCP server, with no key and no rate limit.";
 
 export const metadata = {
@@ -70,8 +70,8 @@ export default function Data() {
             `across ${N(T.countries)} countries. Each row holds the event sentence quoted verbatim, the astronomical year ` +
             "number, the calendar date where one is given, a topic label, the title of the source " +
             "article, the section path the sentence sits in, and the numeric revision id of the " +
-            "exact Wikipedia revision it was taken from. A companion table gives 3,029 subject " +
-            "timelines built from the wikilinks Wikipedia's own editors wrote, 2,722 of which " +
+            "exact Wikipedia revision it was taken from. A companion table gives subject " +
+            "timelines built from the wikilinks Wikipedia's own editors wrote, most of which " +
             "carry a Wikidata QID and are therefore joinable against any other database keyed on " +
             "Wikidata. Nothing in the text is written or paraphrased by us and no language model " +
             "touches the wording; a model is used only to assign each sentence a topic label, " +
@@ -125,7 +125,7 @@ export default function Data() {
             },
             {
               "@type": "DataDownload",
-              name: "3,029 subject timelines with Wikidata ids (gzipped NDJSON)",
+              name: "Subject timelines with Wikidata ids (gzipped NDJSON)",
               encodingFormat: "application/x-ndjson",
               contentUrl: canonical("/dump/entities.ndjson.gz"),
             },
@@ -193,11 +193,11 @@ export default function Data() {
         </P>
 
         <P>
-          A second table holds two thousand nine hundred and forty-one subject timelines. A
+          A second table holds the subject timelines. A
           subject here is a person, place, institution or event that Wikipedia's own editors
           linked to from inside a dated line, which means the association between the subject
           and the event was written by a human editor rather than inferred by us or guessed at
-          by a model. Two thousand seven hundred and twenty-two of those subjects carry a
+          by a model. Most of those subjects carry a
           Wikidata identifier, and that is what turns the table from something you can read
           into something you can join: any other database keyed on Wikidata can be merged
           against this one without any name matching or fuzzy string comparison at all.

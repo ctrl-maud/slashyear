@@ -27,7 +27,7 @@ function groupByCentury(rows: IndexRow[]) {
 
 const title = "slashyear — every recorded year, every line sourced";
 const description =
-  "A directory of 2,960 documented years. Every entry is a sentence quoted from a specific Wikipedia revision you can open and check.";
+  "Every documented year, every line sourced. Each entry is a sentence quoted from a specific Wikipedia revision you can open and check.";
 
 export const metadata = {
   title,

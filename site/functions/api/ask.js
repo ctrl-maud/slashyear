@@ -66,14 +66,26 @@ async function spentUsd(kv) {
 
 async function addSpendUsd(kv, usd) {
   const k = monthKey();
-  const cur = parseInt((await kv.get(k)) || "0", 10) || 0;
-  // 70 days of TTL: the key only has to outlive its own month.
-  await kv.put(k, String(cur + Math.round(usd * 1e6)), { expirationTtl: 70 * 86400 });
+  try {
+    const cur = parseInt((await kv.get(k)) || "0", 10) || 0;
+    // 70 days of TTL: the key only has to outlive its own month.
+    await kv.put(k, String(cur + Math.round(usd * 1e6)), { expirationTtl: 70 * 86400 });
+  } catch (e) {
+    console.error("ask: spend write failed", String(e));
+  }
 }
 
+/* KV allows one write per second to a key, so two requests landing together (a double
+ * click, or two visitors in the same minute on the site-wide counter) make the second
+ * put throw. A rate counter that drifts by one is harmless; an uncaught throw is a 500. */
 async function bump(kv, key, ttl) {
-  const cur = parseInt((await kv.get(key)) || "0", 10) || 0;
-  await kv.put(key, String(cur + 1), { expirationTtl: ttl });
+  let cur = 0;
+  try {
+    cur = parseInt((await kv.get(key)) || "0", 10) || 0;
+    await kv.put(key, String(cur + 1), { expirationTtl: ttl });
+  } catch (e) {
+    console.error("ask: counter write failed", key, String(e));
+  }
   return cur + 1;
 }
 
@@ -264,7 +276,16 @@ export async function onRequestOptions() {
   return new Response(null, { status: 204, headers: { "cache-control": "no-store" } });
 }
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost(ctx) {
+  try {
+    return await answerPost(ctx);
+  } catch (e) {
+    console.error("ask: unhandled", String(e && e.stack || e));
+    return json({ error: "Something went wrong answering that. Try again in a moment." }, 500);
+  }
+}
+
+async function answerPost({ request, env }) {
   const c = cfg(env);
   const kv = env.ASK_KV;
   if (!kv) return json({ error: "Ask History is not configured." }, 503);
@@ -415,6 +436,10 @@ export async function onRequestPost({ request, env }) {
   };
 
   // 30 days: the corpus only changes on a rebuild, and a rebuild is rarer than that.
-  await kv.put(key, JSON.stringify(payload), { expirationTtl: 30 * 86400 });
+  try {
+    await kv.put(key, JSON.stringify(payload), { expirationTtl: 30 * 86400 });
+  } catch (e) {
+    console.error("ask: answer cache write failed", String(e));
+  }
   return json(payload);
 }

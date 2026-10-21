@@ -4,7 +4,7 @@ import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "On this day — every calendar date in recorded history";
 const description =
-  "All 366 calendar dates, each holding every sourced event, birth and death recorded on that day across 2,960 years.";
+  "Every calendar date, each holding every sourced event, birth and death recorded on that day across recorded history.";
 
 export const metadata = {
   title,

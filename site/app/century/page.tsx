@@ -4,7 +4,7 @@ import { breadcrumb, canonical, JsonLd, SITE , OG_IMAGE } from "@/lib/seo";
 
 const title = "Centuries — the whole record, three clicks deep";
 const description =
-  "Every documented century, each opening onto its decades and then its individual years. The hierarchy that turns 2,960 year pages into something you can actually walk through.";
+  "Every documented century, each opening onto its decades and then its individual years. The hierarchy that turns the year pages into something you can actually walk through.";
 
 export const metadata = {
   title, description,

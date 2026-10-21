@@ -46,7 +46,7 @@ export default function Ask() {
         <footer className="mt-16 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">
           The model arranges sourced sentences; it is not asked what it knows, and it is
           instructed not to add anything the sources do not say. That is a real limit, not a
-          disclaimer: a question the 121,493 published entries do not cover will get a short
+          disclaimer: a question the published entries do not cover will get a short
           answer saying so. The whole index is open without a question at{" "}
           <a className="underline underline-offset-2" href="/api/search?q=eruption">
             /api/search
