@@ -307,6 +307,15 @@ def write_sitemap(out: str, site: str, base: str) -> str:
             urls += [(f"{base}/timeline/{e['slug']}", newest)
                      for e in json.load(fh)["entities"] if e["entries"] >= THIN_TIMELINE]
 
+    # /born and /play: built from data/extras, one page per year that has the data.
+    facts_index = os.path.join(ROOT, "data", "extras", "facts", "index.json")
+    if os.path.exists(facts_index):
+        with open(facts_index, encoding="utf-8") as fh:
+            fi = json.load(fh)
+        built = fi.get("built")
+        urls += [(f"{base}/play", built), (f"{base}/born", built)]
+        urls += [(f"{base}/born/{r['year']}", built) for r in fi["years"] if r["prices"]]
+
     body = "".join(
         "<url><loc>" + html.escape(u) + "</loc>"
         + (f"<lastmod>{lm}</lastmod>" if lm else "")
@@ -403,6 +412,31 @@ def write_api(out: str, site: str) -> str:
         # /api/place/<slug>.json is the country page's own payload; the index of them
         # rides inside /api/cross.json under "places".
     return f"/api: {n} year files, {m} date files, {k} cross-cut files, 3 indexes"
+
+
+def write_extras_api(out: str, extras: str) -> str:
+    """The outside series (prices, population, checked office holders, No. 1 singles) and
+    the daily puzzles, as files. The raw Wikidata pull (leaders.json) is not published:
+    only office-years that passed the check in facts.py go out, inside the facts files. Same rule as the rest of /api: /api/facts/1985.json is the
+    record the /born/1985 page and the 1985 panel were rendered from."""
+    if not os.path.isdir(extras):
+        return "/api extras: none"
+    api = os.path.join(out, "api")
+    n = 0
+    for sub in ("facts", "play"):
+        src = os.path.join(extras, sub)
+        if not os.path.isdir(src):
+            continue
+        dst = os.path.join(api, sub)
+        os.makedirs(dst, exist_ok=True)
+        for f in os.listdir(src):
+            shutil.copyfile(os.path.join(src, f), os.path.join(dst, f))
+            n += 1
+    for f in ("prices.json", "hot100.json"):
+        if os.path.exists(os.path.join(extras, f)):
+            shutil.copyfile(os.path.join(extras, f), os.path.join(api, f))
+            n += 1
+    return f"/api extras: {n} files (facts, play, prices, hot100)"
 
 
 def write_entities_api(out: str, site: str) -> str:
@@ -745,7 +779,21 @@ by us and no language model touches the wording.
 - [One country]({base}/api/place/japan.json): `/api/place/{{country}}.json`, harvested from the per-country year articles
 - [Subject index]({base}/api/entities.json), [year index]({base}/api/years.json), [date index]({base}/api/dates.json)
 - [Search]({base}/api/search?q=plague): `/api/search?q=&from=&to=&limit=` returns matching subjects and their dated entries
-- [MCP server]({base}/mcp): streamable HTTP, no auth, tools for years, days, subjects and search
+- [MCP server]({base}/mcp): streamable HTTP, no auth, tools for years, days, subjects, search, year facts, prices and No. 1 songs
+
+## Year facts (outside series, not Wikipedia prose)
+
+For 1800-2025 each year also has a record built from public statistical and structured
+sources, every figure carrying its source: world population (Our World in Data), U.S. CPI
+and average retail prices (BLS, Census, DOL via FRED; public domain), the leaders of the
+U.S., U.K., Canada, Germany and France with dates in office (Wikidata, CC0, published
+only for years that match an independent list of holders), and every Billboard Hot 100
+No. 1 by issue date (quoted from cited Wikipedia revisions).
+
+- [One year's facts]({base}/api/facts/1985.json): `/api/facts/{{year}}.json`
+- [Born in a year]({base}/born/1985): what a dollar was worth, prices then and now, leaders, No. 1 songs, famous births
+- [Prices]({base}/api/prices.json), [Hot 100 No. 1s]({base}/api/hot100.json)
+- [Daily guess-the-year puzzle]({base}/play), data at `/api/play/{{YYYY-MM}}.json`
 
 ## Terms
 
@@ -764,6 +812,8 @@ model crawler and there never will be.
     lines.append(f"- {base}/topic/{{slug}} and {base}/topic/{{slug}}/{{century}} — one of twelve subjects, whole or per century\n")
     lines.append(f"- {base}/timeline/{{slug}} — one subject's whole record in date order ({ents:,} of them)\n")
     lines.append(f"- {base}/embed and {base}/embed.js — today's entries on any third-party page\n")
+    lines.append(f"- {base}/born/{{year}} — the year someone was born: prices, leaders, No. 1 songs, births\n")
+    lines.append(f"- {base}/play — a daily guess-the-year puzzle\n")
     epath = os.path.join(site, "entities", "index.json")
     if os.path.exists(epath):
         idx = json.load(open(epath, encoding="utf-8"))
@@ -796,6 +846,13 @@ def write_manifest(out: str, base: str) -> str:
         ("/api/entities.json", "index of every subject that has a timeline"),
         ("/api/entity/{slug}.json", "one subject: every dated entry naming it, in order, with its Wikidata id"),
         ("/api/search?q={query}", "subjects matching a query and their dated entries; &from= &to= &limit="),
+        ("/api/facts/{year}.json", "one year, 1800-2025, from outside series: world population, U.S. prices "
+                                   "and CPI, leaders of the U.S., U.K., Canada, Germany and France, Billboard "
+                                   "Hot 100 No. 1s; each figure with its source"),
+        ("/api/facts/index.json", "which years have which facts"),
+        ("/api/prices.json", "U.S. CPI and average prices by year (BLS, Census, DOL via FRED)"),
+        ("/api/hot100.json", "every Billboard Hot 100 No. 1 by issue date, with its Wikipedia revision"),
+        ("/api/play/{month}.json", "the guess-the-year puzzles for one month (YYYY-MM)"),
         ("/dump/events.ndjson.gz", "every dated entry on the site, gzipped newline-delimited JSON"),
         ("/dump/years.ndjson.gz", "one record per year"),
         ("/dump/entities.ndjson.gz", "one record per subject timeline"),
@@ -939,6 +996,7 @@ def main() -> int:
     ap.add_argument("--out", default=os.path.join(ROOT, "site", "out"))
     ap.add_argument("--site", default=os.path.join(ROOT, "data", "site"))
     ap.add_argument("--base", default="https://slashyear.com")
+    ap.add_argument("--extras", default=os.path.join(ROOT, "data", "extras"))
     a = ap.parse_args()
     base = a.base.rstrip("/")
     print(" ", fix_404(a.out, a.site, base))
@@ -946,6 +1004,7 @@ def main() -> int:
     print(" ", write_redirects(a.out, base, a.site))
     print(" ", write_api(a.out, a.site))
     print(" ", write_entities_api(a.out, a.site))
+    print(" ", write_extras_api(a.out, a.extras))
     print(" ", write_search_index(a.out, a.site))
     print(" ", write_text_index(a.out, a.site))
     print(" ", write_dumps(a.out, a.site, base))

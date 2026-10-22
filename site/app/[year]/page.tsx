@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import YearFacts from "@/components/YearFacts";
+import { readFacts } from "@/lib/facts";
 import YearNav from "@/components/YearNav";
 import { allYears, readYear, type Item } from "@/lib/data";
 import { readable } from "@/lib/display";
@@ -162,6 +164,8 @@ export default async function YearPage({ params }: { params: Promise<{ year: str
           </p>
         )}
 
+        <YearFacts year={page.year} />
+
         {page.sections.map((section) => (
           <section className="mb-10" key={section.title}>
             <h2 className="mb-4 border-b border-border pb-2 text-lg font-medium text-foreground">
@@ -272,7 +276,14 @@ export default async function YearPage({ params }: { params: Promise<{ year: str
           .
           Nothing on this page is written by us and nothing is generated: the sentences are the
           source&rsquo;s own, so a claim you doubt can be checked against the exact revision it came
-          from. Text is reused under{" "}
+          from.
+          {readFacts(page.year) && (
+            <>
+              {" "}The figures in the &ldquo;at a glance&rdquo; box are not from Wikipedia&rsquo;s year
+              article: each comes from the public source linked beside it.
+            </>
+          )}{" "}
+          Text is reused under{" "}
           <a
             className="underline underline-offset-2 hover:text-foreground"
             href="https://creativecommons.org/licenses/by-sa/4.0/"

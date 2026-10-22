@@ -9,6 +9,8 @@
  *  client runtime on most pages, and <details> opens without JavaScript.
  */
 const EXPLORE = [
+  { href: "/play", label: "Guess the year", hint: "a daily history puzzle" },
+  { href: "/born", label: "The year you were born", hint: "prices, No. 1 songs, leaders" },
   { href: "/century", label: "Centuries", hint: "the long view" },
   { href: "/in", label: "Countries", hint: "one place through time" },
   { href: "/topic", label: "Subjects", hint: "one thread through time" },

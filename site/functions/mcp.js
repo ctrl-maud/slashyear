@@ -113,6 +113,46 @@ const TOOLS = [
     },
   },
   {
+    name: "get_year_facts",
+    description:
+      "What a year (1800-2025) looked like in numbers, from outside sources rather than " +
+      "encyclopedia prose: world population, U.S. CPI and what a dollar then is worth now, " +
+      "average U.S. prices (gas, eggs, bread, milk, houses, income, minimum wage), who led the " +
+      "U.S., U.K., Canada, Germany and France (only years that match an independent list of " +
+      "holders), and the Billboard Hot 100 No. 1 songs. Every figure carries its source.",
+    inputSchema: {
+      type: "object",
+      properties: { year: { type: "integer", description: "1800 to 2025" } },
+      required: ["year"],
+    },
+  },
+  {
+    name: "get_number_one_song",
+    description:
+      "The Billboard Hot 100 No. 1 single on a given date (1958-08-04 onward): the first chart " +
+      "issue dated on or after that day, quoted from a cited Wikipedia revision.",
+    inputSchema: {
+      type: "object",
+      properties: { date: { type: "string", description: "YYYY-MM-DD" } },
+      required: ["date"],
+    },
+  },
+  {
+    name: "convert_dollars",
+    description:
+      "Inflation-adjust U.S. dollars between years with the BLS CPI-U (1913 onward). Omit " +
+      "to_year for the latest published month.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        amount: { type: "number" },
+        from_year: { type: "integer" },
+        to_year: { type: "integer", description: "optional; default is the latest CPI month" },
+      },
+      required: ["amount", "from_year"],
+    },
+  },
+  {
     name: "list_countries",
     description: "Browse the countries that have a record of their own, largest first.",
     inputSchema: {
@@ -249,6 +289,59 @@ async function call(name, args, env, request) {
     });
   }
 
+  if (name === "get_year_facts") {
+    const y = parseInt(args?.year, 10);
+    if (!Number.isFinite(y)) return text({ error: "year must be an integer" });
+    const f = await asset(env, request, `/api/facts/${y}.json`);
+    if (!f) return text({ error: `no facts published for ${y}`, covered: "1800 to 2025" });
+    return text({
+      ...f,
+      pages: { year: `${origin}/${y}`, born: f.prices ? `${origin}/born/${y}` : undefined },
+    });
+  }
+
+  if (name === "get_number_one_song") {
+    const d = String(args?.date || "");
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return text({ error: "date must be YYYY-MM-DD" });
+    if (d < "1958-08-04") return text({ error: "the Hot 100 starts with the issue of 1958-08-04", covered: "1958-08-04 onward" });
+    const y = parseInt(d.slice(0, 4), 10);
+    let wk = null;
+    let src = null;
+    for (const yy of [y, y + 1]) {
+      const f = await asset(env, request, `/api/facts/${yy}.json`);
+      const hit = f?.hot100?.weeks.find((w) => w.date >= d);
+      if (hit) { wk = hit; src = f.hot100.source; break; }
+    }
+    if (!wk) return text({ error: `no Hot 100 issue on or after ${d}`, covered: "1958-08-04 onward" });
+    return text({
+      date: d, chart_issue_date: wk.date, title: wk.title, artist: wk.artist,
+      source: src, page: `${origin}/born/${y}`,
+      license: "CC BY-SA 4.0. Attribute the Wikipedia article and revision id.",
+    });
+  }
+
+  if (name === "convert_dollars") {
+    const prices = await asset(env, request, "/api/prices.json");
+    const amount = Number(args?.amount);
+    const fy = String(parseInt(args?.from_year, 10));
+    const a = prices?.cpi?.years?.[fy];
+    if (!Number.isFinite(amount) || !a) return text({ error: "need an amount and a from_year of 1913 or later" });
+    let b = prices.cpi.latest.value;
+    let label = prices.cpi.latest.date.slice(0, 7);
+    if (args?.to_year != null) {
+      const ty = String(parseInt(args.to_year, 10));
+      b = prices.cpi.years[ty];
+      label = ty;
+      if (!b) return text({ error: `no annual CPI for ${args.to_year}` });
+    }
+    return text({
+      amount, from_year: +fy, to: label,
+      result: Math.round(amount * (b / a) * 100) / 100,
+      cpi_from: a, cpi_to: b,
+      source: prices.cpi.source,
+    });
+  }
+
   if (name === "list_subjects") {
     const rows = await subjects(env, request);
     const p = norm(args?.starts_with || "");
@@ -315,7 +408,7 @@ export async function onRequest({ request, env }) {
         return ok({
           protocolVersion: PROTOCOL,
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "slashyear", version: "1.0.0" },
+          serverInfo: { name: "slashyear", version: "1.1.0" },
           instructions:
             "Sourced history. Every entry is a sentence quoted verbatim from a specific English " +
             "Wikipedia revision and carries that revision id, so a claim built on it stays " +
