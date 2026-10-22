@@ -1,4 +1,4 @@
-import { holderLine, money, monthYear, people, readFacts, roleLabel, wd } from "@/lib/facts";
+import { money, monthYear, panelStates, people, postsLine, readFacts, stateLabel } from "@/lib/facts";
 
 /** The questions people actually put to a year, answered from the public series that
  *  hold the answer, each figure linked to its publisher. Rendered as a definition list,
@@ -7,8 +7,7 @@ import { holderLine, money, monthYear, people, readFacts, roleLabel, wd } from "
 export default function YearFacts({ year }: { year: number }) {
   const f = readFacts(year);
   if (!f) return null;
-  const key = f.leaders?.key ?? [];
-  const us = key.find((s) => s.state === "United States");
+  const key = panelStates(f.leaders);
   const most = Math.max(0, ...(f.hot100?.songs.map((s) => s.weeks) ?? []));
   const top = f.hot100?.songs.filter((s) => s.weeks === most) ?? [];
   const gas = f.prices?.items.find((i) => i.id === "gas");
@@ -20,19 +19,11 @@ export default function YearFacts({ year }: { year: number }) {
       value: `about ${people(f.population.value)}`,
       src: { href: f.population.source.url, label: f.population.source.publisher ?? f.population.source.name },
     });
-  if (us)
-    for (const o of us.offices.filter((o) => o.role === "head_of_state"))
-      rows.push({
-        term: "U.S. president",
-        value: holderLine(o, year),
-        src: { href: wd(o.office_qid), label: "Wikidata" },
-      });
-  for (const s of key.filter((s) => s.state !== "United States").slice(0, 4)) {
-    const o = s.offices.find((o) => o.role === "head_of_government") ?? s.offices[0];
+  for (const s of key) {
     rows.push({
-      term: `${s.state}, ${roleLabel(o).toLowerCase()}`,
-      value: holderLine(o, year),
-      src: { href: wd(o.office_qid), label: "Wikidata" },
+      term: stateLabel(s),
+      value: postsLine(s),
+      src: { href: f.leaders!.source.url, label: `Wikipedia rev. ${f.leaders!.source.revid}` },
     });
   }
   if (f.prices)
@@ -77,6 +68,11 @@ export default function YearFacts({ year }: { year: number }) {
         ))}
       </dl>
       <p className="mt-3 flex flex-wrap gap-x-4 text-sm">
+        {f.leaders && (
+          <a className="underline underline-offset-2 hover:text-foreground" href={`/leaders/${year}`}>
+            Who led every country in {year} →
+          </a>
+        )}
         {f.prices && (
           <a className="underline underline-offset-2 hover:text-foreground" href={`/born/${year}`}>
             Born in {year}? What it cost, who led, what was No. 1 →

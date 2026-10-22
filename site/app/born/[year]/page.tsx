@@ -4,7 +4,7 @@ import SiteNav from "@/components/SiteNav";
 import { readYear } from "@/lib/data";
 import { dateHref } from "@/lib/dates";
 import { readable } from "@/lib/display";
-import { bornYears, holderLine, money, monthYear, people, readFacts, roleLabel, wd } from "@/lib/facts";
+import { bornYears, keyStates, money, monthYear, people, postsLine, readFacts, stateLabel } from "@/lib/facts";
 import { breadcrumb, canonical, JsonLd, SITE, OG_IMAGE } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -142,28 +142,26 @@ export default async function BornPage({ params }: { params: Promise<{ year: str
           </p>
         </section>
 
-        {f.leaders && f.leaders.key.length > 0 && (
+        {f.leaders && keyStates(f.leaders).length > 0 && (
           <section className="mb-10">
             <h2 className="mb-3 border-b border-border pb-2 text-lg font-medium text-foreground">
               Who was in charge in {year}
             </h2>
             <dl className="grid grid-cols-1 gap-x-4 gap-y-2 text-sm sm:grid-cols-[minmax(0,14rem)_1fr]">
-              {f.leaders.key.flatMap((s) =>
-                s.offices.map((o) => (
-                  <div className="contents" key={`${s.qid}-${o.office_qid}`}>
-                    <dt className="text-muted-foreground">{s.state}, {roleLabel(o).toLowerCase()}</dt>
-                    <dd className="text-foreground/85">
-                      {holderLine(o, y)}{" "}
-                      <a className="align-super text-[10px] text-muted-foreground hover:underline" href={wd(o.office_qid)} target="_blank" rel="noreferrer nofollow">
-                        Wikidata
-                      </a>
-                    </dd>
-                  </div>
-                )),
-              )}
+              {keyStates(f.leaders).map((s) => (
+                <div className="contents" key={s.state}>
+                  <dt className="text-muted-foreground">{stateLabel(s)}</dt>
+                  <dd className="text-foreground/85">{postsLine(s)}</dd>
+                </div>
+              ))}
             </dl>
             <p className="mt-3 text-xs text-muted-foreground">
-              Terms from Wikidata, shown only where they match the official lists of holders.
+              From Wikipedia&rsquo;s{" "}
+              <a className="underline underline-offset-2 hover:text-foreground" href={f.leaders.source.url} target="_blank" rel="noreferrer nofollow">
+                {f.leaders.source.title}
+              </a>{" "}
+              (revision {f.leaders.source.revid}), each name checked against Wikidata.{" "}
+              <a className="underline underline-offset-2 hover:text-foreground" href={`/leaders/${year}`}>Every country in {year} →</a>
             </p>
           </section>
         )}
@@ -239,7 +237,7 @@ export default async function BornPage({ params }: { params: Promise<{ year: str
 
         <footer className="mt-16 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">
           Prices and the CPI are U.S. government statistics (public domain). World population is Our World in
-          Data&rsquo;s series (CC BY 4.0). Office holders are from Wikidata (CC0). People, events and the song
+          Data&rsquo;s series (CC BY 4.0). Office holders are quoted from Wikipedia&rsquo;s lists of state leaders and checked against Wikidata. People, events and the song
           lists are quoted from the English Wikipedia revision linked beside each one (CC BY-SA 4.0). Nothing
           here is estimated or generated: a figure a source does not publish for {year} is left out.
         </footer>

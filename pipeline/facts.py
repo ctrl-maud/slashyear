@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """facts.py — one file per year of the things the year articles do not say.
 
-prices.py, leaders.py and hot100.py each fetch one outside source. This joins them into a
+prices.py, stateleaders.py and hot100.py each fetch one outside source. This joins them into a
 single record per year, which is what the year page's "at a glance" panel, the /born
 pages and /api/facts/<year>.json all render from, so the page and the API cannot
 disagree. Nothing is estimated: a figure the source does not have for that year is left
@@ -18,7 +18,6 @@ import json
 import os
 import sys
 
-from leaders_reference import CHECKED
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -30,75 +29,79 @@ def load(path: str):
         return json.load(fh)
 
 
-def overlaps(h: dict, year: int) -> bool:
-    start = h["start"][:4]
-    end = (h.get("end") or "9999")[:4]
-    return int(start) <= year <= int(end)
+# The states the year page's panel names first, by the article each state's entry in the
+# Wikipedia lists links to (the list's own heading where an entry has no link).
+KEY = [
+    ("United States", {"United States"}),
+    ("United Kingdom", {"United Kingdom", "United Kingdom of Great Britain and Ireland", "Kingdom of Great Britain"}),
+    ("France", {"France", "French First Republic", "First French Empire", "Bourbon Restoration in France",
+                "July Monarchy", "French Second Republic", "Second French Empire", "French Third Republic",
+                "Vichy France", "Provisional Government of the French Republic", "French Fourth Republic"}),
+    ("Germany", {"Germany", "West Germany", "East Germany", "German Empire", "Weimar Republic", "Nazi Germany",
+                 "Allied-occupied Germany", "North German Confederation", "Confederation of the Rhine"}),
+    ("Russia", {"Russia", "Russian Empire", "Russian Republic", "Russian Soviet Federative Socialist Republic",
+                "Soviet Union"}),
+    ("China", {"China", "Qing dynasty", "Republic of China (1912–49)", "Empire of China (1915–16)"}),
+    ("Japan", {"Japan", "Empire of Japan", "Tokugawa shogunate"}),
+    ("India", {"India"}),
+]
 
 
-def in_office(state: dict, year: int) -> list[dict]:
+def leaders_for(doc: dict, year: int) -> dict | None:
+    """Every state's office holders in one year, from stateleaders.json: each holder with
+    the line quoted from the Wikipedia list and the Wikidata item that vouched for it."""
+    src = None
+    for s in doc["sources"]:
+        if s["first"] <= year <= s["last"]:
+            src = s                       # the later article wins where two cover a year
+    if src is None:
+        return None
+    states: dict[str, dict] = {}
+    for r in doc["rows"]:
+        if year not in r["years"]:
+            continue
+        st = states.get(r["state"])
+        if st is None:
+            link = r["state_link"] or r["state"]
+            st = states[r["state"]] = {
+                "state": r["state"], "region": r["region"],
+                "country": (r["group"] or link).split(":")[0].strip(),
+                "wikipedia": r["state_link"],
+                "key": next((k for k, links in KEY if link in links), None),
+                "holders": [],
+            }
+        since = min(a for a, b in r["terms"] if a <= year <= (b if b is not None else year))
+        h = next((h for h in st["holders"] if h["person"] == r["person"] and h["quote"] == r["quote"]), None)
+        if h is None:
+            st["holders"].append({"name": r["name"], "person": r["person"], "qid": r["qid"],
+                                  "title": r["title"], "office": r["office"], "quote": r["quote"], "_since": since})
+        elif r["title"] and r["title"] not in (h["title"] or ""):
+            h["title"] = f"{h['title']}; {r['title']}" if h["title"] else r["title"]
+    # Within one post, holders in the order they took it that year (the list gives a
+    # returning holder's line once, at his first term: Trump before Biden in 2025).
+    for st in states.values():
+        posts = list(dict.fromkeys((h["title"] or h["office"] or "").lower() for h in st["holders"]))
+        st["holders"].sort(key=lambda h: (posts.index((h["title"] or h["office"] or "").lower()), h["_since"]))
+        for h in st["holders"]:
+            del h["_since"]
+    # A ruler whose reign the list carries under two headings of one country (Hirohito
+    # under the Empire of Japan and the State of Japan) is one entry, not two.
     out = []
-    for off in state["offices"]:
-        holders = [h for h in off["holders"] if overlaps(h, year)]
-        if not holders:
+    for st in states.values():
+        mine = {h["person"] for h in st["holders"]}
+        if any(o["country"] == st["country"] and mine <= {h["person"] for h in o["holders"]} for o in out):
             continue
-        out.append({
-            "role": off["role"],
-            "office": off["name"],
-            "office_qid": off["qid"],
-            "also_head_of_government": bool(off.get("also_head_of_government")),
-            "holders": [{k: h[k] for k in ("qid", "name", "start", "end") if k in h}
-                        | ({"acting": True} if h.get("acting") else {})
-                        | ({"approx": True} if h.get("approx") else {})
-                        for h in holders],
-        })
-    out.sort(key=lambda o: o["role"] != "head_of_state")
-    return out
-
-
-def state_alive(state: dict, year: int) -> bool:
-    lo = state.get("from")
-    hi = state.get("to")
-    return (lo is None or lo <= year) and (hi is None or year <= hi)
-
-
-def matches(reference: list, year: int, offices: list[dict]) -> bool:
-    """The people Wikidata puts in the office this year are exactly the reference's."""
-    want = {t for t, lo, hi in reference if lo <= year <= hi}
-    got = {h["name"] for o in offices for h in o["holders"]}
-    return bool(got) and all(any(t in g for t in want) for g in got) \
-        and all(any(t in g for g in got) for t in want)
-
-
-def leaders_for(doc: dict, year: int) -> list[dict]:
-    """The checked offices (leaders_reference.CHECKED) whose Wikidata holders for this
-    year agree with the reference list. A year that disagrees is left out."""
-    by_name = {s["name"]: s for s in doc["states"]}
-    rows: dict[str, dict] = {}
-    for chain, role, (first, last), reference in CHECKED:
-        if not first <= year <= last:
-            continue
-        for name in chain:
-            s = by_name.get(name)
-            if not s or not state_alive(s, year):
-                continue
-            offices = [o for o in in_office(s, year)
-                       if o["role"] == role or (role == "head_of_government" and o["also_head_of_government"])]
-            if not offices:
-                continue
-            if matches(reference, year, offices):
-                # One seat recorded under several office items (Monarch of Great Britain,
-                # King of Ireland, monarch of the United Kingdom of Great Britain and
-                # Ireland in 1801): keep the item that runs latest, the seat's current name.
-                offices = [max(offices, key=lambda o: max(h.get("end") or "9999" for h in o["holders"]))]
-            if matches(reference, year, offices):
-                row = rows.setdefault(s["qid"], {"state": s["name"], "qid": s["qid"], "slug": s["slug"],
-                                                 "page": bool(s.get("page")), "offices": []})
-                row["offices"] += [o for o in offices if o not in row["offices"]]
-            break
-    for row in rows.values():
-        row["offices"].sort(key=lambda o: o["role"] != "head_of_state")
-    return list(rows.values())
+        out = [o for o in out if not (o["country"] == st["country"]
+                                      and {h["person"] for h in o["holders"]} < mine)] + [st]
+    if not out:
+        return None
+    return {
+        "states": out,
+        "source": {"name": "Wikipedia", "title": src["title"], "revid": src["revid"], "url": src["permalink"],
+                   "license": "CC BY-SA 4.0", "retrieved": doc["built"]},
+        "checked": "Each holder is quoted from the list and kept for this year only where the person's own "
+                   "Wikidata record holds the same post over the same term, to within a year.",
+    }
 
 
 def hot100_for(doc: dict, year: int) -> dict | None:
@@ -186,7 +189,7 @@ def main() -> int:
     a = ap.parse_args()
 
     prices = load(os.path.join(a.extras, "prices.json"))
-    leaders = load(os.path.join(a.extras, "leaders.json"))
+    leaders = load(os.path.join(a.extras, "stateleaders.json"))
     hot100 = load(os.path.join(a.extras, "hot100.json"))
     notability = load(os.path.join(ROOT, "data", "notability.json")) or {}
     claims = os.path.join(ROOT, "data", "claims")
@@ -204,10 +207,9 @@ def main() -> int:
             if p:
                 rec["prices"] = p
         if leaders:
-            key = leaders_for(leaders, year)
-            if key:
-                rec["leaders"] = {"key": key, "source": leaders["source"],
-                                  "checked": "each office-year matches an independent list of holders"}
+            lead = leaders_for(leaders, year)
+            if lead:
+                rec["leaders"] = lead
         if hot100:
             h = hot100_for(hot100, year)
             if h:
@@ -223,7 +225,7 @@ def main() -> int:
             "year": year,
             "population": "population" in rec,
             "prices": "prices" in rec,
-            "leaders": len(rec.get("leaders", {}).get("key", [])),
+            "leaders": len(rec.get("leaders", {}).get("states", [])),
             "hot100": "hot100" in rec,
         })
     with open(os.path.join(out, "index.json"), "w", encoding="utf-8") as fh:

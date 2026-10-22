@@ -76,10 +76,11 @@ export default function Directory() {
           </a>
           .
         </p>
-        <ul className="mb-10 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
+        <ul className="mb-10 grid grid-cols-1 gap-2 text-sm sm:grid-cols-3">
           {[
             { href: "/play", label: "Guess the year", hint: "Today's puzzle: five events, one year." },
             { href: "/born", label: "The year you were born", hint: "Prices, the No. 1 song, who led." },
+            { href: "/leaders", label: "World leaders by year", hint: "Who ruled every country, 1800 to now." },
           ].map((c) => (
             <li key={c.href}>
               <a className="block h-full border border-border p-3 hover:bg-muted" href={c.href}>

@@ -5,15 +5,20 @@ const FACTS = path.join(process.cwd(), "..", "data", "extras", "facts");
 
 export type Origin = { name: string; publisher?: string; url: string; license: string; series?: string };
 
-export type Holder = { qid: string; name: string; start: string; end?: string | null; acting?: boolean; approx?: boolean };
-export type Office = {
-  role: "head_of_state" | "head_of_government";
-  office: string;
-  office_qid: string;
-  also_head_of_government: boolean;
+export type Holder = { name: string; person: string; qid: string; title: string | null; office: string | null; quote: string };
+export type StateRow = {
+  state: string;
+  region: string | null;
+  country: string;
+  wikipedia: string | null;
+  key: string | null;
   holders: Holder[];
 };
-export type StateRow = { state: string; qid: string; slug: string; page: boolean; offices: Office[] };
+export type Leaders = {
+  states: StateRow[];
+  source: { name: string; title: string; revid: number; url: string; license: string; retrieved: string };
+  checked: string;
+};
 
 export type PriceItem = {
   id: string;
@@ -38,7 +43,7 @@ export type Facts = {
     items: PriceItem[];
   };
   births?: Birth[];
-  leaders?: { key: StateRow[]; source: Origin & { retrieved: string }; checked: string };
+  leaders?: Leaders;
   hot100?: {
     weeks: { date: string; title: string; artist: string }[];
     songs: { title: string; artist: string; weeks: number }[];
@@ -88,20 +93,48 @@ export function people(n: number): string {
   return `${Math.round(n / 1e6).toLocaleString("en-US")} million`;
 }
 
-export function roleLabel(o: Office): string {
-  if (o.role === "head_of_state") return o.also_head_of_government ? "Head of state and government" : "Head of state";
-  return "Head of government";
+/** Years that have a world-leaders page. */
+export const leaderYears = () => factsIndex().filter((r) => r.leaders > 0).map((r) => r.year);
+
+/** The panel's states, in the order of the countries readers ask about first. */
+export function keyStates(l: Leaders | undefined): StateRow[] {
+  const order = ["United States", "United Kingdom", "Russia", "China", "France", "Germany", "Japan", "India"];
+  return (l?.states ?? []).filter((s) => s.key).sort((a, b) => order.indexOf(a.key!) - order.indexOf(b.key!));
 }
 
-/** "Richard Nixon" or "Lyndon B. Johnson, then Richard Nixon (from January 20)" for the
- *  holders of one office during one year. */
-export function holderLine(o: Office, year: number): string {
-  return o.holders
-    .map((h, i) => {
-      const from = h.start.startsWith(`${year}-`) && i > 0 && !h.approx ? ` (from ${longDate(h.start).replace(`, ${year}`, "")})` : "";
-      return `${h.name}${h.acting ? " (acting)" : ""}${from}`;
-    })
-    .join(", then ");
+/** The panel's first `n` countries; East and West Germany count as one. */
+export function panelStates(l: Leaders | undefined, n = 6): StateRow[] {
+  const all = keyStates(l);
+  const keys = Array.from(new Set(all.map((s) => s.key))).slice(0, n);
+  return all.filter((s) => keys.includes(s.key));
 }
+
+/** The list's own name for the state unless it is a mouthful ("United Kingdom of Great
+ *  Britain and Northern Ireland", "France: Fifth Republic"). */
+export const stateLabel = (s: StateRow) =>
+  s.key && (s.state.length > 30 || s.state.includes(":")) ? s.key : s.state;
+
+/** One state's holders grouped by post, in list order:
+ *  [["Queen", ["Elizabeth II"]], ["Prime minister", ["Harold Wilson", "Edward Heath"]]]. */
+export function posts(s: StateRow): [string, string[]][] {
+  const out: [string, string[]][] = [];
+  for (const h of s.holders) {
+    const label = h.title || h.office || "";
+    const row = out.find(([t]) => t.toLowerCase() === label.toLowerCase());
+    if (row) {
+      if (!row[1].includes(h.name)) row[1].push(h.name);
+    } else out.push([label, [h.name]]);
+  }
+  return out;
+}
+
+/** "Elizabeth II (Queen); Harold Wilson, then Edward Heath (Prime minister)" */
+export function postsLine(s: StateRow): string {
+  return posts(s)
+    .map(([t, names]) => `${names.join(", then ")}${t ? ` (${t})` : ""}`)
+    .join("; ");
+}
+
+export const wiki = (title: string) => `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, "_"))}`;
 
 export const wd = (qid: string) => `https://www.wikidata.org/wiki/${qid}`;

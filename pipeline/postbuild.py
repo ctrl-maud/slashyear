@@ -307,7 +307,7 @@ def write_sitemap(out: str, site: str, base: str) -> str:
             urls += [(f"{base}/timeline/{e['slug']}", newest)
                      for e in json.load(fh)["entities"] if e["entries"] >= THIN_TIMELINE]
 
-    # /born and /play: built from data/extras, one page per year that has the data.
+    # /born, /leaders and /play: built from data/extras, one page per year that has the data.
     facts_index = os.path.join(ROOT, "data", "extras", "facts", "index.json")
     if os.path.exists(facts_index):
         with open(facts_index, encoding="utf-8") as fh:
@@ -315,6 +315,8 @@ def write_sitemap(out: str, site: str, base: str) -> str:
         built = fi.get("built")
         urls += [(f"{base}/play", built), (f"{base}/born", built)]
         urls += [(f"{base}/born/{r['year']}", built) for r in fi["years"] if r["prices"]]
+        urls += [(f"{base}/leaders", built)]
+        urls += [(f"{base}/leaders/{r['year']}", built) for r in fi["years"] if r["leaders"]]
 
     body = "".join(
         "<url><loc>" + html.escape(u) + "</loc>"
@@ -415,10 +417,11 @@ def write_api(out: str, site: str) -> str:
 
 
 def write_extras_api(out: str, extras: str) -> str:
-    """The outside series (prices, population, checked office holders, No. 1 singles) and
-    the daily puzzles, as files. The raw Wikidata pull (leaders.json) is not published:
-    only office-years that passed the check in facts.py go out, inside the facts files. Same rule as the rest of /api: /api/facts/1985.json is the
-    record the /born/1985 page and the 1985 panel were rendered from."""
+    """The outside series (prices, population, office holders, No. 1 singles) and the daily
+    puzzles, as files. Office holders go out only inside the facts files, as the
+    holder-years that passed stateleaders.py's check. Same rule as the rest of /api:
+    /api/facts/1985.json is the record the /born/1985 and /leaders/1985 pages and the 1985
+    panel were rendered from."""
     if not os.path.isdir(extras):
         return "/api extras: none"
     api = os.path.join(out, "api")
@@ -779,19 +782,20 @@ by us and no language model touches the wording.
 - [One country]({base}/api/place/japan.json): `/api/place/{{country}}.json`, harvested from the per-country year articles
 - [Subject index]({base}/api/entities.json), [year index]({base}/api/years.json), [date index]({base}/api/dates.json)
 - [Search]({base}/api/search?q=plague): `/api/search?q=&from=&to=&limit=` returns matching subjects and their dated entries
-- [MCP server]({base}/mcp): streamable HTTP, no auth, tools for years, days, subjects, search, year facts, prices and No. 1 songs
+- [MCP server]({base}/mcp): streamable HTTP, no auth, tools for years, days, subjects, search, year facts, world leaders, prices and No. 1 songs
 
 ## Year facts (outside series, not Wikipedia prose)
 
 For 1800-2025 each year also has a record built from public statistical and structured
 sources, every figure carrying its source: world population (Our World in Data), U.S. CPI
-and average retail prices (BLS, Census, DOL via FRED; public domain), the leaders of the
-U.S., U.K., Canada, Germany and France with dates in office (Wikidata, CC0, published
-only for years that match an independent list of holders), and every Billboard Hot 100
-No. 1 by issue date (quoted from cited Wikipedia revisions).
+and average retail prices (BLS, Census, DOL via FRED; public domain), who led every state
+that year (quoted from Wikipedia's lists of state leaders, each name kept only where the
+person's Wikidata record holds the same post over the same years), and every Billboard
+Hot 100 No. 1 by issue date (quoted from cited Wikipedia revisions).
 
 - [One year's facts]({base}/api/facts/1985.json): `/api/facts/{{year}}.json`
 - [Born in a year]({base}/born/1985): what a dollar was worth, prices then and now, leaders, No. 1 songs, famous births
+- [World leaders in a year]({base}/leaders/1985): every state's heads of state and government
 - [Prices]({base}/api/prices.json), [Hot 100 No. 1s]({base}/api/hot100.json)
 - [Daily guess-the-year puzzle]({base}/play), data at `/api/play/{{YYYY-MM}}.json`
 
@@ -813,6 +817,7 @@ model crawler and there never will be.
     lines.append(f"- {base}/timeline/{{slug}} — one subject's whole record in date order ({ents:,} of them)\n")
     lines.append(f"- {base}/embed and {base}/embed.js — today's entries on any third-party page\n")
     lines.append(f"- {base}/born/{{year}} — the year someone was born: prices, leaders, No. 1 songs, births\n")
+    lines.append(f"- {base}/leaders/{{year}} — who led every country that year, 1800-2025\n")
     lines.append(f"- {base}/play — a daily guess-the-year puzzle\n")
     epath = os.path.join(site, "entities", "index.json")
     if os.path.exists(epath):
@@ -847,7 +852,7 @@ def write_manifest(out: str, base: str) -> str:
         ("/api/entity/{slug}.json", "one subject: every dated entry naming it, in order, with its Wikidata id"),
         ("/api/search?q={query}", "subjects matching a query and their dated entries; &from= &to= &limit="),
         ("/api/facts/{year}.json", "one year, 1800-2025, from outside series: world population, U.S. prices "
-                                   "and CPI, leaders of the U.S., U.K., Canada, Germany and France, Billboard "
+                                   "and CPI, who led every state, Billboard "
                                    "Hot 100 No. 1s; each figure with its source"),
         ("/api/facts/index.json", "which years have which facts"),
         ("/api/prices.json", "U.S. CPI and average prices by year (BLS, Census, DOL via FRED)"),

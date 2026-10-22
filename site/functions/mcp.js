@@ -118,11 +118,28 @@ const TOOLS = [
       "What a year (1800-2025) looked like in numbers, from outside sources rather than " +
       "encyclopedia prose: world population, U.S. CPI and what a dollar then is worth now, " +
       "average U.S. prices (gas, eggs, bread, milk, houses, income, minimum wage), who led the " +
-      "U.S., U.K., Canada, Germany and France (only years that match an independent list of " +
-      "holders), and the Billboard Hot 100 No. 1 songs. Every figure carries its source.",
+      "major powers, and the Billboard Hot 100 No. 1 songs. Every figure carries its source. " +
+      "For any other country's leaders use get_leaders.",
     inputSchema: {
       type: "object",
       properties: { year: { type: "integer", description: "1800 to 2025" } },
+      required: ["year"],
+    },
+  },
+  {
+    name: "get_leaders",
+    description:
+      "Who led a country (or every country) in a year, 1800-2025: heads of state, heads of " +
+      "government and ruling-party leaders, in the order they held the post. Each name is quoted " +
+      "from Wikipedia's list of state leaders (revision id given) and kept only where the " +
+      "person's Wikidata record holds the same post over the same years, so a missing name " +
+      "means the sources disagree, not that the post was empty.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        year: { type: "integer", description: "1800 to 2025" },
+        country: { type: "string", description: "optional: country or state name, e.g. 'Brazil', 'Ottoman Empire', 'Soviet Union'. Omit for every state" },
+      },
       required: ["year"],
     },
   },
@@ -289,14 +306,49 @@ async function call(name, args, env, request) {
     });
   }
 
+  const brief = (s) => ({
+    state: s.state,
+    holders: s.holders.map((h) => ({ name: h.name, post: h.title || h.office, wikidata: h.qid })),
+  });
+
   if (name === "get_year_facts") {
     const y = parseInt(args?.year, 10);
     if (!Number.isFinite(y)) return text({ error: "year must be an integer" });
     const f = await asset(env, request, `/api/facts/${y}.json`);
     if (!f) return text({ error: `no facts published for ${y}`, covered: "1800 to 2025" });
+    const { leaders, ...rest } = f;
     return text({
-      ...f,
-      pages: { year: `${origin}/${y}`, born: f.prices ? `${origin}/born/${y}` : undefined },
+      ...rest,
+      leaders: leaders && {
+        major_powers: leaders.states.filter((s) => s.key).map(brief),
+        other_states: leaders.states.length - leaders.states.filter((s) => s.key).length,
+        more: "get_leaders with this year (and optionally a country) for the rest",
+        source: leaders.source,
+      },
+      pages: { year: `${origin}/${y}`, leaders: leaders ? `${origin}/leaders/${y}` : undefined, born: f.prices ? `${origin}/born/${y}` : undefined },
+    });
+  }
+
+  if (name === "get_leaders") {
+    const y = parseInt(args?.year, 10);
+    if (!Number.isFinite(y)) return text({ error: "year must be an integer" });
+    const f = await asset(env, request, `/api/facts/${y}.json`);
+    if (!f?.leaders) return text({ error: `no leaders published for ${y}`, covered: "1800 to 2025" });
+    const q = String(args?.country || "").trim().toLowerCase();
+    let states = f.leaders.states;
+    if (q) {
+      states = states.filter((s) =>
+        [s.state, s.country, s.key, s.wikipedia].some((v) => v && v.toLowerCase().includes(q)));
+      if (!states.length)
+        return text({ year: y, country: args.country, states: [], note: "no state by that name has a checked leader this year", page: `${origin}/leaders/${y}` });
+    }
+    return text({
+      year: y,
+      states: q ? states : states.map(brief),
+      source: f.leaders.source,
+      checked: f.leaders.checked,
+      page: `${origin}/leaders/${y}`,
+      license: "CC BY-SA 4.0. Attribute the Wikipedia article and revision id.",
     });
   }
 
@@ -408,7 +460,7 @@ export async function onRequest({ request, env }) {
         return ok({
           protocolVersion: PROTOCOL,
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "slashyear", version: "1.1.0" },
+          serverInfo: { name: "slashyear", version: "1.2.0" },
           instructions:
             "Sourced history. Every entry is a sentence quoted verbatim from a specific English " +
             "Wikipedia revision and carries that revision id, so a claim built on it stays " +

@@ -1,12 +1,11 @@
-"""Independent check list for the office holders the year pages name.
+"""The official lists of holders for six offices, as a gate on stateleaders.py.
 
-Wikidata's P39 statements are uneven: terms go missing, rebels and occupiers are
-recorded as holders, a dictatorship is entered as a person. facts.py publishes a state's
-office for a year only when the set of people Wikidata puts in it that year matches this
-list exactly; any year that disagrees is left out rather than shown. Each entry is
-(token that appears in the holder's Wikidata label, first year, last year), acting
-holders included, written from
-the official lists (whitehouse.gov, gov.uk, pm.gc.ca, bundeskanzler.de, elysee.fr).
+stateleaders.py publishes a holder-year when Wikipedia's state-leader list and the
+person's Wikidata record agree. These six lists are a third, independent source for the
+offices readers ask about most: if the published data ever names someone for one of
+these offices in a year the official list does not, the build stops. Each entry is
+(token from the holder's name, first year, last year), acting holders included, written
+from the official lists (whitehouse.gov, gov.uk, pm.gc.ca, bundeskanzler.de, elysee.fr).
 """
 
 US_PRESIDENT = [
@@ -81,14 +80,4 @@ FRANCE_PRESIDENT = [
     ("Coty", 1954, 1959), ("de Gaulle", 1959, 1969), ("Poher", 1969, 1969), ("Pompidou", 1969, 1974), ("Poher", 1974, 1974),
     ("Giscard", 1974, 1981), ("Mitterrand", 1981, 1995), ("Chirac", 1995, 2007),
     ("Sarkozy", 2007, 2012), ("Hollande", 2012, 2017), ("Macron", 2017, 2029),
-]
-
-# state chain (as named in leaders.json), role, the years the list covers, the list.
-CHECKED = [
-    (["United States"], "head_of_state", (1801, 2025), US_PRESIDENT),
-    (["United Kingdom", "United Kingdom of Great Britain and Ireland"], "head_of_state", (1801, 2025), UK_MONARCH),
-    (["United Kingdom", "United Kingdom of Great Britain and Ireland"], "head_of_government", (1801, 2025), UK_PRIME_MINISTER),
-    (["Canada"], "head_of_government", (1867, 2025), CANADA_PRIME_MINISTER),
-    (["Germany", "West Germany"], "head_of_government", (1949, 2025), GERMANY_CHANCELLOR),
-    (["France", "French Fifth Republic"], "head_of_state", (1959, 2025), FRANCE_PRESIDENT),
 ]

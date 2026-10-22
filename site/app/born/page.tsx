@@ -38,8 +38,8 @@ export default function BornHub() {
         <h1 className="mb-4 text-3xl font-normal text-foreground md:text-4xl">The year you were born</h1>
         <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
           What a dollar was worth, what gas, eggs and a house cost, the No. 1 song the week you were born, who
-          led the U.S., Britain, Canada, Germany and France, and who else shares your birthday. The prices are U.S. government
-          statistics, the leaders come from Wikidata and the songs and people are quoted from cited Wikipedia
+          led the world&rsquo;s countries, and who else shares your birthday. The prices are U.S. government
+          statistics, the leaders are quoted from Wikipedia and checked against Wikidata, and the songs and people are quoted from cited Wikipedia
           revisions, each linked to its source.
         </p>
         <BornForm first={years[0]} last={years[years.length - 1]} />
