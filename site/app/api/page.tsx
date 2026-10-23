@@ -151,11 +151,14 @@ export default function Api() {
           </h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
             <code>{`${SITE.base}/mcp`}</code> is a Model Context Protocol server over streamable
-            HTTP. No key, no account, no session. Point any MCP client at it and a model gets five
-            tools — <code>search_history</code>, <code>get_year</code>, <code>get_day</code>,{" "}
-            <code>get_timeline</code>, <code>list_subjects</code> — that return rows carrying the
-            revision id each sentence came from, so the answer it writes can cite something that
-            will still say the same thing next year.
+            HTTP. No key, no account, no session. Point any MCP client at it and a model gets tools
+            for the dated events — <code>search_history</code>, <code>get_year</code>,{" "}
+            <code>get_day</code>, <code>get_timeline</code>, <code>get_country</code>,{" "}
+            <code>list_subjects</code>, <code>list_countries</code> — plus <code>get_leaders</code>,{" "}
+            <code>get_number_one_song</code>, <code>get_year_facts</code> and{" "}
+            <code>convert_dollars</code>. Every entry carries its source (the Wikipedia revision id a
+            line was quoted from, or the official CPI series for prices), so the answer it writes can
+            cite something that will still say the same thing next year.
           </p>
           <pre className="overflow-x-auto rounded border border-border bg-foreground/5 p-4 text-xs leading-relaxed">
             <code>{`claude mcp add --transport http slashyear ${SITE.base}/mcp`}</code>
