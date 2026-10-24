@@ -84,7 +84,8 @@ instead, start at `pipeline/harvest.py` and follow the stage order in
 - **Static JSON API** — `https://slashyear.com/api/year/1969.json`, `/api/date/july-20.json`,
   `/api/entity/byzantine-empire.json`, and an OpenAPI description at `/api/openapi.json`.
   CORS-open, no key, no rate limit, no signup. See [docs/API.md](docs/API.md).
-- **MCP server** — `https://slashyear.com/mcp`, so a model can query the corpus directly.
+- **MCP server** — `https://slashyear.com/mcp`, so a model can query the corpus directly. No key;
+  client setup in [llms-install.md](llms-install.md).
 
 ## Licensing
 
