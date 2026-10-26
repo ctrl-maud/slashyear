@@ -40,6 +40,7 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import glob
 import html
 import json
 import os
@@ -831,6 +832,63 @@ model crawler and there never will be.
     return "llms.txt + llms-full.txt"
 
 
+def _dynamic(keys: list) -> bool:
+    return len(keys) > 40 or (keys and all(re.fullmatch(r"-?\d+", k) for k in keys))
+
+
+def _schema(v):
+    if isinstance(v, bool):
+        return {"type": "boolean"}
+    if isinstance(v, int):
+        return {"type": "integer"}
+    if isinstance(v, float):
+        return {"type": "number"}
+    if isinstance(v, str):
+        return {"type": "string"}
+    if v is None:
+        return {"type": "null"}
+    if isinstance(v, list):
+        items = {}
+        for x in v[:200]:
+            items = _merge(items, _schema(x)) if items else _schema(x)
+        return {"type": "array", "items": items}
+    if _dynamic(list(v)):
+        return {"type": "object", "additionalProperties": _schema(next(iter(v.values()), None))}
+    return {"type": "object", "properties": {k: _schema(x) for k, x in v.items()}}
+
+
+def _merge(a, b):
+    ta, tb = a.get("type"), b.get("type")
+    if ta == tb == "object" and "properties" in a and "properties" in b:
+        props = dict(a["properties"])
+        for k, sub in b["properties"].items():
+            props[k] = _merge(props[k], sub) if k in props else sub
+        return {"type": "object", "properties": props}
+    if ta == tb == "array":
+        if not a["items"] or not b["items"]:
+            return a if a["items"] else b
+        return {"type": "array", "items": _merge(a["items"], b["items"])}
+    if ta == tb:
+        return a
+    types = sorted({*(ta if isinstance(ta, list) else [ta]), *(tb if isinstance(tb, list) else [tb])})
+    if "null" in types and len(types) == 2:
+        keep = a if tb == "null" else b
+        if keep.get("type") != "null":
+            return {**keep, "type": [keep["type"], "null"]} if isinstance(keep["type"], str) else keep
+    if any(t in ("object", "array") for t in types):
+        return {"anyOf": [a, b]}
+    return {"type": types}
+
+
+def _trim(v):
+    if isinstance(v, list):
+        return [_trim(x) for x in v[:2]]
+    if isinstance(v, dict):
+        items = list(v.items())[:2] if _dynamic(list(v)) else v.items()
+        return {k: _trim(x) for k, x in items}
+    return v
+
+
 def write_manifest(out: str, base: str) -> str:
     """Two files whose only job is to be read by a machine that found us on its own: a
     plain endpoint list at /api/index.json and an OpenAPI document at /api/openapi.json.
@@ -883,30 +941,61 @@ def write_manifest(out: str, base: str) -> str:
         "endpoints": [{"path": p, "description": d} for p, d in endpoints],
     }, open(os.path.join(api, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
+    samples = {"year": "1969", "month-day": "july-20", "country": "france", "month": "2026-10"}
+    slug_samples = {"century": "20th-century", "decade": "1960s", "topic": "climate-and-environment",
+                    "entity": "apollo-program"}
     paths = {}
     for p, d in endpoints:
         path_only = p.split("?")[0]
-        params = [{"name": n, "in": "path", "required": True, "schema": {"type": "string"}}
-                  for n in re.findall(r"{([a-z-]+)}", path_only)]
+        names = re.findall(r"{([a-z-]+)}", path_only)
+        values = {n: samples.get(n) for n in names}
+        if "slug" in values:
+            values["slug"] = slug_samples.get(path_only.split("/")[2])
+        if "century" in values:
+            values["century"] = "20th-century"
+        params = [{"name": n, "in": "path", "required": True, "schema": {"type": "string"},
+                   **({"example": values[n]} if values[n] else {})} for n in names]
         if "?" in p:
             params += [
-                {"name": "q", "in": "query", "required": True, "schema": {"type": "string"},
+                {"name": "q", "in": "query", "required": True, "schema": {"type": "string"}, "example": "apollo",
                  "description": "free text; matched against subject names and descriptions"},
                 {"name": "from", "in": "query", "schema": {"type": "integer"},
                  "description": "earliest year, astronomical numbering"},
                 {"name": "to", "in": "query", "schema": {"type": "integer"}},
                 {"name": "limit", "in": "query", "schema": {"type": "integer", "default": 20}},
             ]
+        sample = None
+        if path_only.endswith(".json") and all(values.values()):
+            f = os.path.join(out, path_only.lstrip("/").format(**values))
+            if os.path.exists(f):
+                sample = json.load(open(f, encoding="utf-8"))
+        if path_only.endswith(".gz"):
+            content = {"application/gzip": {"schema": {"type": "string", "format": "binary"}}}
+        else:
+            schema = _schema(sample) if sample is not None else {"type": "object"}
+            if sample is not None:
+                pattern = os.path.join(out, re.sub(r"{[a-z-]+}", "*", path_only.lstrip("/")))
+                for x in sorted(glob.glob(pattern)):
+                    if not x.endswith("index.json"):
+                        schema = _merge(schema, _schema(json.load(open(x, encoding="utf-8"))))
+            content = {"application/json": {"schema": schema}}
+            if sample is not None:
+                content["application/json"]["example"] = _trim(sample)
         paths[path_only] = {"get": {
+            "operationId": re.sub(r"[^a-zA-Z0-9]+", "_", path_only.replace(".json", "")).strip("_"),
             "summary": d,
             "parameters": params,
-            "responses": {"200": {"description": d,
-                                  "content": {"application/json": {"schema": {"type": "object"}}}}},
+            "responses": {"200": {"description": d, "content": content},
+                          "404": {"description": "no such year, date, country or subject"}},
         }}
     json.dump({
         "openapi": "3.1.0",
-        "info": {"title": "slashyear", "version": "1.0.0",
-                 "description": "Sourced history as static JSON. No key, no rate limit, CORS open.",
+        "info": {"title": "slashyear", "version": "1.1.0",
+                 "description": "Sourced history as static JSON: years, calendar dates, countries, "
+                                "subjects, world leaders, U.S. prices and Billboard No. 1s. Every "
+                                "entry carries the Wikipedia revision id it was quoted from. "
+                                "No key, no rate limit, CORS open.",
+                 "contact": {"url": f"{base}/api"},
                  "license": {"name": "CC BY-SA 4.0",
                              "url": "https://creativecommons.org/licenses/by-sa/4.0/"}},
         "servers": [{"url": base}],
