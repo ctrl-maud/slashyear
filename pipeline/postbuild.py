@@ -999,6 +999,7 @@ def write_manifest(out: str, base: str) -> str:
                  "license": {"name": "CC BY-SA 4.0",
                              "url": "https://creativecommons.org/licenses/by-sa/4.0/"}},
         "servers": [{"url": base}],
+        "security": [],
         "paths": paths,
     }, open(os.path.join(api, "openapi.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return "/api/index.json + /api/openapi.json"
