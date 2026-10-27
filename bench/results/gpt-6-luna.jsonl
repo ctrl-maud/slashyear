@@ -1,0 +1,1000 @@
+{"id": "ev-0000", "type": "event_year", "response": "1531.", "correct": false, "extra": {"pred": 1531, "abs_err": 2, "within1": false}}
+{"id": "ev-0001", "type": "event_year", "response": "1541", "correct": true, "extra": {"pred": 1541, "abs_err": 0, "within1": true}}
+{"id": "ev-0002", "type": "event_year", "response": "1564.", "correct": true, "extra": {"pred": 1564, "abs_err": 0, "within1": true}}
+{"id": "ev-0003", "type": "event_year", "response": "1503.", "correct": true, "extra": {"pred": 1503, "abs_err": 0, "within1": true}}
+{"id": "ev-0004", "type": "event_year", "response": "1550", "correct": true, "extra": {"pred": 1550, "abs_err": 0, "within1": true}}
+{"id": "ev-0005", "type": "event_year", "response": "1592.", "correct": true, "extra": {"pred": 1592, "abs_err": 0, "within1": true}}
+{"id": "ev-0006", "type": "event_year", "response": "1570.", "correct": true, "extra": {"pred": 1570, "abs_err": 0, "within1": true}}
+{"id": "ev-0007", "type": "event_year", "response": "1516.", "correct": true, "extra": {"pred": 1516, "abs_err": 0, "within1": true}}
+{"id": "ev-0008", "type": "event_year", "response": "1558.", "correct": true, "extra": {"pred": 1558, "abs_err": 0, "within1": true}}
+{"id": "ev-0009", "type": "event_year", "response": "1509", "correct": true, "extra": {"pred": 1509, "abs_err": 0, "within1": true}}
+{"id": "ev-0010", "type": "event_year", "response": "1500", "correct": true, "extra": {"pred": 1500, "abs_err": 0, "within1": true}}
+{"id": "ev-0011", "type": "event_year", "response": "1576.", "correct": true, "extra": {"pred": 1576, "abs_err": 0, "within1": true}}
+{"id": "ev-0012", "type": "event_year", "response": "1582.", "correct": true, "extra": {"pred": 1582, "abs_err": 0, "within1": true}}
+{"id": "ev-0013", "type": "event_year", "response": "1560", "correct": true, "extra": {"pred": 1560, "abs_err": 0, "within1": true}}
+{"id": "ev-0014", "type": "event_year", "response": "1547 CE", "correct": true, "extra": {"pred": 1547, "abs_err": 0, "within1": true}}
+{"id": "ev-0015", "type": "event_year", "response": "1520.", "correct": true, "extra": {"pred": 1520, "abs_err": 0, "within1": true}}
+{"id": "ev-0016", "type": "event_year", "response": "1521", "correct": true, "extra": {"pred": 1521, "abs_err": 0, "within1": true}}
+{"id": "ev-0017", "type": "event_year", "response": "1582.", "correct": true, "extra": {"pred": 1582, "abs_err": 0, "within1": true}}
+{"id": "ev-0018", "type": "event_year", "response": "1560.", "correct": false, "extra": {"pred": 1560, "abs_err": 27, "within1": false}}
+{"id": "ev-0019", "type": "event_year", "response": "1530.", "correct": true, "extra": {"pred": 1530, "abs_err": 0, "within1": true}}
+{"id": "ev-0020", "type": "event_year", "response": "1563.", "correct": true, "extra": {"pred": 1563, "abs_err": 0, "within1": true}}
+{"id": "ev-0021", "type": "event_year", "response": "1549.", "correct": true, "extra": {"pred": 1549, "abs_err": 0, "within1": true}}
+{"id": "ev-0022", "type": "event_year", "response": "1596", "correct": true, "extra": {"pred": 1596, "abs_err": 0, "within1": true}}
+{"id": "ev-0023", "type": "event_year", "response": "1561.", "correct": true, "extra": {"pred": 1561, "abs_err": 0, "within1": true}}
+{"id": "ev-0024", "type": "event_year", "response": "1546.", "correct": true, "extra": {"pred": 1546, "abs_err": 0, "within1": true}}
+{"id": "ev-0025", "type": "event_year", "response": "1529.", "correct": true, "extra": {"pred": 1529, "abs_err": 0, "within1": true}}
+{"id": "ev-0026", "type": "event_year", "response": "1588.", "correct": true, "extra": {"pred": 1588, "abs_err": 0, "within1": true}}
+{"id": "ev-0027", "type": "event_year", "response": "1539.", "correct": true, "extra": {"pred": 1539, "abs_err": 0, "within1": true}}
+{"id": "ev-0028", "type": "event_year", "response": "1589.", "correct": true, "extra": {"pred": 1589, "abs_err": 0, "within1": true}}
+{"id": "ev-0029", "type": "event_year", "response": "1528.", "correct": true, "extra": {"pred": 1528, "abs_err": 0, "within1": true}}
+{"id": "ev-0030", "type": "event_year", "response": "1573", "correct": true, "extra": {"pred": 1573, "abs_err": 0, "within1": true}}
+{"id": "ev-0031", "type": "event_year", "response": "1569.", "correct": true, "extra": {"pred": 1569, "abs_err": 0, "within1": true}}
+{"id": "ev-0032", "type": "event_year", "response": "1507.", "correct": false, "extra": {"pred": 1507, "abs_err": 2, "within1": false}}
+{"id": "ev-0033", "type": "event_year", "response": "1584.", "correct": true, "extra": {"pred": 1584, "abs_err": 0, "within1": true}}
+{"id": "ev-0034", "type": "event_year", "response": "1585.", "correct": true, "extra": {"pred": 1585, "abs_err": 0, "within1": true}}
+{"id": "ev-0035", "type": "event_year", "response": "1539.", "correct": false, "extra": {"pred": 1539, "abs_err": 1, "within1": true}}
+{"id": "ev-0036", "type": "event_year", "response": "1596.", "correct": true, "extra": {"pred": 1596, "abs_err": 0, "within1": true}}
+{"id": "ev-0037", "type": "event_year", "response": "1548", "correct": true, "extra": {"pred": 1548, "abs_err": 0, "within1": true}}
+{"id": "ev-0038", "type": "event_year", "response": "1546.", "correct": true, "extra": {"pred": 1546, "abs_err": 0, "within1": true}}
+{"id": "ev-0039", "type": "event_year", "response": "1590.", "correct": true, "extra": {"pred": 1590, "abs_err": 0, "within1": true}}
+{"id": "ev-0040", "type": "event_year", "response": "1573.", "correct": true, "extra": {"pred": 1573, "abs_err": 0, "within1": true}}
+{"id": "ev-0041", "type": "event_year", "response": "1569", "correct": true, "extra": {"pred": 1569, "abs_err": 0, "within1": true}}
+{"id": "ev-0042", "type": "event_year", "response": "1516.", "correct": true, "extra": {"pred": 1516, "abs_err": 0, "within1": true}}
+{"id": "ev-0043", "type": "event_year", "response": "1588.", "correct": true, "extra": {"pred": 1588, "abs_err": 0, "within1": true}}
+{"id": "ev-0044", "type": "event_year", "response": "1567.", "correct": true, "extra": {"pred": 1567, "abs_err": 0, "within1": true}}
+{"id": "ev-0045", "type": "event_year", "response": "1644", "correct": true, "extra": {"pred": 1644, "abs_err": 0, "within1": true}}
+{"id": "ev-0046", "type": "event_year", "response": "1630.", "correct": false, "extra": {"pred": 1630, "abs_err": 1, "within1": true}}
+{"id": "ev-0047", "type": "event_year", "response": "1635.", "correct": true, "extra": {"pred": 1635, "abs_err": 0, "within1": true}}
+{"id": "ev-0048", "type": "event_year", "response": "1669.", "correct": true, "extra": {"pred": 1669, "abs_err": 0, "within1": true}}
+{"id": "ev-0049", "type": "event_year", "response": "1649.", "correct": true, "extra": {"pred": 1649, "abs_err": 0, "within1": true}}
+{"id": "ev-0050", "type": "event_year", "response": "1696.", "correct": true, "extra": {"pred": 1696, "abs_err": 0, "within1": true}}
+{"id": "ev-0051", "type": "event_year", "response": "1693.", "correct": true, "extra": {"pred": 1693, "abs_err": 0, "within1": true}}
+{"id": "ev-0052", "type": "event_year", "response": "1660.", "correct": true, "extra": {"pred": 1660, "abs_err": 0, "within1": true}}
+{"id": "ev-0053", "type": "event_year", "response": "1616.", "correct": true, "extra": {"pred": 1616, "abs_err": 0, "within1": true}}
+{"id": "ev-0054", "type": "event_year", "response": "1657", "correct": false, "extra": {"pred": 1657, "abs_err": 11, "within1": false}}
+{"id": "ev-0055", "type": "event_year", "response": "1657", "correct": true, "extra": {"pred": 1657, "abs_err": 0, "within1": true}}
+{"id": "ev-0056", "type": "event_year", "response": "1621.", "correct": true, "extra": {"pred": 1621, "abs_err": 0, "within1": true}}
+{"id": "ev-0057", "type": "event_year", "response": "1682.", "correct": true, "extra": {"pred": 1682, "abs_err": 0, "within1": true}}
+{"id": "ev-0058", "type": "event_year", "response": "1633", "correct": true, "extra": {"pred": 1633, "abs_err": 0, "within1": true}}
+{"id": "ev-0059", "type": "event_year", "response": "1607", "correct": true, "extra": {"pred": 1607, "abs_err": 0, "within1": true}}
+{"id": "ev-0060", "type": "event_year", "response": "1615.", "correct": true, "extra": {"pred": 1615, "abs_err": 0, "within1": true}}
+{"id": "ev-0061", "type": "event_year", "response": "1641", "correct": true, "extra": {"pred": 1641, "abs_err": 0, "within1": true}}
+{"id": "ev-0062", "type": "event_year", "response": "1645.", "correct": true, "extra": {"pred": 1645, "abs_err": 0, "within1": true}}
+{"id": "ev-0063", "type": "event_year", "response": "1650", "correct": true, "extra": {"pred": 1650, "abs_err": 0, "within1": true}}
+{"id": "ev-0064", "type": "event_year", "response": "1691", "correct": true, "extra": {"pred": 1691, "abs_err": 0, "within1": true}}
+{"id": "ev-0065", "type": "event_year", "response": "1613.", "correct": true, "extra": {"pred": 1613, "abs_err": 0, "within1": true}}
+{"id": "ev-0066", "type": "event_year", "response": "1605", "correct": true, "extra": {"pred": 1605, "abs_err": 0, "within1": true}}
+{"id": "ev-0067", "type": "event_year", "response": "1636.", "correct": true, "extra": {"pred": 1636, "abs_err": 0, "within1": true}}
+{"id": "ev-0068", "type": "event_year", "response": "1654.", "correct": false, "extra": {"pred": 1654, "abs_err": 44, "within1": false}}
+{"id": "ev-0069", "type": "event_year", "response": "1681", "correct": true, "extra": {"pred": 1681, "abs_err": 0, "within1": true}}
+{"id": "ev-0070", "type": "event_year", "response": "1656.", "correct": true, "extra": {"pred": 1656, "abs_err": 0, "within1": true}}
+{"id": "ev-0071", "type": "event_year", "response": "1658", "correct": true, "extra": {"pred": 1658, "abs_err": 0, "within1": true}}
+{"id": "ev-0072", "type": "event_year", "response": "1614.", "correct": true, "extra": {"pred": 1614, "abs_err": 0, "within1": true}}
+{"id": "ev-0073", "type": "event_year", "response": "1671", "correct": true, "extra": {"pred": 1671, "abs_err": 0, "within1": true}}
+{"id": "ev-0074", "type": "event_year", "response": "1676", "correct": true, "extra": {"pred": 1676, "abs_err": 0, "within1": true}}
+{"id": "ev-0075", "type": "event_year", "response": "1656", "correct": true, "extra": {"pred": 1656, "abs_err": 0, "within1": true}}
+{"id": "ev-0076", "type": "event_year", "response": "1686.", "correct": true, "extra": {"pred": 1686, "abs_err": 0, "within1": true}}
+{"id": "ev-0077", "type": "event_year", "response": "1616.", "correct": true, "extra": {"pred": 1616, "abs_err": 0, "within1": true}}
+{"id": "ev-0078", "type": "event_year", "response": null, "correct": false, "extra": {"error": "HTTP 400: {\n  \"error\": {\n    \"message\": \"The response was filtered due to the prompt triggering Azure OpenAI’s content management policy. Please modify your prompt and retry. To learn more about our content filtering policies please read our documentation: https://go.microsoft.com/fwlink/?linkid=2198766\",\n    \"type\": \"invalid_request_error\",\n    \"param\": \"prompt\",\n    \"code\": \"content_filter\",\n    \"content_filters\": [\n      {\n        \"blocked\": true,\n        \"source_type\": \"prompt\",\n        \"content_fil"}}
+{"id": "ev-0079", "type": "event_year", "response": "1680.", "correct": true, "extra": {"pred": 1680, "abs_err": 0, "within1": true}}
+{"id": "ev-0080", "type": "event_year", "response": "1666.", "correct": true, "extra": {"pred": 1666, "abs_err": 0, "within1": true}}
+{"id": "ev-0081", "type": "event_year", "response": "1622", "correct": true, "extra": {"pred": 1622, "abs_err": 0, "within1": true}}
+{"id": "ev-0082", "type": "event_year", "response": "1690.", "correct": true, "extra": {"pred": 1690, "abs_err": 0, "within1": true}}
+{"id": "ev-0083", "type": "event_year", "response": "1686.", "correct": true, "extra": {"pred": 1686, "abs_err": 0, "within1": true}}
+{"id": "ev-0084", "type": "event_year", "response": "1607.", "correct": true, "extra": {"pred": 1607, "abs_err": 0, "within1": true}}
+{"id": "ev-0085", "type": "event_year", "response": "1629.", "correct": true, "extra": {"pred": 1629, "abs_err": 0, "within1": true}}
+{"id": "ev-0086", "type": "event_year", "response": "1530.", "correct": false, "extra": {"pred": 1530, "abs_err": 85, "within1": false}}
+{"id": "ev-0087", "type": "event_year", "response": "The siege took place in **1685–1686**; Bijapur surrendered in **1686**.", "correct": true, "extra": {"pred": 1685, "abs_err": 0, "within1": true}}
+{"id": "ev-0088", "type": "event_year", "response": "1591.", "correct": false, "extra": {"pred": 1591, "abs_err": 26, "within1": false}}
+{"id": "ev-0089", "type": "event_year", "response": "1690.", "correct": true, "extra": {"pred": 1690, "abs_err": 0, "within1": true}}
+{"id": "ev-0090", "type": "event_year", "response": "1724.", "correct": true, "extra": {"pred": 1724, "abs_err": 0, "within1": true}}
+{"id": "ev-0091", "type": "event_year", "response": "1703", "correct": true, "extra": {"pred": 1703, "abs_err": 0, "within1": true}}
+{"id": "ev-0092", "type": "event_year", "response": "1735.", "correct": true, "extra": {"pred": 1735, "abs_err": 0, "within1": true}}
+{"id": "ev-0093", "type": "event_year", "response": "1751.", "correct": true, "extra": {"pred": 1751, "abs_err": 0, "within1": true}}
+{"id": "ev-0094", "type": "event_year", "response": "1778", "correct": true, "extra": {"pred": 1778, "abs_err": 0, "within1": true}}
+{"id": "ev-0095", "type": "event_year", "response": "1725", "correct": true, "extra": {"pred": 1725, "abs_err": 0, "within1": true}}
+{"id": "ev-0096", "type": "event_year", "response": "1702.", "correct": true, "extra": {"pred": 1702, "abs_err": 0, "within1": true}}
+{"id": "ev-0097", "type": "event_year", "response": "1762", "correct": true, "extra": {"pred": 1762, "abs_err": 0, "within1": true}}
+{"id": "ev-0098", "type": "event_year", "response": "1755.", "correct": true, "extra": {"pred": 1755, "abs_err": 0, "within1": true}}
+{"id": "ev-0099", "type": "event_year", "response": "1783.", "correct": true, "extra": {"pred": 1783, "abs_err": 0, "within1": true}}
+{"id": "ev-0100", "type": "event_year", "response": "1708", "correct": true, "extra": {"pred": 1708, "abs_err": 0, "within1": true}}
+{"id": "ev-0101", "type": "event_year", "response": "1778.", "correct": true, "extra": {"pred": 1778, "abs_err": 0, "within1": true}}
+{"id": "ev-0102", "type": "event_year", "response": "1736.", "correct": true, "extra": {"pred": 1736, "abs_err": 0, "within1": true}}
+{"id": "ev-0103", "type": "event_year", "response": "1799.", "correct": true, "extra": {"pred": 1799, "abs_err": 0, "within1": true}}
+{"id": "ev-0104", "type": "event_year", "response": "1783.", "correct": true, "extra": {"pred": 1783, "abs_err": 0, "within1": true}}
+{"id": "ev-0105", "type": "event_year", "response": "1711", "correct": true, "extra": {"pred": 1711, "abs_err": 0, "within1": true}}
+{"id": "ev-0106", "type": "event_year", "response": "1764", "correct": true, "extra": {"pred": 1764, "abs_err": 0, "within1": true}}
+{"id": "ev-0107", "type": "event_year", "response": "1794.", "correct": true, "extra": {"pred": 1794, "abs_err": 0, "within1": true}}
+{"id": "ev-0108", "type": "event_year", "response": "1742", "correct": true, "extra": {"pred": 1742, "abs_err": 0, "within1": true}}
+{"id": "ev-0109", "type": "event_year", "response": "1799.", "correct": true, "extra": {"pred": 1799, "abs_err": 0, "within1": true}}
+{"id": "ev-0110", "type": "event_year", "response": "1760.", "correct": true, "extra": {"pred": 1760, "abs_err": 0, "within1": true}}
+{"id": "ev-0111", "type": "event_year", "response": "1703.", "correct": true, "extra": {"pred": 1703, "abs_err": 0, "within1": true}}
+{"id": "ev-0112", "type": "event_year", "response": "1755", "correct": true, "extra": {"pred": 1755, "abs_err": 0, "within1": true}}
+{"id": "ev-0113", "type": "event_year", "response": "1796.", "correct": true, "extra": {"pred": 1796, "abs_err": 0, "within1": true}}
+{"id": "ev-0114", "type": "event_year", "response": "1790.", "correct": true, "extra": {"pred": 1790, "abs_err": 0, "within1": true}}
+{"id": "ev-0115", "type": "event_year", "response": "1724", "correct": true, "extra": {"pred": 1724, "abs_err": 0, "within1": true}}
+{"id": "ev-0116", "type": "event_year", "response": "1991", "correct": false, "extra": {"pred": 1991, "abs_err": 289, "within1": false}}
+{"id": "ev-0117", "type": "event_year", "response": "1792", "correct": true, "extra": {"pred": 1792, "abs_err": 0, "within1": true}}
+{"id": "ev-0118", "type": "event_year", "response": "1737", "correct": false, "extra": {"pred": 1737, "abs_err": 20, "within1": false}}
+{"id": "ev-0119", "type": "event_year", "response": "1797.", "correct": true, "extra": {"pred": 1797, "abs_err": 0, "within1": true}}
+{"id": "ev-0120", "type": "event_year", "response": "1725", "correct": true, "extra": {"pred": 1725, "abs_err": 0, "within1": true}}
+{"id": "ev-0121", "type": "event_year", "response": "1704.", "correct": true, "extra": {"pred": 1704, "abs_err": 0, "within1": true}}
+{"id": "ev-0122", "type": "event_year", "response": "1719.", "correct": true, "extra": {"pred": 1719, "abs_err": 0, "within1": true}}
+{"id": "ev-0123", "type": "event_year", "response": "1768.", "correct": true, "extra": {"pred": 1768, "abs_err": 0, "within1": true}}
+{"id": "ev-0124", "type": "event_year", "response": "1777.", "correct": true, "extra": {"pred": 1777, "abs_err": 0, "within1": true}}
+{"id": "ev-0125", "type": "event_year", "response": "1789.", "correct": true, "extra": {"pred": 1789, "abs_err": 0, "within1": true}}
+{"id": "ev-0126", "type": "event_year", "response": "1733.", "correct": true, "extra": {"pred": 1733, "abs_err": 0, "within1": true}}
+{"id": "ev-0127", "type": "event_year", "response": "1768.", "correct": true, "extra": {"pred": 1768, "abs_err": 0, "within1": true}}
+{"id": "ev-0128", "type": "event_year", "response": "1708.", "correct": true, "extra": {"pred": 1708, "abs_err": 0, "within1": true}}
+{"id": "ev-0129", "type": "event_year", "response": "1792.", "correct": true, "extra": {"pred": 1792, "abs_err": 0, "within1": true}}
+{"id": "ev-0130", "type": "event_year", "response": "1787", "correct": false, "extra": {"pred": 1787, "abs_err": 1, "within1": true}}
+{"id": "ev-0131", "type": "event_year", "response": "1776", "correct": true, "extra": {"pred": 1776, "abs_err": 0, "within1": true}}
+{"id": "ev-0132", "type": "event_year", "response": "1776.", "correct": true, "extra": {"pred": 1776, "abs_err": 0, "within1": true}}
+{"id": "ev-0133", "type": "event_year", "response": "1709.", "correct": false, "extra": {"pred": 1709, "abs_err": 24, "within1": false}}
+{"id": "ev-0134", "type": "event_year", "response": "1794.", "correct": true, "extra": {"pred": 1794, "abs_err": 0, "within1": true}}
+{"id": "ev-0135", "type": "event_year", "response": "1713", "correct": true, "extra": {"pred": 1713, "abs_err": 0, "within1": true}}
+{"id": "ev-0136", "type": "event_year", "response": "1784", "correct": true, "extra": {"pred": 1784, "abs_err": 0, "within1": true}}
+{"id": "ev-0137", "type": "event_year", "response": "1780", "correct": true, "extra": {"pred": 1780, "abs_err": 0, "within1": true}}
+{"id": "ev-0138", "type": "event_year", "response": "1759", "correct": true, "extra": {"pred": 1759, "abs_err": 0, "within1": true}}
+{"id": "ev-0139", "type": "event_year", "response": "1732", "correct": true, "extra": {"pred": 1732, "abs_err": 0, "within1": true}}
+{"id": "ev-0140", "type": "event_year", "response": "1806", "correct": true, "extra": {"pred": 1806, "abs_err": 0, "within1": true}}
+{"id": "ev-0141", "type": "event_year", "response": "1807", "correct": true, "extra": {"pred": 1807, "abs_err": 0, "within1": true}}
+{"id": "ev-0142", "type": "event_year", "response": "1809.", "correct": true, "extra": {"pred": 1809, "abs_err": 0, "within1": true}}
+{"id": "ev-0143", "type": "event_year", "response": "1851", "correct": true, "extra": {"pred": 1851, "abs_err": 0, "within1": true}}
+{"id": "ev-0144", "type": "event_year", "response": "1851.", "correct": true, "extra": {"pred": 1851, "abs_err": 0, "within1": true}}
+{"id": "ev-0145", "type": "event_year", "response": "1828.", "correct": true, "extra": {"pred": 1828, "abs_err": 0, "within1": true}}
+{"id": "ev-0146", "type": "event_year", "response": "1895", "correct": true, "extra": {"pred": 1895, "abs_err": 0, "within1": true}}
+{"id": "ev-0147", "type": "event_year", "response": "1808.", "correct": true, "extra": {"pred": 1808, "abs_err": 0, "within1": true}}
+{"id": "ev-0148", "type": "event_year", "response": "1843", "correct": true, "extra": {"pred": 1843, "abs_err": 0, "within1": true}}
+{"id": "ev-0149", "type": "event_year", "response": "1886.", "correct": true, "extra": {"pred": 1886, "abs_err": 0, "within1": true}}
+{"id": "ev-0150", "type": "event_year", "response": "1880.", "correct": true, "extra": {"pred": 1880, "abs_err": 0, "within1": true}}
+{"id": "ev-0151", "type": "event_year", "response": "1891.", "correct": true, "extra": {"pred": 1891, "abs_err": 0, "within1": true}}
+{"id": "ev-0152", "type": "event_year", "response": "1826", "correct": true, "extra": {"pred": 1826, "abs_err": 0, "within1": true}}
+{"id": "ev-0153", "type": "event_year", "response": "1820.", "correct": true, "extra": {"pred": 1820, "abs_err": 0, "within1": true}}
+{"id": "ev-0154", "type": "event_year", "response": "1891.", "correct": true, "extra": {"pred": 1891, "abs_err": 0, "within1": true}}
+{"id": "ev-0155", "type": "event_year", "response": "1852", "correct": true, "extra": {"pred": 1852, "abs_err": 0, "within1": true}}
+{"id": "ev-0156", "type": "event_year", "response": "1894.", "correct": true, "extra": {"pred": 1894, "abs_err": 0, "within1": true}}
+{"id": "ev-0157", "type": "event_year", "response": "1829", "correct": true, "extra": {"pred": 1829, "abs_err": 0, "within1": true}}
+{"id": "ev-0158", "type": "event_year", "response": "1829.", "correct": true, "extra": {"pred": 1829, "abs_err": 0, "within1": true}}
+{"id": "ev-0159", "type": "event_year", "response": "1883.", "correct": true, "extra": {"pred": 1883, "abs_err": 0, "within1": true}}
+{"id": "ev-0160", "type": "event_year", "response": "1890.", "correct": true, "extra": {"pred": 1890, "abs_err": 0, "within1": true}}
+{"id": "ev-0161", "type": "event_year", "response": "1830.", "correct": true, "extra": {"pred": 1830, "abs_err": 0, "within1": true}}
+{"id": "ev-0162", "type": "event_year", "response": "1889.", "correct": true, "extra": {"pred": 1889, "abs_err": 0, "within1": true}}
+{"id": "ev-0163", "type": "event_year", "response": "1882", "correct": true, "extra": {"pred": 1882, "abs_err": 0, "within1": true}}
+{"id": "ev-0164", "type": "event_year", "response": "1806.", "correct": false, "extra": {"pred": 1806, "abs_err": 2, "within1": false}}
+{"id": "ev-0165", "type": "event_year", "response": "1848", "correct": true, "extra": {"pred": 1848, "abs_err": 0, "within1": true}}
+{"id": "ev-0166", "type": "event_year", "response": "1873.", "correct": true, "extra": {"pred": 1873, "abs_err": 0, "within1": true}}
+{"id": "ev-0167", "type": "event_year", "response": "1849", "correct": true, "extra": {"pred": 1849, "abs_err": 0, "within1": true}}
+{"id": "ev-0168", "type": "event_year", "response": "1872.", "correct": true, "extra": {"pred": 1872, "abs_err": 0, "within1": true}}
+{"id": "ev-0169", "type": "event_year", "response": "1843.", "correct": true, "extra": {"pred": 1843, "abs_err": 0, "within1": true}}
+{"id": "ev-0170", "type": "event_year", "response": "1854", "correct": true, "extra": {"pred": 1854, "abs_err": 0, "within1": true}}
+{"id": "ev-0171", "type": "event_year", "response": "1839.", "correct": true, "extra": {"pred": 1839, "abs_err": 0, "within1": true}}
+{"id": "ev-0172", "type": "event_year", "response": "1865", "correct": true, "extra": {"pred": 1865, "abs_err": 0, "within1": true}}
+{"id": "ev-0173", "type": "event_year", "response": "1869.", "correct": true, "extra": {"pred": 1869, "abs_err": 0, "within1": true}}
+{"id": "ev-0174", "type": "event_year", "response": "1861", "correct": true, "extra": {"pred": 1861, "abs_err": 0, "within1": true}}
+{"id": "ev-0175", "type": "event_year", "response": "1863.", "correct": true, "extra": {"pred": 1863, "abs_err": 0, "within1": true}}
+{"id": "ev-0176", "type": "event_year", "response": "1896.", "correct": true, "extra": {"pred": 1896, "abs_err": 0, "within1": true}}
+{"id": "ev-0177", "type": "event_year", "response": "1898", "correct": true, "extra": {"pred": 1898, "abs_err": 0, "within1": true}}
+{"id": "ev-0178", "type": "event_year", "response": "1813", "correct": true, "extra": {"pred": 1813, "abs_err": 0, "within1": true}}
+{"id": "ev-0179", "type": "event_year", "response": "1862.", "correct": false, "extra": {"pred": 1862, "abs_err": 1, "within1": true}}
+{"id": "ev-0180", "type": "event_year", "response": "1847", "correct": true, "extra": {"pred": 1847, "abs_err": 0, "within1": true}}
+{"id": "ev-0181", "type": "event_year", "response": "1826.", "correct": true, "extra": {"pred": 1826, "abs_err": 0, "within1": true}}
+{"id": "ev-0182", "type": "event_year", "response": "1857", "correct": true, "extra": {"pred": 1857, "abs_err": 0, "within1": true}}
+{"id": "ev-0183", "type": "event_year", "response": "1818.", "correct": true, "extra": {"pred": 1818, "abs_err": 0, "within1": true}}
+{"id": "ev-0184", "type": "event_year", "response": "1833", "correct": true, "extra": {"pred": 1833, "abs_err": 0, "within1": true}}
+{"id": "ev-0185", "type": "event_year", "response": "1866", "correct": true, "extra": {"pred": 1866, "abs_err": 0, "within1": true}}
+{"id": "ev-0186", "type": "event_year", "response": "1893", "correct": false, "extra": {"pred": 1893, "abs_err": 12, "within1": false}}
+{"id": "ev-0187", "type": "event_year", "response": "1846", "correct": true, "extra": {"pred": 1846, "abs_err": 0, "within1": true}}
+{"id": "ev-0188", "type": "event_year", "response": "1819", "correct": true, "extra": {"pred": 1819, "abs_err": 0, "within1": true}}
+{"id": "ev-0189", "type": "event_year", "response": "1881", "correct": true, "extra": {"pred": 1881, "abs_err": 0, "within1": true}}
+{"id": "ev-0190", "type": "event_year", "response": "1871.", "correct": true, "extra": {"pred": 1871, "abs_err": 0, "within1": true}}
+{"id": "ev-0191", "type": "event_year", "response": "1893", "correct": true, "extra": {"pred": 1893, "abs_err": 0, "within1": true}}
+{"id": "ev-0192", "type": "event_year", "response": "1809.", "correct": true, "extra": {"pred": 1809, "abs_err": 0, "within1": true}}
+{"id": "ev-0193", "type": "event_year", "response": "1854.", "correct": true, "extra": {"pred": 1854, "abs_err": 0, "within1": true}}
+{"id": "ev-0194", "type": "event_year", "response": "1879", "correct": true, "extra": {"pred": 1879, "abs_err": 0, "within1": true}}
+{"id": "ev-0195", "type": "event_year", "response": "1861", "correct": true, "extra": {"pred": 1861, "abs_err": 0, "within1": true}}
+{"id": "ev-0196", "type": "event_year", "response": "1806", "correct": true, "extra": {"pred": 1806, "abs_err": 0, "within1": true}}
+{"id": "ev-0197", "type": "event_year", "response": "1883.", "correct": true, "extra": {"pred": 1883, "abs_err": 0, "within1": true}}
+{"id": "ev-0198", "type": "event_year", "response": "1876.", "correct": true, "extra": {"pred": 1876, "abs_err": 0, "within1": true}}
+{"id": "ev-0199", "type": "event_year", "response": "Van Diemen’s Land separated from New South Wales in **1825**; it gained self-government in **1856**.", "correct": false, "extra": {"pred": 1825, "abs_err": 30, "within1": false}}
+{"id": "ev-0200", "type": "event_year", "response": "1801", "correct": true, "extra": {"pred": 1801, "abs_err": 0, "within1": true}}
+{"id": "ev-0201", "type": "event_year", "response": "1922", "correct": false, "extra": {"pred": 1922, "abs_err": 23, "within1": false}}
+{"id": "ev-0202", "type": "event_year", "response": "1873.", "correct": true, "extra": {"pred": 1873, "abs_err": 0, "within1": true}}
+{"id": "ev-0203", "type": "event_year", "response": "1818.", "correct": true, "extra": {"pred": 1818, "abs_err": 0, "within1": true}}
+{"id": "ev-0204", "type": "event_year", "response": "1878", "correct": true, "extra": {"pred": 1878, "abs_err": 0, "within1": true}}
+{"id": "ev-0205", "type": "event_year", "response": "1948.", "correct": true, "extra": {"pred": 1948, "abs_err": 0, "within1": true}}
+{"id": "ev-0206", "type": "event_year", "response": "1932.", "correct": true, "extra": {"pred": 1932, "abs_err": 0, "within1": true}}
+{"id": "ev-0207", "type": "event_year", "response": "1926.", "correct": true, "extra": {"pred": 1926, "abs_err": 0, "within1": true}}
+{"id": "ev-0208", "type": "event_year", "response": "1946. The Kingdom of Hungary was abolished and the republic proclaimed that year.", "correct": true, "extra": {"pred": 1946, "abs_err": 0, "within1": true}}
+{"id": "ev-0209", "type": "event_year", "response": "1918.", "correct": true, "extra": {"pred": 1918, "abs_err": 0, "within1": true}}
+{"id": "ev-0210", "type": "event_year", "response": "1923", "correct": true, "extra": {"pred": 1923, "abs_err": 0, "within1": true}}
+{"id": "ev-0211", "type": "event_year", "response": "1943", "correct": true, "extra": {"pred": 1943, "abs_err": 0, "within1": true}}
+{"id": "ev-0212", "type": "event_year", "response": "1932.", "correct": true, "extra": {"pred": 1932, "abs_err": 0, "within1": true}}
+{"id": "ev-0213", "type": "event_year", "response": "1918", "correct": true, "extra": {"pred": 1918, "abs_err": 0, "within1": true}}
+{"id": "ev-0214", "type": "event_year", "response": "1942.", "correct": true, "extra": {"pred": 1942, "abs_err": 0, "within1": true}}
+{"id": "ev-0215", "type": "event_year", "response": "1935.", "correct": true, "extra": {"pred": 1935, "abs_err": 0, "within1": true}}
+{"id": "ev-0216", "type": "event_year", "response": "1927", "correct": false, "extra": {"pred": 1927, "abs_err": 5, "within1": false}}
+{"id": "ev-0217", "type": "event_year", "response": "1930.", "correct": true, "extra": {"pred": 1930, "abs_err": 0, "within1": true}}
+{"id": "ev-0218", "type": "event_year", "response": "1937.", "correct": true, "extra": {"pred": 1937, "abs_err": 0, "within1": true}}
+{"id": "ev-0219", "type": "event_year", "response": "1947", "correct": true, "extra": {"pred": 1947, "abs_err": 0, "within1": true}}
+{"id": "ev-0220", "type": "event_year", "response": "1935.", "correct": true, "extra": {"pred": 1935, "abs_err": 0, "within1": true}}
+{"id": "ev-0221", "type": "event_year", "response": "1949.", "correct": true, "extra": {"pred": 1949, "abs_err": 0, "within1": true}}
+{"id": "ev-0222", "type": "event_year", "response": "1938.", "correct": true, "extra": {"pred": 1938, "abs_err": 0, "within1": true}}
+{"id": "ev-0223", "type": "event_year", "response": "1917.", "correct": true, "extra": {"pred": 1917, "abs_err": 0, "within1": true}}
+{"id": "ev-0224", "type": "event_year", "response": "1945.", "correct": true, "extra": {"pred": 1945, "abs_err": 0, "within1": true}}
+{"id": "ev-0225", "type": "event_year", "response": "1926", "correct": false, "extra": {"pred": 1926, "abs_err": 2, "within1": false}}
+{"id": "ev-0226", "type": "event_year", "response": "1913.", "correct": true, "extra": {"pred": 1913, "abs_err": 0, "within1": true}}
+{"id": "ev-0227", "type": "event_year", "response": "1947.", "correct": true, "extra": {"pred": 1947, "abs_err": 0, "within1": true}}
+{"id": "ev-0228", "type": "event_year", "response": "1901", "correct": true, "extra": {"pred": 1901, "abs_err": 0, "within1": true}}
+{"id": "ev-0229", "type": "event_year", "response": "1933", "correct": true, "extra": {"pred": 1933, "abs_err": 0, "within1": true}}
+{"id": "ev-0230", "type": "event_year", "response": "1945.", "correct": true, "extra": {"pred": 1945, "abs_err": 0, "within1": true}}
+{"id": "ev-0231", "type": "event_year", "response": "1917.", "correct": true, "extra": {"pred": 1917, "abs_err": 0, "within1": true}}
+{"id": "ev-0232", "type": "event_year", "response": "1922.", "correct": true, "extra": {"pred": 1922, "abs_err": 0, "within1": true}}
+{"id": "ev-0233", "type": "event_year", "response": "1907.", "correct": true, "extra": {"pred": 1907, "abs_err": 0, "within1": true}}
+{"id": "ev-0234", "type": "event_year", "response": "1907.", "correct": true, "extra": {"pred": 1907, "abs_err": 0, "within1": true}}
+{"id": "ev-0235", "type": "event_year", "response": "1927", "correct": false, "extra": {"pred": 1927, "abs_err": 1, "within1": true}}
+{"id": "ev-0236", "type": "event_year", "response": "1922.", "correct": false, "extra": {"pred": 1922, "abs_err": 7, "within1": false}}
+{"id": "ev-0237", "type": "event_year", "response": "1944.", "correct": true, "extra": {"pred": 1944, "abs_err": 0, "within1": true}}
+{"id": "ev-0238", "type": "event_year", "response": "1944.", "correct": true, "extra": {"pred": 1944, "abs_err": 0, "within1": true}}
+{"id": "ev-0239", "type": "event_year", "response": "1916.", "correct": true, "extra": {"pred": 1916, "abs_err": 0, "within1": true}}
+{"id": "ev-0240", "type": "event_year", "response": "1948.", "correct": true, "extra": {"pred": 1948, "abs_err": 0, "within1": true}}
+{"id": "ev-0241", "type": "event_year", "response": "1920", "correct": true, "extra": {"pred": 1920, "abs_err": 0, "within1": true}}
+{"id": "ev-0242", "type": "event_year", "response": "1947.", "correct": false, "extra": {"pred": 1947, "abs_err": 44, "within1": false}}
+{"id": "ev-0243", "type": "event_year", "response": "1914.", "correct": true, "extra": {"pred": 1914, "abs_err": 0, "within1": true}}
+{"id": "ev-0244", "type": "event_year", "response": "1914.", "correct": true, "extra": {"pred": 1914, "abs_err": 0, "within1": true}}
+{"id": "ev-0245", "type": "event_year", "response": "1946.", "correct": true, "extra": {"pred": 1946, "abs_err": 0, "within1": true}}
+{"id": "ev-0246", "type": "event_year", "response": "1916", "correct": true, "extra": {"pred": 1916, "abs_err": 0, "within1": true}}
+{"id": "ev-0247", "type": "event_year", "response": "1905.", "correct": true, "extra": {"pred": 1905, "abs_err": 0, "within1": true}}
+{"id": "ev-0248", "type": "event_year", "response": "1938.", "correct": false, "extra": {"pred": 1938, "abs_err": 1, "within1": true}}
+{"id": "ev-0249", "type": "event_year", "response": "1943.", "correct": true, "extra": {"pred": 1943, "abs_err": 0, "within1": true}}
+{"id": "ev-0250", "type": "event_year", "response": "1926.", "correct": true, "extra": {"pred": 1926, "abs_err": 0, "within1": true}}
+{"id": "ev-0251", "type": "event_year", "response": "1915.", "correct": true, "extra": {"pred": 1915, "abs_err": 0, "within1": true}}
+{"id": "ev-0252", "type": "event_year", "response": "1928", "correct": true, "extra": {"pred": 1928, "abs_err": 0, "within1": true}}
+{"id": "ev-0253", "type": "event_year", "response": "1941.", "correct": true, "extra": {"pred": 1941, "abs_err": 0, "within1": true}}
+{"id": "ev-0254", "type": "event_year", "response": "1949.", "correct": true, "extra": {"pred": 1949, "abs_err": 0, "within1": true}}
+{"id": "ev-0255", "type": "event_year", "response": "1920", "correct": true, "extra": {"pred": 1920, "abs_err": 0, "within1": true}}
+{"id": "ev-0256", "type": "event_year", "response": "1909", "correct": true, "extra": {"pred": 1909, "abs_err": 0, "within1": true}}
+{"id": "ev-0257", "type": "event_year", "response": "1886", "correct": false, "extra": {"pred": 1886, "abs_err": 37, "within1": false}}
+{"id": "ev-0258", "type": "event_year", "response": "1938.", "correct": true, "extra": {"pred": 1938, "abs_err": 0, "within1": true}}
+{"id": "ev-0259", "type": "event_year", "response": "1908.", "correct": true, "extra": {"pred": 1908, "abs_err": 0, "within1": true}}
+{"id": "ev-0260", "type": "event_year", "response": "It was held in 1885.", "correct": false, "extra": {"pred": 1885, "abs_err": 77, "within1": false}}
+{"id": "ev-0261", "type": "event_year", "response": "1967.", "correct": true, "extra": {"pred": 1967, "abs_err": 0, "within1": true}}
+{"id": "ev-0262", "type": "event_year", "response": "1991.", "correct": true, "extra": {"pred": 1991, "abs_err": 0, "within1": true}}
+{"id": "ev-0263", "type": "event_year", "response": "1969.", "correct": true, "extra": {"pred": 1969, "abs_err": 0, "within1": true}}
+{"id": "ev-0264", "type": "event_year", "response": "1954.", "correct": false, "extra": {"pred": 1954, "abs_err": 1, "within1": true}}
+{"id": "ev-0265", "type": "event_year", "response": "1994.", "correct": true, "extra": {"pred": 1994, "abs_err": 0, "within1": true}}
+{"id": "ev-0266", "type": "event_year", "response": "1968", "correct": true, "extra": {"pred": 1968, "abs_err": 0, "within1": true}}
+{"id": "ev-0267", "type": "event_year", "response": "1988", "correct": true, "extra": {"pred": 1988, "abs_err": 0, "within1": true}}
+{"id": "ev-0268", "type": "event_year", "response": "1962", "correct": false, "extra": {"pred": 1962, "abs_err": 1, "within1": true}}
+{"id": "ev-0269", "type": "event_year", "response": "1955", "correct": true, "extra": {"pred": 1955, "abs_err": 0, "within1": true}}
+{"id": "ev-0270", "type": "event_year", "response": "1994", "correct": true, "extra": {"pred": 1994, "abs_err": 0, "within1": true}}
+{"id": "ev-0271", "type": "event_year", "response": "1981", "correct": true, "extra": {"pred": 1981, "abs_err": 0, "within1": true}}
+{"id": "ev-0272", "type": "event_year", "response": "1997. The Dublin Convention, the precursor to the Dublin Regulation, came into force that year.", "correct": true, "extra": {"pred": 1997, "abs_err": 0, "within1": true}}
+{"id": "ev-0273", "type": "event_year", "response": "1957.", "correct": true, "extra": {"pred": 1957, "abs_err": 0, "within1": true}}
+{"id": "ev-0274", "type": "event_year", "response": "1986.", "correct": true, "extra": {"pred": 1986, "abs_err": 0, "within1": true}}
+{"id": "ev-0275", "type": "event_year", "response": "1973.", "correct": false, "extra": {"pred": 1973, "abs_err": 15, "within1": false}}
+{"id": "ev-0276", "type": "event_year", "response": "1988", "correct": true, "extra": {"pred": 1988, "abs_err": 0, "within1": true}}
+{"id": "ev-0277", "type": "event_year", "response": "1987.", "correct": false, "extra": {"pred": 1987, "abs_err": 8, "within1": false}}
+{"id": "ev-0278", "type": "event_year", "response": "1989", "correct": true, "extra": {"pred": 1989, "abs_err": 0, "within1": true}}
+{"id": "ev-0279", "type": "event_year", "response": "1989", "correct": true, "extra": {"pred": 1989, "abs_err": 0, "within1": true}}
+{"id": "ev-0280", "type": "event_year", "response": "1958.", "correct": true, "extra": {"pred": 1958, "abs_err": 0, "within1": true}}
+{"id": "ev-0281", "type": "event_year", "response": "1992.", "correct": true, "extra": {"pred": 1992, "abs_err": 0, "within1": true}}
+{"id": "ev-0282", "type": "event_year", "response": "1967.", "correct": true, "extra": {"pred": 1967, "abs_err": 0, "within1": true}}
+{"id": "ev-0283", "type": "event_year", "response": "1986", "correct": true, "extra": {"pred": 1986, "abs_err": 0, "within1": true}}
+{"id": "ev-0284", "type": "event_year", "response": "1979", "correct": true, "extra": {"pred": 1979, "abs_err": 0, "within1": true}}
+{"id": "ev-0285", "type": "event_year", "response": "1999", "correct": true, "extra": {"pred": 1999, "abs_err": 0, "within1": true}}
+{"id": "ev-0286", "type": "event_year", "response": "1964.", "correct": true, "extra": {"pred": 1964, "abs_err": 0, "within1": true}}
+{"id": "ev-0287", "type": "event_year", "response": "1970", "correct": true, "extra": {"pred": 1970, "abs_err": 0, "within1": true}}
+{"id": "ev-0288", "type": "event_year", "response": "1984.", "correct": false, "extra": {"pred": 1984, "abs_err": 1, "within1": true}}
+{"id": "ev-0289", "type": "event_year", "response": "1957", "correct": true, "extra": {"pred": 1957, "abs_err": 0, "within1": true}}
+{"id": "ev-0290", "type": "event_year", "response": "1972.", "correct": true, "extra": {"pred": 1972, "abs_err": 0, "within1": true}}
+{"id": "ev-0291", "type": "event_year", "response": "1992.", "correct": true, "extra": {"pred": 1992, "abs_err": 0, "within1": true}}
+{"id": "ev-0292", "type": "event_year", "response": "1959", "correct": true, "extra": {"pred": 1959, "abs_err": 0, "within1": true}}
+{"id": "ev-0293", "type": "event_year", "response": "1970.", "correct": true, "extra": {"pred": 1970, "abs_err": 0, "within1": true}}
+{"id": "ev-0294", "type": "event_year", "response": "1956.", "correct": true, "extra": {"pred": 1956, "abs_err": 0, "within1": true}}
+{"id": "ev-0295", "type": "event_year", "response": "1972.", "correct": true, "extra": {"pred": 1972, "abs_err": 0, "within1": true}}
+{"id": "ev-0296", "type": "event_year", "response": "1953.", "correct": true, "extra": {"pred": 1953, "abs_err": 0, "within1": true}}
+{"id": "ev-0297", "type": "event_year", "response": "1980.", "correct": true, "extra": {"pred": 1980, "abs_err": 0, "within1": true}}
+{"id": "ev-0298", "type": "event_year", "response": "1982.", "correct": true, "extra": {"pred": 1982, "abs_err": 0, "within1": true}}
+{"id": "ev-0299", "type": "event_year", "response": "1960.", "correct": false, "extra": {"pred": 1960, "abs_err": 3, "within1": false}}
+{"id": "ev-0300", "type": "event_year", "response": "1983.", "correct": true, "extra": {"pred": 1983, "abs_err": 0, "within1": true}}
+{"id": "ev-0301", "type": "event_year", "response": "1996.", "correct": true, "extra": {"pred": 1996, "abs_err": 0, "within1": true}}
+{"id": "ev-0302", "type": "event_year", "response": "1952.", "correct": true, "extra": {"pred": 1952, "abs_err": 0, "within1": true}}
+{"id": "ev-0303", "type": "event_year", "response": "1996", "correct": false, "extra": {"pred": 1996, "abs_err": 1, "within1": true}}
+{"id": "ev-0304", "type": "event_year", "response": "1963", "correct": true, "extra": {"pred": 1963, "abs_err": 0, "within1": true}}
+{"id": "ev-0305", "type": "event_year", "response": "1953.", "correct": true, "extra": {"pred": 1953, "abs_err": 0, "within1": true}}
+{"id": "ev-0306", "type": "event_year", "response": "1964", "correct": true, "extra": {"pred": 1964, "abs_err": 0, "within1": true}}
+{"id": "ev-0307", "type": "event_year", "response": "1936.", "correct": false, "extra": {"pred": 1936, "abs_err": 29, "within1": false}}
+{"id": "ev-0308", "type": "event_year", "response": "1999.", "correct": true, "extra": {"pred": 1999, "abs_err": 0, "within1": true}}
+{"id": "ev-0309", "type": "event_year", "response": "1978", "correct": true, "extra": {"pred": 1978, "abs_err": 0, "within1": true}}
+{"id": "ev-0310", "type": "event_year", "response": "1962.", "correct": true, "extra": {"pred": 1962, "abs_err": 0, "within1": true}}
+{"id": "ev-0311", "type": "event_year", "response": "1993", "correct": false, "extra": {"pred": 1993, "abs_err": 6, "within1": false}}
+{"id": "ev-0312", "type": "event_year", "response": "1950.", "correct": true, "extra": {"pred": 1950, "abs_err": 0, "within1": true}}
+{"id": "ev-0313", "type": "event_year", "response": "1960.", "correct": true, "extra": {"pred": 1960, "abs_err": 0, "within1": true}}
+{"id": "ev-0314", "type": "event_year", "response": "1959.", "correct": true, "extra": {"pred": 1959, "abs_err": 0, "within1": true}}
+{"id": "ev-0315", "type": "event_year", "response": "1952.", "correct": true, "extra": {"pred": 1952, "abs_err": 0, "within1": true}}
+{"id": "ev-0316", "type": "event_year", "response": "1950", "correct": true, "extra": {"pred": 1950, "abs_err": 0, "within1": true}}
+{"id": "ev-0317", "type": "event_year", "response": "1973", "correct": true, "extra": {"pred": 1973, "abs_err": 0, "within1": true}}
+{"id": "ev-0318", "type": "event_year", "response": "1961.", "correct": true, "extra": {"pred": 1961, "abs_err": 0, "within1": true}}
+{"id": "ev-0319", "type": "event_year", "response": "1999", "correct": false, "extra": {"pred": 1999, "abs_err": 6, "within1": false}}
+{"id": "ev-0320", "type": "event_year", "response": "1956", "correct": true, "extra": {"pred": 1956, "abs_err": 0, "within1": true}}
+{"id": "ev-0321", "type": "event_year", "response": "1990", "correct": true, "extra": {"pred": 1990, "abs_err": 0, "within1": true}}
+{"id": "ev-0322", "type": "event_year", "response": "1969.", "correct": true, "extra": {"pred": 1969, "abs_err": 0, "within1": true}}
+{"id": "ev-0323", "type": "event_year", "response": "1978", "correct": true, "extra": {"pred": 1978, "abs_err": 0, "within1": true}}
+{"id": "ev-0324", "type": "event_year", "response": "1973.", "correct": true, "extra": {"pred": 1973, "abs_err": 0, "within1": true}}
+{"id": "ev-0325", "type": "event_year", "response": "1968", "correct": true, "extra": {"pred": 1968, "abs_err": 0, "within1": true}}
+{"id": "ev-0326", "type": "event_year", "response": "1976.", "correct": true, "extra": {"pred": 1976, "abs_err": 0, "within1": true}}
+{"id": "ev-0327", "type": "event_year", "response": "1935.", "correct": false, "extra": {"pred": 1935, "abs_err": 63, "within1": false}}
+{"id": "ev-0328", "type": "event_year", "response": "1990.", "correct": true, "extra": {"pred": 1990, "abs_err": 0, "within1": true}}
+{"id": "ev-0329", "type": "event_year", "response": "1975.", "correct": true, "extra": {"pred": 1975, "abs_err": 0, "within1": true}}
+{"id": "ev-0330", "type": "event_year", "response": "1972.", "correct": false, "extra": {"pred": 1972, "abs_err": 4, "within1": false}}
+{"id": "ev-0331", "type": "event_year", "response": "1975", "correct": true, "extra": {"pred": 1975, "abs_err": 0, "within1": true}}
+{"id": "ev-0332", "type": "event_year", "response": "1980.", "correct": true, "extra": {"pred": 1980, "abs_err": 0, "within1": true}}
+{"id": "ev-0333", "type": "event_year", "response": "1982.", "correct": true, "extra": {"pred": 1982, "abs_err": 0, "within1": true}}
+{"id": "ev-0334", "type": "event_year", "response": "1996.", "correct": true, "extra": {"pred": 1996, "abs_err": 0, "within1": true}}
+{"id": "ev-0335", "type": "event_year", "response": "2006.", "correct": true, "extra": {"pred": 2006, "abs_err": 0, "within1": true}}
+{"id": "ev-0336", "type": "event_year", "response": "2003.", "correct": true, "extra": {"pred": 2003, "abs_err": 0, "within1": true}}
+{"id": "ev-0337", "type": "event_year", "response": "2003.", "correct": true, "extra": {"pred": 2003, "abs_err": 0, "within1": true}}
+{"id": "ev-0338", "type": "event_year", "response": "2006.", "correct": true, "extra": {"pred": 2006, "abs_err": 0, "within1": true}}
+{"id": "ev-0339", "type": "event_year", "response": "2005.", "correct": true, "extra": {"pred": 2005, "abs_err": 0, "within1": true}}
+{"id": "ev-0340", "type": "event_year", "response": "2020", "correct": true, "extra": {"pred": 2020, "abs_err": 0, "within1": true}}
+{"id": "ev-0341", "type": "event_year", "response": "2022.", "correct": true, "extra": {"pred": 2022, "abs_err": 0, "within1": true}}
+{"id": "ev-0342", "type": "event_year", "response": "2001.", "correct": true, "extra": {"pred": 2001, "abs_err": 0, "within1": true}}
+{"id": "ev-0343", "type": "event_year", "response": "2018.", "correct": true, "extra": {"pred": 2018, "abs_err": 0, "within1": true}}
+{"id": "ev-0344", "type": "event_year", "response": "2022.", "correct": true, "extra": {"pred": 2022, "abs_err": 0, "within1": true}}
+{"id": "ev-0345", "type": "event_year", "response": "2001.", "correct": true, "extra": {"pred": 2001, "abs_err": 0, "within1": true}}
+{"id": "ev-0346", "type": "event_year", "response": "2025.", "correct": true, "extra": {"pred": 2025, "abs_err": 0, "within1": true}}
+{"id": "ev-0347", "type": "event_year", "response": "2015", "correct": true, "extra": {"pred": 2015, "abs_err": 0, "within1": true}}
+{"id": "ev-0348", "type": "event_year", "response": "2025.", "correct": true, "extra": {"pred": 2025, "abs_err": 0, "within1": true}}
+{"id": "ev-0349", "type": "event_year", "response": "2018.", "correct": true, "extra": {"pred": 2018, "abs_err": 0, "within1": true}}
+{"id": "ev-0350", "type": "event_year", "response": "2000", "correct": true, "extra": {"pred": 2000, "abs_err": 0, "within1": true}}
+{"id": "ev-0351", "type": "event_year", "response": "2012.", "correct": true, "extra": {"pred": 2012, "abs_err": 0, "within1": true}}
+{"id": "ev-0352", "type": "event_year", "response": "It vanished in **2017**; the wreck was found in **2018**.", "correct": true, "extra": {"pred": 2017, "abs_err": 0, "within1": true}}
+{"id": "ev-0353", "type": "event_year", "response": "2013.", "correct": true, "extra": {"pred": 2013, "abs_err": 0, "within1": true}}
+{"id": "ev-0354", "type": "event_year", "response": "2008", "correct": true, "extra": {"pred": 2008, "abs_err": 0, "within1": true}}
+{"id": "ev-0355", "type": "event_year", "response": "2023.", "correct": true, "extra": {"pred": 2023, "abs_err": 0, "within1": true}}
+{"id": "ev-0356", "type": "event_year", "response": "2014.", "correct": false, "extra": {"pred": 2014, "abs_err": 7, "within1": false}}
+{"id": "ev-0357", "type": "event_year", "response": "2020", "correct": true, "extra": {"pred": 2020, "abs_err": 0, "within1": true}}
+{"id": "ev-0358", "type": "event_year", "response": "2008", "correct": true, "extra": {"pred": 2008, "abs_err": 0, "within1": true}}
+{"id": "ev-0359", "type": "event_year", "response": "2013.", "correct": true, "extra": {"pred": 2013, "abs_err": 0, "within1": true}}
+{"id": "ev-0360", "type": "event_year", "response": "2024", "correct": true, "extra": {"pred": 2024, "abs_err": 0, "within1": true}}
+{"id": "ev-0361", "type": "event_year", "response": "2016", "correct": true, "extra": {"pred": 2016, "abs_err": 0, "within1": true}}
+{"id": "ev-0362", "type": "event_year", "response": "Serbia applied for EU membership in 2009.", "correct": true, "extra": {"pred": 2009, "abs_err": 0, "within1": true}}
+{"id": "ev-0363", "type": "event_year", "response": "2024.", "correct": true, "extra": {"pred": 2024, "abs_err": 0, "within1": true}}
+{"id": "ev-0364", "type": "event_year", "response": "2017", "correct": true, "extra": {"pred": 2017, "abs_err": 0, "within1": true}}
+{"id": "ev-0365", "type": "event_year", "response": "2019.", "correct": true, "extra": {"pred": 2019, "abs_err": 0, "within1": true}}
+{"id": "ev-0366", "type": "event_year", "response": "2019", "correct": true, "extra": {"pred": 2019, "abs_err": 0, "within1": true}}
+{"id": "ev-0367", "type": "event_year", "response": null, "correct": false, "extra": {"error": "HTTP 400: {\n  \"error\": {\n    \"message\": \"The response was filtered due to the prompt triggering Azure OpenAI’s content management policy. Please modify your prompt and retry. To learn more about our content filtering policies please read our documentation: https://go.microsoft.com/fwlink/?linkid=2198766\",\n    \"type\": \"invalid_request_error\",\n    \"param\": \"prompt\",\n    \"code\": \"content_filter\",\n    \"content_filters\": [\n      {\n        \"blocked\": true,\n        \"source_type\": \"prompt\",\n        \"content_fil"}}
+{"id": "ev-0368", "type": "event_year", "response": "2004", "correct": true, "extra": {"pred": 2004, "abs_err": 0, "within1": true}}
+{"id": "ev-0369", "type": "event_year", "response": "2021.", "correct": true, "extra": {"pred": 2021, "abs_err": 0, "within1": true}}
+{"id": "ev-0370", "type": "event_year", "response": "2011", "correct": true, "extra": {"pred": 2011, "abs_err": 0, "within1": true}}
+{"id": "ev-0371", "type": "event_year", "response": "2007.", "correct": true, "extra": {"pred": 2007, "abs_err": 0, "within1": true}}
+{"id": "ev-0372", "type": "event_year", "response": "2015.", "correct": true, "extra": {"pred": 2015, "abs_err": 0, "within1": true}}
+{"id": "ev-0373", "type": "event_year", "response": "2004", "correct": true, "extra": {"pred": 2004, "abs_err": 0, "within1": true}}
+{"id": "ev-0374", "type": "event_year", "response": "2002", "correct": true, "extra": {"pred": 2002, "abs_err": 0, "within1": true}}
+{"id": "ev-0375", "type": "event_year", "response": "2023.", "correct": true, "extra": {"pred": 2023, "abs_err": 0, "within1": true}}
+{"id": "ev-0376", "type": "event_year", "response": "2012", "correct": true, "extra": {"pred": 2012, "abs_err": 0, "within1": true}}
+{"id": "ev-0377", "type": "event_year", "response": "2021.", "correct": true, "extra": {"pred": 2021, "abs_err": 0, "within1": true}}
+{"id": "ev-0378", "type": "event_year", "response": "2010.", "correct": true, "extra": {"pred": 2010, "abs_err": 0, "within1": true}}
+{"id": "ev-0379", "type": "event_year", "response": "2010", "correct": true, "extra": {"pred": 2010, "abs_err": 0, "within1": true}}
+{"id": "ev-0380", "type": "event_year", "response": "2014.", "correct": true, "extra": {"pred": 2014, "abs_err": 0, "within1": true}}
+{"id": "ev-0381", "type": "event_year", "response": "2014.", "correct": true, "extra": {"pred": 2014, "abs_err": 0, "within1": true}}
+{"id": "ev-0382", "type": "event_year", "response": "2002", "correct": true, "extra": {"pred": 2002, "abs_err": 0, "within1": true}}
+{"id": "ev-0383", "type": "event_year", "response": "2009.", "correct": true, "extra": {"pred": 2009, "abs_err": 0, "within1": true}}
+{"id": "ev-0384", "type": "event_year", "response": "2005", "correct": true, "extra": {"pred": 2005, "abs_err": 0, "within1": true}}
+{"id": "ev-0385", "type": "event_year", "response": "2000", "correct": true, "extra": {"pred": 2000, "abs_err": 0, "within1": true}}
+{"id": "ev-0386", "type": "event_year", "response": "2016", "correct": true, "extra": {"pred": 2016, "abs_err": 0, "within1": true}}
+{"id": "ev-0387", "type": "event_year", "response": "2003", "correct": true, "extra": {"pred": 2003, "abs_err": 0, "within1": true}}
+{"id": "ev-0388", "type": "event_year", "response": "2022.", "correct": true, "extra": {"pred": 2022, "abs_err": 0, "within1": true}}
+{"id": "ev-0389", "type": "event_year", "response": "2001", "correct": true, "extra": {"pred": 2001, "abs_err": 0, "within1": true}}
+{"id": "ev-0390", "type": "event_year", "response": "2025", "correct": true, "extra": {"pred": 2025, "abs_err": 0, "within1": true}}
+{"id": "ev-0391", "type": "event_year", "response": "2018.", "correct": true, "extra": {"pred": 2018, "abs_err": 0, "within1": true}}
+{"id": "ev-0392", "type": "event_year", "response": "2013", "correct": true, "extra": {"pred": 2013, "abs_err": 0, "within1": true}}
+{"id": "ev-0393", "type": "event_year", "response": "2008", "correct": true, "extra": {"pred": 2008, "abs_err": 0, "within1": true}}
+{"id": "ev-0394", "type": "event_year", "response": "2015.", "correct": true, "extra": {"pred": 2015, "abs_err": 0, "within1": true}}
+{"id": "ev-0395", "type": "event_year", "response": "2020", "correct": true, "extra": {"pred": 2020, "abs_err": 0, "within1": true}}
+{"id": "ev-0396", "type": "event_year", "response": "2024.", "correct": true, "extra": {"pred": 2024, "abs_err": 0, "within1": true}}
+{"id": "ev-0397", "type": "event_year", "response": "2007", "correct": true, "extra": {"pred": 2007, "abs_err": 0, "within1": true}}
+{"id": "ev-0398", "type": "event_year", "response": "2019.", "correct": true, "extra": {"pred": 2019, "abs_err": 0, "within1": true}}
+{"id": "ev-0399", "type": "event_year", "response": "2011.", "correct": true, "extra": {"pred": 2011, "abs_err": 0, "within1": true}}
+{"id": "no1-0000", "type": "number_one", "response": "“Mack the Knife” by Bobby Darin.", "correct": true, "extra": {"artist": "Bobby Darin"}}
+{"id": "no1-0001", "type": "number_one", "response": "“The Battle of New Orleans” by Johnny Horton.", "correct": true, "extra": {"artist": "Johnny Horton"}}
+{"id": "no1-0002", "type": "number_one", "response": "“It's All in the Game” by Tommy Edwards.", "correct": true, "extra": {"artist": "Tommy Edwards"}}
+{"id": "no1-0003", "type": "number_one", "response": "“Stagger Lee” by Lloyd Price.", "correct": true, "extra": {"artist": "Lloyd Price"}}
+{"id": "no1-0004", "type": "number_one", "response": "“Poor Little Fool” by Ricky Nelson.", "correct": true, "extra": {"artist": "Ricky Nelson"}}
+{"id": "no1-0005", "type": "number_one", "response": "“Nel Blu Dipinto Di Blu (Volare)” by Domenico Modugno.", "correct": true, "extra": {"artist": "Domenico Modugno"}}
+{"id": "no1-0006", "type": "number_one", "response": "“Nel Blu Dipinto Di Blu (Volare)” by Domenico Modugno.", "correct": false, "extra": {"artist": "The Elegants"}}
+{"id": "no1-0007", "type": "number_one", "response": "“Lonely Boy” by Paul Anka.", "correct": true, "extra": {"artist": "Paul Anka"}}
+{"id": "no1-0008", "type": "number_one", "response": "“Smoke Gets in Your Eyes” by the Platters.", "correct": true, "extra": {"artist": "The Platters"}}
+{"id": "no1-0009", "type": "number_one", "response": "“A Big Hunk o’ Love” by Elvis Presley.", "correct": true, "extra": {"artist": "Elvis Presley"}}
+{"id": "no1-0010", "type": "number_one", "response": "“Tom Dooley” by the Kingston Trio.", "correct": false, "extra": {"artist": "The Teddy Bears"}}
+{"id": "no1-0011", "type": "number_one", "response": "“Sleep Walk” by Santo & Johnny.", "correct": true, "extra": {"artist": "Santo & Johnny"}}
+{"id": "no1-0012", "type": "number_one", "response": "“Why” by Frankie Avalon.", "correct": true, "extra": {"artist": "Frankie Avalon"}}
+{"id": "no1-0013", "type": "number_one", "response": "“The Chipmunk Song (Christmas Don’t Be Late)” by David Seville and the Chipmunks.", "correct": true, "extra": {"artist": "The Chipmunks with David Seville"}}
+{"id": "no1-0014", "type": "number_one", "response": "“Come Softly to Me” by the Fleetwoods.", "correct": true, "extra": {"artist": "The Fleetwoods"}}
+{"id": "no1-0015", "type": "number_one", "response": "“Why” by Frankie Avalon.", "correct": false, "extra": {"artist": "Guy Mitchell"}}
+{"id": "no1-0016", "type": "number_one", "response": "“The Chipmunk Song (Christmas Don’t Be Late)” by David Seville and the Chipmunks.", "correct": true, "extra": {"artist": "The Chipmunks with David Seville"}}
+{"id": "no1-0017", "type": "number_one", "response": "“The Three Bells” by The Browns.", "correct": true, "extra": {"artist": "The Browns"}}
+{"id": "no1-0018", "type": "number_one", "response": "“Kansas City” by Wilbert Harrison.", "correct": true, "extra": {"artist": "Wilbert Harrison"}}
+{"id": "no1-0019", "type": "number_one", "response": "“Venus” by Frankie Avalon.", "correct": true, "extra": {"artist": "Frankie Avalon"}}
+{"id": "no1-0020", "type": "number_one", "response": "“Go Away Little Girl” by Steve Lawrence.", "correct": true, "extra": {"artist": "Steve Lawrence"}}
+{"id": "no1-0021", "type": "number_one", "response": "“Downtown” by Petula Clark.", "correct": true, "extra": {"artist": "Petula Clark"}}
+{"id": "no1-0022", "type": "number_one", "response": "“People Got to Be Free” by the Rascals.", "correct": true, "extra": {"artist": "The Rascals"}}
+{"id": "no1-0023", "type": "number_one", "response": "“Love Is Here and Now You’re Gone” by the Supremes.", "correct": false, "extra": {"artist": "The Rolling Stones"}}
+{"id": "no1-0024", "type": "number_one", "response": "“Running Bear” by Johnny Preston.", "correct": true, "extra": {"artist": "Johnny Preston"}}
+{"id": "no1-0025", "type": "number_one", "response": "“Mother-in-Law” by Ernie K-Doe.", "correct": false, "extra": {"artist": "Ricky Nelson"}}
+{"id": "no1-0026", "type": "number_one", "response": "“Paperback Writer” by the Beatles.", "correct": false, "extra": {"artist": "Frank Sinatra"}}
+{"id": "no1-0027", "type": "number_one", "response": "“This Guy’s in Love with You” by Herb Alpert.", "correct": true, "extra": {"artist": "Herb Alpert"}}
+{"id": "no1-0028", "type": "number_one", "response": "“Baby Love” by the Supremes.", "correct": true, "extra": {"artist": "The Supremes"}}
+{"id": "no1-0029", "type": "number_one", "response": "“Blue Moon” by the Marcels.", "correct": true, "extra": {"artist": "The Marcels"}}
+{"id": "no1-0030", "type": "number_one", "response": "“He’s So Fine” by the Chiffons.", "correct": true, "extra": {"artist": "The Chiffons"}}
+{"id": "no1-0031", "type": "number_one", "response": "“Quarter to Three” by Gary U.S. Bonds.", "correct": true, "extra": {"artist": "U.S. Bonds"}}
+{"id": "no1-0032", "type": "number_one", "response": "“Windy” by The Association.", "correct": true, "extra": {"artist": "The Association"}}
+{"id": "no1-0033", "type": "number_one", "response": "“Aquarius/Let the Sunshine In” by The 5th Dimension.", "correct": true, "extra": {"artist": "The 5th Dimension"}}
+{"id": "no1-0034", "type": "number_one", "response": "“Sherry” by the Four Seasons.", "correct": true, "extra": {"artist": "The Four Seasons"}}
+{"id": "no1-0035", "type": "number_one", "response": "“Daydream Believer” by the Monkees.", "correct": true, "extra": {"artist": "The Monkees"}}
+{"id": "no1-0036", "type": "number_one", "response": "“Ode to Billie Joe” by Bobbie Gentry.", "correct": true, "extra": {"artist": "Bobbie Gentry"}}
+{"id": "no1-0037", "type": "number_one", "response": "“Everybody’s Somebody’s Fool” by Connie Francis.", "correct": false, "extra": {"artist": "The Everly Brothers"}}
+{"id": "no1-0038", "type": "number_one", "response": "“Theme from A Summer Place” by Percy Faith and His Orchestra.", "correct": true, "extra": {"artist": "Percy Faith and his orchestra"}}
+{"id": "no1-0039", "type": "number_one", "response": "“Everyday People” by Sly & the Family Stone.", "correct": true, "extra": {"artist": "Sly & the Family Stone"}}
+{"id": "no1-0040", "type": "number_one", "response": "“I'm Leaving It Up to You” by Dale & Grace.", "correct": false, "extra": {"artist": "The Singing Nun"}}
+{"id": "no1-0041", "type": "number_one", "response": "“The House of the Rising Sun” by the Animals.", "correct": true, "extra": {"artist": "The Animals"}}
+{"id": "no1-0042", "type": "number_one", "response": "“Calcutta” by Lawrence Welk.", "correct": false, "extra": {"artist": "Chubby Checker"}}
+{"id": "no1-0043", "type": "number_one", "response": "“Kind of a Drag” by the Buckinghams.", "correct": true, "extra": {"artist": "The Buckinghams"}}
+{"id": "no1-0044", "type": "number_one", "response": "“Crimson and Clover” by Tommy James and the Shondells.", "correct": true, "extra": {"artist": "Tommy James and the Shondells"}}
+{"id": "no1-0045", "type": "number_one", "response": "“Stuck on You” by Elvis Presley.", "correct": true, "extra": {"artist": "Elvis Presley"}}
+{"id": "no1-0046", "type": "number_one", "response": "“Love Theme from Romeo and Juliet” by Henry Mancini.", "correct": false, "extra": {"artist": "The Beatles with Billy Preston"}}
+{"id": "no1-0047", "type": "number_one", "response": "“Good Lovin’” by the Young Rascals.", "correct": false, "extra": {"artist": "The Righteous Brothers"}}
+{"id": "no1-0048", "type": "number_one", "response": "“Mr. Tambourine Man” by The Byrds.", "correct": true, "extra": {"artist": "The Byrds"}}
+{"id": "no1-0049", "type": "number_one", "response": "“The Stripper” by David Rose.", "correct": true, "extra": {"artist": "David Rose"}}
+{"id": "no1-0050", "type": "number_one", "response": "“Reunited” by Peaches & Herb.", "correct": true, "extra": {"artist": "Peaches & Herb"}}
+{"id": "no1-0051", "type": "number_one", "response": "“Escape (The Piña Colada Song)” by Rupert Holmes.", "correct": true, "extra": {"artist": "Rupert Holmes"}}
+{"id": "no1-0052", "type": "number_one", "response": "“Black and White” by Three Dog Night.", "correct": true, "extra": {"artist": "Three Dog Night"}}
+{"id": "no1-0053", "type": "number_one", "response": "“My Love” by Paul McCartney & Wings.", "correct": true, "extra": {"artist": "Paul McCartney and Wings"}}
+{"id": "no1-0054", "type": "number_one", "response": "“Band on the Run” by Paul McCartney and Wings.", "correct": false, "extra": {"artist": "Bo Donaldson and The Heywoods"}}
+{"id": "no1-0055", "type": "number_one", "response": "“Kung Fu Fighting” by Carl Douglas.", "correct": true, "extra": {"artist": "Carl Douglas"}}
+{"id": "no1-0056", "type": "number_one", "response": "“Tonight’s the Night (Gonna Be Alright)” by Rod Stewart.", "correct": true, "extra": {"artist": "Rod Stewart"}}
+{"id": "no1-0057", "type": "number_one", "response": "“You Make Me Feel Like Dancing” by Leo Sayer.", "correct": false, "extra": {"artist": "Stevie Wonder"}}
+{"id": "no1-0058", "type": "number_one", "response": "“The Tears of a Clown” by Smokey Robinson & the Miracles.", "correct": true, "extra": {"artist": "Smokey Robinson & the Miracles"}}
+{"id": "no1-0059", "type": "number_one", "response": "“Go Away Little Girl” by Donny Osmond.", "correct": true, "extra": {"artist": "Donny Osmond"}}
+{"id": "no1-0060", "type": "number_one", "response": "“Seasons in the Sun” by Terry Jacks.", "correct": true, "extra": {"artist": "Terry Jacks"}}
+{"id": "no1-0061", "type": "number_one", "response": "“Torn Between Two Lovers” by Mary MacGregor.", "correct": true, "extra": {"artist": "Mary MacGregor"}}
+{"id": "no1-0062", "type": "number_one", "response": "“Tragedy” by the Bee Gees.", "correct": false, "extra": {"artist": "Gloria Gaynor"}}
+{"id": "no1-0063", "type": "number_one", "response": "“The First Time Ever I Saw Your Face” by Roberta Flack.", "correct": true, "extra": {"artist": "Roberta Flack"}}
+{"id": "no1-0064", "type": "number_one", "response": "“Feel Like Makin’ Love” by Roberta Flack.", "correct": false, "extra": {"artist": "Paul Anka and Odia Coates"}}
+{"id": "no1-0065", "type": "number_one", "response": "“Killing Me Softly with His Song” by Roberta Flack.", "correct": true, "extra": {"artist": "Roberta Flack"}}
+{"id": "no1-0066", "type": "number_one", "response": "“Baby Come Back” by Player.", "correct": true, "extra": {"artist": "Player"}}
+{"id": "no1-0067", "type": "number_one", "response": "“How Can You Mend a Broken Heart” by the Bee Gees.", "correct": true, "extra": {"artist": "Bee Gees"}}
+{"id": "no1-0068", "type": "number_one", "response": "“Rhinestone Cowboy” by Glen Campbell.", "correct": false, "extra": {"artist": "David Bowie"}}
+{"id": "no1-0069", "type": "number_one", "response": "“Fallin’ in Love” by Hamilton, Joe Frank & Reynolds.", "correct": false, "extra": {"artist": "KC and the Sunshine Band"}}
+{"id": "no1-0070", "type": "number_one", "response": "“With a Little Luck” by Wings.", "correct": false, "extra": {"artist": "Johnny Mathis and Deniece Williams"}}
+{"id": "no1-0071", "type": "number_one", "response": "“Bad Girls” by Donna Summer.", "correct": true, "extra": {"artist": "Donna Summer"}}
+{"id": "no1-0072", "type": "number_one", "response": "“Oh Girl” by the Chi-Lites.", "correct": true, "extra": {"artist": "The Chi-Lites"}}
+{"id": "no1-0073", "type": "number_one", "response": "“Play That Funky Music” by Wild Cherry.", "correct": true, "extra": {"artist": "Wild Cherry"}}
+{"id": "no1-0074", "type": "number_one", "response": "“Everything Is Beautiful” by Ray Stevens.", "correct": true, "extra": {"artist": "Ray Stevens"}}
+{"id": "no1-0075", "type": "number_one", "response": "“Silly Love Songs” by Wings.", "correct": true, "extra": {"artist": "Wings"}}
+{"id": "no1-0076", "type": "number_one", "response": "“Make It with You” by Bread.", "correct": false, "extra": {"artist": "Edwin Starr"}}
+{"id": "no1-0077", "type": "number_one", "response": "“Tie a Yellow Ribbon Round the Ole Oak Tree” by Tony Orlando and Dawn.", "correct": true, "extra": {"artist": "Dawn featuring Tony Orlando"}}
+{"id": "no1-0078", "type": "number_one", "response": "“You Light Up My Life” by Debby Boone.", "correct": true, "extra": {"artist": "Debby Boone"}}
+{"id": "no1-0079", "type": "number_one", "response": "“Let’s Get It On” by Marvin Gaye.", "correct": true, "extra": {"artist": "Marvin Gaye"}}
+{"id": "no1-0080", "type": "number_one", "response": "“Endless Love” by Diana Ross and Lionel Richie.", "correct": true, "extra": {"artist": "Diana Ross and Lionel Richie"}}
+{"id": "no1-0081", "type": "number_one", "response": "“Up Where We Belong” by Joe Cocker and Jennifer Warnes.", "correct": true, "extra": {"artist": "Joe Cocker and Jennifer Warnes"}}
+{"id": "no1-0082", "type": "number_one", "response": "“Footloose” by Kenny Loggins.", "correct": true, "extra": {"artist": "Kenny Loggins"}}
+{"id": "no1-0083", "type": "number_one", "response": "“Nothing’s Gonna Stop Us Now” by Starship.", "correct": false, "extra": {"artist": "Aretha Franklin and George Michael"}}
+{"id": "no1-0084", "type": "number_one", "response": "“Centerfold” by the J. Geils Band.", "correct": true, "extra": {"artist": "The J. Geils Band"}}
+{"id": "no1-0085", "type": "number_one", "response": "“You Give Love a Bad Name” by Bon Jovi.", "correct": true, "extra": {"artist": "Bon Jovi"}}
+{"id": "no1-0086", "type": "number_one", "response": "“Billie Jean” by Michael Jackson.", "correct": true, "extra": {"artist": "Michael Jackson"}}
+{"id": "no1-0087", "type": "number_one", "response": "“Against All Odds (Take a Look at Me Now)” by Phil Collins.", "correct": true, "extra": {"artist": "Phil Collins"}}
+{"id": "no1-0088", "type": "number_one", "response": "“Eye of the Tiger” by Survivor.", "correct": true, "extra": {"artist": "Survivor"}}
+{"id": "no1-0089", "type": "number_one", "response": "“Livin’ on a Prayer” by Bon Jovi.", "correct": true, "extra": {"artist": "Bon Jovi"}}
+{"id": "no1-0090", "type": "number_one", "response": "“One More Try” by George Michael.", "correct": false, "extra": {"artist": "Gloria Estefan and Miami Sound Machine"}}
+{"id": "no1-0091", "type": "number_one", "response": "“Arthur’s Theme (Best That You Can Do)” by Christopher Cross.", "correct": true, "extra": {"artist": "Christopher Cross"}}
+{"id": "no1-0092", "type": "number_one", "response": "“Private Eyes” by Daryl Hall and John Oates.", "correct": true, "extra": {"artist": "Daryl Hall & John Oates"}}
+{"id": "no1-0093", "type": "number_one", "response": "“We Are the World” by USA for Africa.", "correct": true, "extra": {"artist": "USA for Africa"}}
+{"id": "no1-0094", "type": "number_one", "response": "“Miss You Much” by Janet Jackson.", "correct": true, "extra": {"artist": "Janet Jackson"}}
+{"id": "no1-0095", "type": "number_one", "response": "“Everytime You Go Away” by Paul Young.", "correct": true, "extra": {"artist": "Paul Young"}}
+{"id": "no1-0096", "type": "number_one", "response": "“Every Breath You Take” by The Police.", "correct": true, "extra": {"artist": "The Police"}}
+{"id": "no1-0097", "type": "number_one", "response": "“Another Brick in the Wall, Part II” by Pink Floyd.", "correct": true, "extra": {"artist": "Pink Floyd"}}
+{"id": "no1-0098", "type": "number_one", "response": "“Down Under” by Men at Work.", "correct": true, "extra": {"artist": "Men at Work"}}
+{"id": "no1-0099", "type": "number_one", "response": "“Can’t Fight This Feeling” by REO Speedwagon.", "correct": true, "extra": {"artist": "REO Speedwagon"}}
+{"id": "no1-0100", "type": "number_one", "response": "“Another One Bites the Dust” by Queen.", "correct": true, "extra": {"artist": "Queen"}}
+{"id": "no1-0101", "type": "number_one", "response": "“Maniac” by Michael Sembello.", "correct": true, "extra": {"artist": "Michael Sembello"}}
+{"id": "no1-0102", "type": "number_one", "response": "“Physical” by Olivia Newton-John.", "correct": true, "extra": {"artist": "Olivia Newton-John"}}
+{"id": "no1-0103", "type": "number_one", "response": "“Let’s Go Crazy” by Prince and the Revolution.", "correct": false, "extra": {"artist": "John Waite"}}
+{"id": "no1-0104", "type": "number_one", "response": "“Flashdance… What a Feeling” by Irene Cara.", "correct": true, "extra": {"artist": "Irene Cara"}}
+{"id": "no1-0105", "type": "number_one", "response": "“Out of Touch” by Daryl Hall and John Oates.", "correct": true, "extra": {"artist": "Daryl Hall and John Oates"}}
+{"id": "no1-0106", "type": "number_one", "response": "“When I See You Smile” by Bad English.", "correct": true, "extra": {"artist": "Bad English"}}
+{"id": "no1-0107", "type": "number_one", "response": "“Look Away” by Chicago.", "correct": false, "extra": {"artist": "Will to Power"}}
+{"id": "no1-0108", "type": "number_one", "response": "“With or Without You” by U2.", "correct": true, "extra": {"artist": "U2"}}
+{"id": "no1-0109", "type": "number_one", "response": "“When Doves Cry” by Prince.", "correct": true, "extra": {"artist": "Prince"}}
+{"id": "no1-0110", "type": "number_one", "response": "“I’ll Make Love to You” by Boyz II Men.", "correct": true, "extra": {"artist": "Boyz II Men"}}
+{"id": "no1-0111", "type": "number_one", "response": "“Because You Loved Me” by Celine Dion.", "correct": true, "extra": {"artist": "Céline Dion"}}
+{"id": "no1-0112", "type": "number_one", "response": "“Release Me” by Wilson Phillips.", "correct": false, "extra": {"artist": "Jon Bon Jovi"}}
+{"id": "no1-0113", "type": "number_one", "response": "“Have You Ever” by Brandy.", "correct": true, "extra": {"artist": "Brandy"}}
+{"id": "no1-0114", "type": "number_one", "response": "“I’ll Be Missing You” by Puff Daddy featuring Faith Evans and 112.", "correct": true, "extra": {"artist": "Puff Daddy and Faith Evans featuring 112"}}
+{"id": "no1-0115", "type": "number_one", "response": "“The Boy Is Mine” by Brandy and Monica.", "correct": true, "extra": {"artist": "Brandy and Monica"}}
+{"id": "no1-0116", "type": "number_one", "response": "“This Is How We Do It” by Montell Jordan.", "correct": false, "extra": {"artist": "Madonna"}}
+{"id": "no1-0117", "type": "number_one", "response": "“Baby Got Back” by Sir Mix-a-Lot.", "correct": true, "extra": {"artist": "Sir Mix-a-Lot"}}
+{"id": "no1-0118", "type": "number_one", "response": "“Bump n’ Grind” by R. Kelly.", "correct": true, "extra": {"artist": "R. Kelly"}}
+{"id": "no1-0119", "type": "number_one", "response": "“Truly Madly Deeply” by Savage Garden.", "correct": true, "extra": {"artist": "Savage Garden"}}
+{"id": "no1-0120", "type": "number_one", "response": "“Waterfalls” by TLC.", "correct": true, "extra": {"artist": "TLC"}}
+{"id": "no1-0121", "type": "number_one", "response": "“The Sign” by Ace of Base.", "correct": true, "extra": {"artist": "Ace of Base"}}
+{"id": "no1-0122", "type": "number_one", "response": "“On Bended Knee” by Boyz II Men.", "correct": false, "extra": {"artist": "Ini Kamoze"}}
+{"id": "no1-0123", "type": "number_one", "response": "“The Promise of a New Day” by Paula Abdul.", "correct": false, "extra": {"artist": "Marky Mark and the Funky Bunch featuring Loleatta Holloway"}}
+{"id": "no1-0124", "type": "number_one", "response": "“Candle in the Wind 1997” by Elton John.", "correct": true, "extra": {"artist": "Elton John"}}
+{"id": "no1-0125", "type": "number_one", "response": "“Macarena (Bayside Boys Mix)” by Los del Río.", "correct": true, "extra": {"artist": "Los del Río"}}
+{"id": "no1-0126", "type": "number_one", "response": "“Hold On” by Wilson Phillips.", "correct": false, "extra": {"artist": "Roxette"}}
+{"id": "no1-0127", "type": "number_one", "response": "“Heartbreaker” by Mariah Carey, featuring Jay-Z.", "correct": true, "extra": {"artist": "Mariah Carey featuring Jay-Z"}}
+{"id": "no1-0128", "type": "number_one", "response": "“That's the Way Love Goes” by Janet Jackson.", "correct": true, "extra": {"artist": "Janet Jackson"}}
+{"id": "no1-0129", "type": "number_one", "response": "“Opposites Attract” by Paula Abdul (featuring The Wild Pair).", "correct": true, "extra": {"artist": "Paula Abdul with The Wild Pair"}}
+{"id": "no1-0130", "type": "number_one", "response": "“One Sweet Day” by Mariah Carey and Boyz II Men.", "correct": true, "extra": {"artist": "Mariah Carey and Boyz II Men"}}
+{"id": "no1-0131", "type": "number_one", "response": "“The First Time” by Surface.", "correct": false, "extra": {"artist": "C+C Music Factory featuring Freedom Williams"}}
+{"id": "no1-0132", "type": "number_one", "response": "“Angel of Mine” by Monica.", "correct": true, "extra": {"artist": "Monica"}}
+{"id": "no1-0133", "type": "number_one", "response": "“Waterfalls” by TLC.", "correct": false, "extra": {"artist": "Bryan Adams"}}
+{"id": "no1-0134", "type": "number_one", "response": "“Always Be My Baby” by Mariah Carey.", "correct": false, "extra": {"artist": "Bone Thugs-n-Harmony"}}
+{"id": "no1-0135", "type": "number_one", "response": "“Livin’ la Vida Loca” by Ricky Martin.", "correct": true, "extra": {"artist": "Ricky Martin"}}
+{"id": "no1-0136", "type": "number_one", "response": "“Informer” by Snow.", "correct": true, "extra": {"artist": "Snow"}}
+{"id": "no1-0137", "type": "number_one", "response": "“I'm Your Baby Tonight” by Whitney Houston.", "correct": true, "extra": {"artist": "Whitney Houston"}}
+{"id": "no1-0138", "type": "number_one", "response": "“Because I Love You (The Postman Song)” by Stevie B.", "correct": true, "extra": {"artist": "Stevie B"}}
+{"id": "no1-0139", "type": "number_one", "response": "“It Must Have Been Love” by Roxette.", "correct": false, "extra": {"artist": "New Kids on the Block"}}
+{"id": "no1-0140", "type": "number_one", "response": "“Low” by Flo Rida featuring T-Pain.", "correct": true, "extra": {"artist": "Flo Rida featuring T-Pain"}}
+{"id": "no1-0141", "type": "number_one", "response": "“How You Remind Me” by Nickelback.", "correct": true, "extra": {"artist": "Nickelback"}}
+{"id": "no1-0142", "type": "number_one", "response": "“Ain’t It Funny” by Jennifer Lopez (featuring Ja Rule and Caddillac Tah).", "correct": true, "extra": {"artist": "Jennifer Lopez featuring Ja Rule"}}
+{"id": "no1-0143", "type": "number_one", "response": "“Yeah!” by Usher featuring Lil Jon and Ludacris.", "correct": true, "extra": {"artist": "Usher featuring Lil Jon and Ludacris"}}
+{"id": "no1-0144", "type": "number_one", "response": "“Come On Over Baby (All I Want Is You)” by Christina Aguilera.", "correct": true, "extra": {"artist": "Christina Aguilera"}}
+{"id": "no1-0145", "type": "number_one", "response": "“Foolish” by Ashanti.", "correct": true, "extra": {"artist": "Ashanti"}}
+{"id": "no1-0146", "type": "number_one", "response": "“Be with You” by Enrique Iglesias.", "correct": true, "extra": {"artist": "Enrique Iglesias"}}
+{"id": "no1-0147", "type": "number_one", "response": "“U Got It Bad” by Usher.", "correct": true, "extra": {"artist": "Usher"}}
+{"id": "no1-0148", "type": "number_one", "response": "“All I Have” by Jennifer Lopez featuring LL Cool J.", "correct": true, "extra": {"artist": "Jennifer Lopez featuring LL Cool J"}}
+{"id": "no1-0149", "type": "number_one", "response": "“Right Round” by Flo Rida featuring Kesha.", "correct": true, "extra": {"artist": "Flo Rida"}}
+{"id": "no1-0150", "type": "number_one", "response": "“Dilemma” by Nelly featuring Kelly Rowland.", "correct": true, "extra": {"artist": "Nelly featuring Kelly Rowland"}}
+{"id": "no1-0151", "type": "number_one", "response": "“Slow Jamz” by Twista featuring Kanye West and Jamie Foxx.", "correct": false, "extra": {"artist": "OutKast featuring Sleepy Brown"}}
+{"id": "no1-0152", "type": "number_one", "response": "“Gold Digger” by Kanye West featuring Jamie Foxx.", "correct": true, "extra": {"artist": "Kanye West featuring Jamie Foxx"}}
+{"id": "no1-0153", "type": "number_one", "response": "“Makes Me Wonder” by Maroon 5.", "correct": true, "extra": {"artist": "Maroon 5"}}
+{"id": "no1-0154", "type": "number_one", "response": "“I Gotta Feeling” by the Black Eyed Peas.", "correct": true, "extra": {"artist": "The Black Eyed Peas"}}
+{"id": "no1-0155", "type": "number_one", "response": "“Lean Back” by Terror Squad.", "correct": true, "extra": {"artist": "Terror Squad"}}
+{"id": "no1-0156", "type": "number_one", "response": "“Hollaback Girl” by Gwen Stefani.", "correct": true, "extra": {"artist": "Gwen Stefani"}}
+{"id": "no1-0157", "type": "number_one", "response": "“Lose Yourself” by Eminem.", "correct": true, "extra": {"artist": "Eminem"}}
+{"id": "no1-0158", "type": "number_one", "response": "“Let Me Love You” by Mario.", "correct": true, "extra": {"artist": "Mario"}}
+{"id": "no1-0159", "type": "number_one", "response": "“Fireflies” by Owl City.", "correct": false, "extra": {"artist": "Jay Sean featuring Lil Wayne"}}
+{"id": "no1-0160", "type": "number_one", "response": "“Whatever You Like” by T.I. was No. 1 on the Billboard Hot 100 dated September 27, 2008.", "correct": false, "extra": {"artist": "Pink"}}
+{"id": "no1-0161", "type": "number_one", "response": "“I'm Real” by Jennifer Lopez featuring Ja Rule.", "correct": true, "extra": {"artist": "Jennifer Lopez featuring Ja Rule"}}
+{"id": "no1-0162", "type": "number_one", "response": "“Poker Face” by Lady Gaga.", "correct": true, "extra": {"artist": "Lady Gaga"}}
+{"id": "no1-0163", "type": "number_one", "response": "“Doesn’t Really Matter” by Janet Jackson.", "correct": true, "extra": {"artist": "Janet"}}
+{"id": "no1-0164", "type": "number_one", "response": "“Take a Bow” by Rihanna.", "correct": false, "extra": {"artist": "Lil Wayne featuring Static Major"}}
+{"id": "no1-0165", "type": "number_one", "response": "“Independent Women Part I” by Destiny’s Child.", "correct": false, "extra": {"artist": "Destiny's Child"}}
+{"id": "no1-0166", "type": "number_one", "response": "“We Belong Together” by Mariah Carey.", "correct": true, "extra": {"artist": "Mariah Carey"}}
+{"id": "no1-0167", "type": "number_one", "response": "“So Sick” by Ne-Yo.", "correct": false, "extra": {"artist": "James Blunt"}}
+{"id": "no1-0168", "type": "number_one", "response": "“Irreplaceable” by Beyoncé.", "correct": true, "extra": {"artist": "Beyoncé"}}
+{"id": "no1-0169", "type": "number_one", "response": "“I'm Real” (Murder Remix) by Jennifer Lopez featuring Ja Rule.", "correct": false, "extra": {"artist": "Mary J. Blige"}}
+{"id": "no1-0170", "type": "number_one", "response": "“Nice for What” by Drake.", "correct": true, "extra": {"artist": "Drake"}}
+{"id": "no1-0171", "type": "number_one", "response": "“Closer” by The Chainsmokers featuring Halsey.", "correct": true, "extra": {"artist": "The Chainsmokers featuring Halsey"}}
+{"id": "no1-0172", "type": "number_one", "response": "“Panda” by Desiigner.", "correct": true, "extra": {"artist": "Desiigner"}}
+{"id": "no1-0173", "type": "number_one", "response": "“**One Dance**” by Drake featuring Wizkid and Kyla.", "correct": true, "extra": {"artist": "Drake featuring Wizkid and Kyla"}}
+{"id": "no1-0174", "type": "number_one", "response": "“Rockstar” by Post Malone featuring 21 Savage.", "correct": true, "extra": {"artist": "Post Malone featuring 21 Savage"}}
+{"id": "no1-0175", "type": "number_one", "response": "“Hello” by Adele.", "correct": true, "extra": {"artist": "Adele"}}
+{"id": "no1-0176", "type": "number_one", "response": "“See You Again” by Wiz Khalifa featuring Charlie Puth.", "correct": true, "extra": {"artist": "Wiz Khalifa featuring Charlie Puth"}}
+{"id": "no1-0177", "type": "number_one", "response": "“We Found Love” by Rihanna featuring Calvin Harris.", "correct": true, "extra": {"artist": "Rihanna featuring Calvin Harris"}}
+{"id": "no1-0178", "type": "number_one", "response": "“Moves Like Jagger” by Maroon 5 featuring Christina Aguilera.", "correct": true, "extra": {"artist": "Maroon 5 featuring Christina Aguilera"}}
+{"id": "no1-0179", "type": "number_one", "response": "“Blank Space” by Taylor Swift.", "correct": true, "extra": {"artist": "Taylor Swift"}}
+{"id": "no1-0180", "type": "number_one", "response": "“Shape of You” by Ed Sheeran.", "correct": true, "extra": {"artist": "Ed Sheeran"}}
+{"id": "no1-0181", "type": "number_one", "response": "“Perfect” by Ed Sheeran.", "correct": true, "extra": {"artist": "Ed Sheeran and Beyoncé"}}
+{"id": "no1-0182", "type": "number_one", "response": "“Timber” by Pitbull featuring Kesha.", "correct": false, "extra": {"artist": "Eminem featuring Rihanna"}}
+{"id": "no1-0183", "type": "number_one", "response": "“We R Who We R” by Kesha.", "correct": false, "extra": {"artist": "Rihanna featuring Drake"}}
+{"id": "no1-0184", "type": "number_one", "response": "“**All About That Bass**” by Meghan Trainor.", "correct": true, "extra": {"artist": "Meghan Trainor"}}
+{"id": "no1-0185", "type": "number_one", "response": "“Royals” by Lorde.", "correct": true, "extra": {"artist": "Lorde"}}
+{"id": "no1-0186", "type": "number_one", "response": "“The Hills” by The Weeknd.", "correct": true, "extra": {"artist": "The Weeknd"}}
+{"id": "no1-0187", "type": "number_one", "response": "“God’s Plan” by Drake.", "correct": true, "extra": {"artist": "Drake"}}
+{"id": "no1-0188", "type": "number_one", "response": "“Sicko Mode” by Travis Scott.", "correct": true, "extra": {"artist": "Travis Scott"}}
+{"id": "no1-0189", "type": "number_one", "response": "“Work” by Rihanna featuring Drake.", "correct": false, "extra": {"artist": "Justin Bieber"}}
+{"id": "no1-0190", "type": "number_one", "response": "“A Bar Song (Tipsy)” by Shaboozey.", "correct": true, "extra": {"artist": "Shaboozey"}}
+{"id": "no1-0191", "type": "number_one", "response": "“Last Night” by Morgan Wallen.", "correct": false, "extra": {"artist": "Jimin"}}
+{"id": "no1-0192", "type": "number_one", "response": "“As It Was” by Harry Styles.", "correct": true, "extra": {"artist": "Harry Styles"}}
+{"id": "no1-0193", "type": "number_one", "response": "“Paint the Town Red” by Doja Cat.", "correct": true, "extra": {"artist": "Doja Cat"}}
+{"id": "no1-0194", "type": "number_one", "response": "“The Box” by Roddy Ricch.", "correct": true, "extra": {"artist": "Roddy Ricch"}}
+{"id": "no1-0195", "type": "number_one", "response": "“All I Want for Christmas Is You” by Mariah Carey.", "correct": false, "extra": {"artist": "Brenda Lee"}}
+{"id": "no1-0196", "type": "number_one", "response": "“Permission to Dance” by BTS.", "correct": true, "extra": {"artist": "BTS"}}
+{"id": "no1-0197", "type": "number_one", "response": "“Lovin on Me” by Jack Harlow.", "correct": true, "extra": {"artist": "Jack Harlow"}}
+{"id": "no1-0198", "type": "number_one", "response": "“Flowers” by Miley Cyrus.", "correct": true, "extra": {"artist": "Miley Cyrus"}}
+{"id": "no1-0199", "type": "number_one", "response": "“Rockstar” by DaBaby featuring Roddy Ricch.", "correct": true, "extra": {"artist": "DaBaby featuring Roddy Ricch"}}
+{"id": "ld-0000", "type": "leader", "response": "Robert Charles Frederic", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0001", "type": "leader", "response": "Nicholas I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0002", "type": "leader", "response": "Daoguang Emperor", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0003", "type": "leader", "response": "Muhammad Ali Pasha", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0004", "type": "leader", "response": "Mahmud Bey", "correct": false, "extra": {"rule": "miss"}}
+{"id": "ld-0005", "type": "leader", "response": "Moulay Slimane", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0006", "type": "leader", "response": "Francisco de Paula Santander", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0007", "type": "leader", "response": "William I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0008", "type": "leader", "response": "Pius VII", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0009", "type": "leader", "response": "Louis-Philippe I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0010", "type": "leader", "response": "Kōkaku\n", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0011", "type": "leader", "response": "Frederick VI", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0012", "type": "leader", "response": "Moshoeshoe I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0013", "type": "leader", "response": "Maria II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0014", "type": "leader", "response": "Ludwig I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0015", "type": "leader", "response": "Mihail Sturdza", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0016", "type": "leader", "response": "Francis I of Austria", "correct": false, "extra": {"rule": "miss"}}
+{"id": "ld-0017", "type": "leader", "response": "Manuel Oribe", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0018", "type": "leader", "response": "Ferdinand I of Austria (Ferdinand V of Bohemia)", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0019", "type": "leader", "response": "Muhammad Amin Khan", "correct": true, "extra": {"rule": "two-tokens"}}
+{"id": "ld-0020", "type": "leader", "response": "George IV", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0021", "type": "leader", "response": "Dost Mohammad Khan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0022", "type": "leader", "response": "Agustín Gamarra", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0023", "type": "leader", "response": "Frederick Augustus I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0024", "type": "leader", "response": "Muhammad Adlan", "correct": false, "extra": {"rule": "miss"}}
+{"id": "ld-0025", "type": "leader", "response": "Radama I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0026", "type": "leader", "response": "Iyoas II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0027", "type": "leader", "response": "Gheorghe Bibescu", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0028", "type": "leader", "response": "Mswati II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0029", "type": "leader", "response": "Alexander Carl", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0030", "type": "leader", "response": "Ranavalona I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0031", "type": "leader", "response": "Sunjo", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0032", "type": "leader", "response": "Mahmud II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0033", "type": "leader", "response": "Alexius Frederick Christian", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0034", "type": "leader", "response": "Sahle Dengel", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0035", "type": "leader", "response": "Sultan Muhammad Syah", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0036", "type": "leader", "response": "Gregory XVI", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0037", "type": "leader", "response": "John VI", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0038", "type": "leader", "response": "Leopold I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0039", "type": "leader", "response": "Ndvungunye", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0040", "type": "leader", "response": "Johann I Joseph, Prince of Liechtenstein", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0041", "type": "leader", "response": "George Frederic Augustus I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0042", "type": "leader", "response": "Hamengkubuwono II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0043", "type": "leader", "response": "Manuel José Arce", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0044", "type": "leader", "response": "Georg II, Prince of Waldeck and Pyrmont", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0045", "type": "leader", "response": "Paul Eyschen", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0046", "type": "leader", "response": "Franz Joseph I", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0047", "type": "leader", "response": "Francesco Crispi", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0048", "type": "leader", "response": "Carlos Antonio López", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0049", "type": "leader", "response": "Carol I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0050", "type": "leader", "response": "Victor Emmanuel II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0051", "type": "leader", "response": "Sultan Muhammad Shah", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0052", "type": "leader", "response": "Manuel González Flores", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0053", "type": "leader", "response": "Oscar I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0054", "type": "leader", "response": "Wilhelmina", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0055", "type": "leader", "response": "William Ewart Gladstone", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0056", "type": "leader", "response": "Shirley Baker", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0057", "type": "leader", "response": "Ahmad Tajuddin Mukarram Shah", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0058", "type": "leader", "response": "José María Medina", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0059", "type": "leader", "response": "Abdul Momin", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0060", "type": "leader", "response": "Bernhard II, Duke of Saxe-Meiningen", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0061", "type": "leader", "response": "Alauddin Muhammad Da’ud Syah II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0062", "type": "leader", "response": "Amélia Tokagahahau Aliki", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0063", "type": "leader", "response": "Muhammad IV", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0064", "type": "leader", "response": "Oscar II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0065", "type": "leader", "response": "Emperor Meiji", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0066", "type": "leader", "response": "Adolphe of Luxembourg", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0067", "type": "leader", "response": "Sultan Idris Murshidul Azzam Shah I", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0068", "type": "leader", "response": "Mustapha Khaznadar", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0069", "type": "leader", "response": "George I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0070", "type": "leader", "response": "Queen Victoria", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0071", "type": "leader", "response": "Nicholas II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0072", "type": "leader", "response": "Maximilian II Joseph", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0073", "type": "leader", "response": "Abdur Rahman Khan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0074", "type": "leader", "response": "Manuel Montt", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0075", "type": "leader", "response": "Prudente de Morais", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0076", "type": "leader", "response": "Alexandru Dimitrie Ghica", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0077", "type": "leader", "response": "Charles III", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0078", "type": "leader", "response": "Mariano Baptista", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0079", "type": "leader", "response": "Jules de Burlet", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0080", "type": "leader", "response": "Falakika Seilala", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0081", "type": "leader", "response": "Sanford B. Dole", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0082", "type": "leader", "response": "Benjamin Harrison", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0083", "type": "leader", "response": "Wilhelm I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0084", "type": "leader", "response": "Pakubuwono IX", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0085", "type": "leader", "response": "Barghash bin Said", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0086", "type": "leader", "response": "Kigeli IV Rwabugiri", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0087", "type": "leader", "response": "Zainal Rashid Mu'adzam Shah II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0088", "type": "leader", "response": "Albert I", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0089", "type": "leader", "response": "Pedro II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0090", "type": "leader", "response": "Marcelo Torcuato de Alvear", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0091", "type": "leader", "response": "Juan Vicente Gómez", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0092", "type": "leader", "response": "Antonín Švehla", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0093", "type": "leader", "response": "Hussein Rushdi Pasha", "correct": false, "extra": {"rule": "miss"}}
+{"id": "ld-0094", "type": "leader", "response": "Ismael Montes", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0095", "type": "leader", "response": "Marie-Adélaïde", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0096", "type": "leader", "response": "William of Wied", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0097", "type": "leader", "response": "Juan Luis Sanfuentes", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0098", "type": "leader", "response": "Benito Mussolini", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0099", "type": "leader", "response": "Abdulaziz Ibn Saud", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0100", "type": "leader", "response": "Shukri al-Quwatli", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0101", "type": "leader", "response": "Eusebio Ayala", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0102", "type": "leader", "response": "Bogd Khan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0103", "type": "leader", "response": "William Lyon Mackenzie King", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0104", "type": "leader", "response": "Élie Lescot", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0105", "type": "leader", "response": "Gustav Schädler", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0106", "type": "leader", "response": "Mohammed Alim Khan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0107", "type": "leader", "response": "Calvin Coolidge", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0108", "type": "leader", "response": "Hirohito", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0109", "type": "leader", "response": "Harmodio Arias Madrid", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0110", "type": "leader", "response": "Thomas Madsen-Mygdal", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0111", "type": "leader", "response": "Mustafa Fahmi Pasha", "correct": true, "extra": {"rule": "fuzzy-surname"}}
+{"id": "ld-0112", "type": "leader", "response": "Josip Broz Tito", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0113", "type": "leader", "response": "Tirésias Simon Sam", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0114", "type": "leader", "response": "Frederick II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0115", "type": "leader", "response": "George VI", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0116", "type": "leader", "response": "Ante Pavelić", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0117", "type": "leader", "response": "Khalifa bin Harub", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0118", "type": "leader", "response": "Yahya Muhammad Hamid ed-Din", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0119", "type": "leader", "response": "Yuhi V Musinga", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0120", "type": "leader", "response": "Miguel Abadía Méndez", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0121", "type": "leader", "response": "Óscar Carmona", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0122", "type": "leader", "response": "Charles Edward", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0123", "type": "leader", "response": "Christian X", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0124", "type": "leader", "response": "Friedrich Ebert", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0125", "type": "leader", "response": "Victor Emmanuel III", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0126", "type": "leader", "response": "José María Orellana", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0127", "type": "leader", "response": "Pope Pius XII", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0128", "type": "leader", "response": "Juan José Arévalo", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0129", "type": "leader", "response": "Ben Chifley", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0130", "type": "leader", "response": "Sultan Zainal Abidin III", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0131", "type": "leader", "response": "Gustaf V", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0132", "type": "leader", "response": "Charlotte", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0133", "type": "leader", "response": "Syarif Kasim II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0134", "type": "leader", "response": "Mubarak Al-Sabah", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0135", "type": "leader", "response": "Abdullah bin Jassim Al Thani", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0136", "type": "leader", "response": "Hamengkubuwono IX", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0137", "type": "leader", "response": "Joseph Ward", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0138", "type": "leader", "response": "Ahmad Al-Jaber Al-Sabah", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0139", "type": "leader", "response": "Paku Alam VIII", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0140", "type": "leader", "response": "Edward Morris", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0141", "type": "leader", "response": "Mozaffar al-Din Shah Qajar", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0142", "type": "leader", "response": "Haakon VII", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0143", "type": "leader", "response": "Peter Fraser", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0144", "type": "leader", "response": "Friedrich, Prince of Waldeck and Pyrmont", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0145", "type": "leader", "response": "Osvaldo Hurtado", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0146", "type": "leader", "response": "John Vorster", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0147", "type": "leader", "response": "Errol Barrow", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0148", "type": "leader", "response": "Nawaz Sharif", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0149", "type": "leader", "response": "Hédi Nouira", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0150", "type": "leader", "response": "Sultan Iskandar", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0151", "type": "leader", "response": "Liu Shaoqi", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0152", "type": "leader", "response": "August Rei", "correct": false, "extra": {"rule": "miss"}}
+{"id": "ld-0153", "type": "leader", "response": "Mohamed Haji Ibrahim Egal", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0154", "type": "leader", "response": "Luis Herrera Campins", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0155", "type": "leader", "response": "Viliam Široký", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0156", "type": "leader", "response": "Qaboos bin Said al Said", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0157", "type": "leader", "response": "Armando Artola Azcárate", "correct": false, "extra": {"rule": "miss"}}
+{"id": "ld-0158", "type": "leader", "response": "Said Mohamed Djohar", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0159", "type": "leader", "response": "Zayed bin Sultan Al Nahyan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0160", "type": "leader", "response": "Quett Masire", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0161", "type": "leader", "response": "Luís Cabral", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0162", "type": "leader", "response": "Manuel Pinto da Costa", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0163", "type": "leader", "response": "Antonín Novotný", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0164", "type": "leader", "response": "Harold Macmillan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0165", "type": "leader", "response": "Bob Hawke", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0166", "type": "leader", "response": "Yu Hung-chun", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0167", "type": "leader", "response": "Hafez al-Assad", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0168", "type": "leader", "response": "David Dacko", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0169", "type": "leader", "response": "António Guterres", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0170", "type": "leader", "response": "Jerry Rawlings", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0171", "type": "leader", "response": "Olav V", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0172", "type": "leader", "response": "Augusto Pinochet", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0173", "type": "leader", "response": "Sam Nujoma", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0174", "type": "leader", "response": "Steingrímur Hermannsson", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0175", "type": "leader", "response": "Paul Biya", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0176", "type": "leader", "response": "Luis Alberto Monge Álvarez", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0177", "type": "leader", "response": "Ruhollah Khomeini", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0178", "type": "leader", "response": "Ayub Khan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0179", "type": "leader", "response": "Marc Forné Molné", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0180", "type": "leader", "response": "Leonid Brezhnev", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0181", "type": "leader", "response": "Habib Bourguiba", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0182", "type": "leader", "response": "Ernesto Zedillo", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0183", "type": "leader", "response": "Zhou Enlai", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0184", "type": "leader", "response": "Guntis Ulmanis", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0185", "type": "leader", "response": "Josef Klaus", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0186", "type": "leader", "response": "Nicolae Ceaușescu", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0187", "type": "leader", "response": "Mauno Koivisto", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0188", "type": "leader", "response": "Bjarni Benediktsson", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0189", "type": "leader", "response": "Tunku Abdul Rahman", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0190", "type": "leader", "response": "Jaber Al-Ahmad Al-Sabah", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0191", "type": "leader", "response": "Moshoeshoe II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0192", "type": "leader", "response": "Chiang Ching-kuo", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0193", "type": "leader", "response": "Elizabeth II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0194", "type": "leader", "response": "Leopold Figl", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0195", "type": "leader", "response": "Julius Nyerere", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0196", "type": "leader", "response": "Violeta Chamorro", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0197", "type": "leader", "response": "France-Albert René", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0198", "type": "leader", "response": "Léon M’ba", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0199", "type": "leader", "response": "Margrethe II", "correct": true, "extra": {"rule": "regnal"}}
+{"id": "ld-0200", "type": "leader", "response": "Grégoire Kayibanda", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0201", "type": "leader", "response": "Janez Drnovšek", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0202", "type": "leader", "response": "Bhumibol Adulyadej", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0203", "type": "leader", "response": "Saddam Hussein", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0204", "type": "leader", "response": "Tom Adams", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0205", "type": "leader", "response": "Saparmurat Niyazov", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0206", "type": "leader", "response": "Serik Akhmetov", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0207", "type": "leader", "response": "Abdullah bin Khalifa Al Thani", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0208", "type": "leader", "response": "Beatrix", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0209", "type": "leader", "response": "Jorge Sampaio", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0210", "type": "leader", "response": "Ali Bongo Ondimba", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0211", "type": "leader", "response": "Emil Boc", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0212", "type": "leader", "response": "Abdelaziz Bouteflika", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0213", "type": "leader", "response": "Horacio Cartes", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0214", "type": "leader", "response": "Abel Pacheco", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0215", "type": "leader", "response": "Pedro Pires", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0216", "type": "leader", "response": "Jens Stoltenberg", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0217", "type": "leader", "response": "Arkadi Ghukasyan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0218", "type": "leader", "response": "Ahmad Tejan Kabbah", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0219", "type": "leader", "response": "Georgi Parvanov", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0220", "type": "leader", "response": "Sir Anerood Jugnauth", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0221", "type": "leader", "response": "Ian Khama", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0222", "type": "leader", "response": "Lee Hsien Loong", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0223", "type": "leader", "response": "Muammar Gaddafi", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0224", "type": "leader", "response": "Mirek Topolánek", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0225", "type": "leader", "response": "Allen Chastanet", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0226", "type": "leader", "response": "Iveta Radičová", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0227", "type": "leader", "response": "Egils Levits", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0228", "type": "leader", "response": "Joseph Kabila", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0229", "type": "leader", "response": "Abdul Hamid", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0230", "type": "leader", "response": "Ilham Aliyev", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0231", "type": "leader", "response": "Tony Blair", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0232", "type": "leader", "response": "Paula-Mae Weekes", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0233", "type": "leader", "response": "Vicente Fox", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0234", "type": "leader", "response": "Amadou Toumani Touré", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0235", "type": "leader", "response": "José Mário Vaz", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0236", "type": "leader", "response": "Anote Tong", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0237", "type": "leader", "response": "Tassos Papadopoulos", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0238", "type": "leader", "response": "Tarja Halonen", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0239", "type": "leader", "response": "Pervez Musharraf", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0240", "type": "leader", "response": "Ronald Venetiaan", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0241", "type": "leader", "response": "Blaise Compaoré", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0242", "type": "leader", "response": "Victoire Tomegah Dogbé", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0243", "type": "leader", "response": "Mikheil Saakashvili", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0244", "type": "leader", "response": "Pierre Nkurunziza", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0245", "type": "leader", "response": "Bakili Muluzi", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0246", "type": "leader", "response": "Kim Dae-jung", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0247", "type": "leader", "response": "Alexander Ankvab", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0248", "type": "leader", "response": "Gyude Bryant", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "ld-0249", "type": "leader", "response": "James Michel", "correct": true, "extra": {"rule": "last-token"}}
+{"id": "cpi-0000", "type": "cpi", "response": "153.18", "correct": true, "extra": {"pred": 153.18, "rel_err": 0.0014}}
+{"id": "cpi-0001", "type": "cpi", "response": "177.98", "correct": true, "extra": {"pred": 177.98, "rel_err": 0.0027}}
+{"id": "cpi-0002", "type": "cpi", "response": "126.62", "correct": true, "extra": {"pred": 126.62, "rel_err": 0.0011}}
+{"id": "cpi-0003", "type": "cpi", "response": "302.04", "correct": true, "extra": {"pred": 302.04, "rel_err": 0.0017}}
+{"id": "cpi-0004", "type": "cpi", "response": "1,297.14", "correct": true, "extra": {"pred": 1297.14, "rel_err": 0.0}}
+{"id": "cpi-0005", "type": "cpi", "response": "286.21", "correct": true, "extra": {"pred": 286.21, "rel_err": 0.0001}}
+{"id": "cpi-0006", "type": "cpi", "response": "54.25", "correct": true, "extra": {"pred": 54.25, "rel_err": 0.0004}}
+{"id": "cpi-0007", "type": "cpi", "response": "95.32", "correct": true, "extra": {"pred": 95.32, "rel_err": 0.005}}
+{"id": "cpi-0008", "type": "cpi", "response": "319.42", "correct": true, "extra": {"pred": 319.42, "rel_err": 0.0024}}
+{"id": "cpi-0009", "type": "cpi", "response": "1,049.13", "correct": true, "extra": {"pred": 1049.13, "rel_err": 0.0003}}
+{"id": "cpi-0010", "type": "cpi", "response": "560.14", "correct": true, "extra": {"pred": 560.14, "rel_err": 0.0017}}
+{"id": "cpi-0011", "type": "cpi", "response": "93.65", "correct": false, "extra": {"pred": 93.65, "rel_err": 0.0842}}
+{"id": "cpi-0012", "type": "cpi", "response": "1111.54", "correct": true, "extra": {"pred": 1111.54, "rel_err": 0.0048}}
+{"id": "cpi-0013", "type": "cpi", "response": "166.05", "correct": true, "extra": {"pred": 166.05, "rel_err": 0.0015}}
+{"id": "cpi-0014", "type": "cpi", "response": "339.18", "correct": true, "extra": {"pred": 339.18, "rel_err": 0.0012}}
+{"id": "cpi-0015", "type": "cpi", "response": "512.75", "correct": true, "extra": {"pred": 512.75, "rel_err": 0.0012}}
+{"id": "cpi-0016", "type": "cpi", "response": "153.01", "correct": true, "extra": {"pred": 153.01, "rel_err": 0.0001}}
+{"id": "cpi-0017", "type": "cpi", "response": "77.22", "correct": true, "extra": {"pred": 77.22, "rel_err": 0.0019}}
+{"id": "cpi-0018", "type": "cpi", "response": "139.18", "correct": true, "extra": {"pred": 139.18, "rel_err": 0.0208}}
+{"id": "cpi-0019", "type": "cpi", "response": "791.76", "correct": true, "extra": {"pred": 791.76, "rel_err": 0.0003}}
+{"id": "cpi-0020", "type": "cpi", "response": "782.76", "correct": true, "extra": {"pred": 782.76, "rel_err": 0.0023}}
+{"id": "cpi-0021", "type": "cpi", "response": "927.75", "correct": true, "extra": {"pred": 927.75, "rel_err": 0.0004}}
+{"id": "cpi-0022", "type": "cpi", "response": "6.08", "correct": true, "extra": {"pred": 6.08, "rel_err": 0.0}}
+{"id": "cpi-0023", "type": "cpi", "response": "706.38", "correct": true, "extra": {"pred": 706.38, "rel_err": 0.0006}}
+{"id": "cpi-0024", "type": "cpi", "response": "486.57", "correct": true, "extra": {"pred": 486.57, "rel_err": 0.0017}}
+{"id": "cpi-0025", "type": "cpi", "response": "1663", "correct": true, "extra": {"pred": 1663.0, "rel_err": 0.0004}}
+{"id": "cpi-0026", "type": "cpi", "response": "2052.89", "correct": true, "extra": {"pred": 2052.89, "rel_err": 0.0008}}
+{"id": "cpi-0027", "type": "cpi", "response": "500.68", "correct": true, "extra": {"pred": 500.68, "rel_err": 0.001}}
+{"id": "cpi-0028", "type": "cpi", "response": "14.76", "correct": true, "extra": {"pred": 14.76, "rel_err": 0.0014}}
+{"id": "cpi-0029", "type": "cpi", "response": "607.60", "correct": true, "extra": {"pred": 607.6, "rel_err": 0.0036}}
+{"id": "cpi-0030", "type": "cpi", "response": "$1,813.23", "correct": true, "extra": {"pred": 1813.23, "rel_err": 0.0019}}
+{"id": "cpi-0031", "type": "cpi", "response": "546.60", "correct": true, "extra": {"pred": 546.6, "rel_err": 0.002}}
+{"id": "cpi-0032", "type": "cpi", "response": "68.5", "correct": true, "extra": {"pred": 68.5, "rel_err": 0.0063}}
+{"id": "cpi-0033", "type": "cpi", "response": "920", "correct": true, "extra": {"pred": 920.0, "rel_err": 0.0023}}
+{"id": "cpi-0034", "type": "cpi", "response": "7.39", "correct": true, "extra": {"pred": 7.39, "rel_err": 0.0027}}
+{"id": "cpi-0035", "type": "cpi", "response": "896.65", "correct": true, "extra": {"pred": 896.65, "rel_err": 0.0029}}
+{"id": "cpi-0036", "type": "cpi", "response": "209.93", "correct": true, "extra": {"pred": 209.93, "rel_err": 0.0002}}
+{"id": "cpi-0037", "type": "cpi", "response": "1128.32", "correct": true, "extra": {"pred": 1128.32, "rel_err": 0.0}}
+{"id": "cpi-0038", "type": "cpi", "response": "297.4", "correct": true, "extra": {"pred": 297.4, "rel_err": 0.0002}}
+{"id": "cpi-0039", "type": "cpi", "response": "129.64", "correct": true, "extra": {"pred": 129.64, "rel_err": 0.0002}}
+{"id": "cpi-0040", "type": "cpi", "response": "159.51", "correct": true, "extra": {"pred": 159.51, "rel_err": 0.0036}}
+{"id": "cpi-0041", "type": "cpi", "response": "461.84", "correct": false, "extra": {"pred": 461.84, "rel_err": 0.0392}}
+{"id": "cpi-0042", "type": "cpi", "response": "911.23", "correct": true, "extra": {"pred": 911.23, "rel_err": 0.0019}}
+{"id": "cpi-0043", "type": "cpi", "response": "359.85", "correct": true, "extra": {"pred": 359.85, "rel_err": 0.0016}}
+{"id": "cpi-0044", "type": "cpi", "response": "444.20", "correct": true, "extra": {"pred": 444.2, "rel_err": 0.0001}}
+{"id": "cpi-0045", "type": "cpi", "response": "173.00", "correct": true, "extra": {"pred": 173.0, "rel_err": 0.0002}}
+{"id": "cpi-0046", "type": "cpi", "response": "226.00", "correct": true, "extra": {"pred": 226.0, "rel_err": 0.0002}}
+{"id": "cpi-0047", "type": "cpi", "response": "395.32", "correct": true, "extra": {"pred": 395.32, "rel_err": 0.0001}}
+{"id": "cpi-0048", "type": "cpi", "response": "74.27", "correct": true, "extra": {"pred": 74.27, "rel_err": 0.0003}}
+{"id": "cpi-0049", "type": "cpi", "response": "660.12", "correct": true, "extra": {"pred": 660.12, "rel_err": 0.0024}}
+{"id": "cpi-0050", "type": "cpi", "response": "10.98", "correct": true, "extra": {"pred": 10.98, "rel_err": 0.0009}}
+{"id": "cpi-0051", "type": "cpi", "response": "209.87", "correct": true, "extra": {"pred": 209.87, "rel_err": 0.0001}}
+{"id": "cpi-0052", "type": "cpi", "response": "168.05", "correct": true, "extra": {"pred": 168.05, "rel_err": 0.0022}}
+{"id": "cpi-0053", "type": "cpi", "response": "78.21", "correct": true, "extra": {"pred": 78.21, "rel_err": 0.0034}}
+{"id": "cpi-0054", "type": "cpi", "response": "779.44", "correct": true, "extra": {"pred": 779.44, "rel_err": 0.0006}}
+{"id": "cpi-0055", "type": "cpi", "response": "933.57", "correct": true, "extra": {"pred": 933.57, "rel_err": 0.0009}}
+{"id": "cpi-0056", "type": "cpi", "response": "1,650\n", "correct": true, "extra": {"pred": 1650.0, "rel_err": 0.0053}}
+{"id": "cpi-0057", "type": "cpi", "response": "136.47", "correct": true, "extra": {"pred": 136.47, "rel_err": 0.0002}}
+{"id": "cpi-0058", "type": "cpi", "response": "160.03", "correct": true, "extra": {"pred": 160.03, "rel_err": 0.0004}}
+{"id": "cpi-0059", "type": "cpi", "response": "130.41", "correct": true, "extra": {"pred": 130.41, "rel_err": 0.004}}
+{"id": "cpi-0060", "type": "cpi", "response": "734.85", "correct": true, "extra": {"pred": 734.85, "rel_err": 0.0012}}
+{"id": "cpi-0061", "type": "cpi", "response": "583.02", "correct": true, "extra": {"pred": 583.02, "rel_err": 0.0019}}
+{"id": "cpi-0062", "type": "cpi", "response": "1568.45", "correct": true, "extra": {"pred": 1568.45, "rel_err": 0.002}}
+{"id": "cpi-0063", "type": "cpi", "response": "179.19", "correct": true, "extra": {"pred": 179.19, "rel_err": 0.0014}}
+{"id": "cpi-0064", "type": "cpi", "response": "1,561.18", "correct": true, "extra": {"pred": 1561.18, "rel_err": 0.0013}}
+{"id": "cpi-0065", "type": "cpi", "response": "582.46", "correct": true, "extra": {"pred": 582.46, "rel_err": 0.0034}}
+{"id": "cpi-0066", "type": "cpi", "response": "64.55", "correct": true, "extra": {"pred": 64.55, "rel_err": 0.0014}}
+{"id": "cpi-0067", "type": "cpi", "response": "452.25", "correct": true, "extra": {"pred": 452.25, "rel_err": 0.0011}}
+{"id": "cpi-0068", "type": "cpi", "response": "220.27", "correct": true, "extra": {"pred": 220.27, "rel_err": 0.0014}}
+{"id": "cpi-0069", "type": "cpi", "response": "124.50", "correct": true, "extra": {"pred": 124.5, "rel_err": 0.0002}}
+{"id": "cpi-0070", "type": "cpi", "response": "755.49", "correct": true, "extra": {"pred": 755.49, "rel_err": 0.0008}}
+{"id": "cpi-0071", "type": "cpi", "response": "1,883", "correct": true, "extra": {"pred": 1883.0, "rel_err": 0.0028}}
+{"id": "cpi-0072", "type": "cpi", "response": "1832.90", "correct": true, "extra": {"pred": 1832.9, "rel_err": 0.0043}}
+{"id": "cpi-0073", "type": "cpi", "response": "101.33", "correct": true, "extra": {"pred": 101.33, "rel_err": 0.0022}}
+{"id": "cpi-0074", "type": "cpi", "response": "142.27", "correct": true, "extra": {"pred": 142.27, "rel_err": 0.0001}}
+{"id": "cpi-0075", "type": "cpi", "response": "1,429.79", "correct": true, "extra": {"pred": 1429.79, "rel_err": 0.0005}}
+{"id": "cpi-0076", "type": "cpi", "response": "987.16", "correct": true, "extra": {"pred": 987.16, "rel_err": 0.0012}}
+{"id": "cpi-0077", "type": "cpi", "response": "1,039", "correct": true, "extra": {"pred": 1039.0, "rel_err": 0.0018}}
+{"id": "cpi-0078", "type": "cpi", "response": "946.59", "correct": true, "extra": {"pred": 946.59, "rel_err": 0.0003}}
+{"id": "cpi-0079", "type": "cpi", "response": "435.97", "correct": true, "extra": {"pred": 435.97, "rel_err": 0.0005}}
+{"id": "cpi-0080", "type": "cpi", "response": "608.89", "correct": true, "extra": {"pred": 608.89, "rel_err": 0.0005}}
+{"id": "cpi-0081", "type": "cpi", "response": "223.2", "correct": true, "extra": {"pred": 223.2, "rel_err": 0.0018}}
+{"id": "cpi-0082", "type": "cpi", "response": "929.06", "correct": true, "extra": {"pred": 929.06, "rel_err": 0.0003}}
+{"id": "cpi-0083", "type": "cpi", "response": "611.04", "correct": true, "extra": {"pred": 611.04, "rel_err": 0.002}}
+{"id": "cpi-0084", "type": "cpi", "response": "396.05", "correct": true, "extra": {"pred": 396.05, "rel_err": 0.0001}}
+{"id": "cpi-0085", "type": "cpi", "response": "431.12", "correct": true, "extra": {"pred": 431.12, "rel_err": 0.0012}}
+{"id": "cpi-0086", "type": "cpi", "response": "1,549.77", "correct": true, "extra": {"pred": 1549.77, "rel_err": 0.0}}
+{"id": "cpi-0087", "type": "cpi", "response": "184.23", "correct": true, "extra": {"pred": 184.23, "rel_err": 0.0014}}
+{"id": "cpi-0088", "type": "cpi", "response": "945.83", "correct": true, "extra": {"pred": 945.83, "rel_err": 0.0011}}
+{"id": "cpi-0089", "type": "cpi", "response": "168.05", "correct": true, "extra": {"pred": 168.05, "rel_err": 0.0012}}
+{"id": "cpi-0090", "type": "cpi", "response": "664.57", "correct": true, "extra": {"pred": 664.57, "rel_err": 0.0009}}
+{"id": "cpi-0091", "type": "cpi", "response": "738.34", "correct": true, "extra": {"pred": 738.34, "rel_err": 0.0004}}
+{"id": "cpi-0092", "type": "cpi", "response": "201.16", "correct": true, "extra": {"pred": 201.16, "rel_err": 0.001}}
+{"id": "cpi-0093", "type": "cpi", "response": "1,383.85", "correct": true, "extra": {"pred": 1383.85, "rel_err": 0.005}}
+{"id": "cpi-0094", "type": "cpi", "response": "191.16", "correct": true, "extra": {"pred": 191.16, "rel_err": 0.002}}
+{"id": "cpi-0095", "type": "cpi", "response": "126.80", "correct": true, "extra": {"pred": 126.8, "rel_err": 0.0002}}
+{"id": "cpi-0096", "type": "cpi", "response": "666.0", "correct": true, "extra": {"pred": 666.0, "rel_err": 0.0015}}
+{"id": "cpi-0097", "type": "cpi", "response": "108.24", "correct": true, "extra": {"pred": 108.24, "rel_err": 0.004}}
+{"id": "cpi-0098", "type": "cpi", "response": "555.06", "correct": true, "extra": {"pred": 555.06, "rel_err": 0.0023}}
+{"id": "cpi-0099", "type": "cpi", "response": "146.14", "correct": true, "extra": {"pred": 146.14, "rel_err": 0.0002}}
+{"id": "cpi-0100", "type": "cpi", "response": "727.38", "correct": true, "extra": {"pred": 727.38, "rel_err": 0.0008}}
+{"id": "cpi-0101", "type": "cpi", "response": "21.1", "correct": true, "extra": {"pred": 21.1, "rel_err": 0.0009}}
+{"id": "cpi-0102", "type": "cpi", "response": "1041.44", "correct": true, "extra": {"pred": 1041.44, "rel_err": 0.0003}}
+{"id": "cpi-0103", "type": "cpi", "response": "259.70", "correct": true, "extra": {"pred": 259.7, "rel_err": 0.0008}}
+{"id": "cpi-0104", "type": "cpi", "response": "1569", "correct": true, "extra": {"pred": 1569.0, "rel_err": 0.002}}
+{"id": "cpi-0105", "type": "cpi", "response": "542.32", "correct": true, "extra": {"pred": 542.32, "rel_err": 0.0011}}
+{"id": "cpi-0106", "type": "cpi", "response": "5.65", "correct": true, "extra": {"pred": 5.65, "rel_err": 0.0018}}
+{"id": "cpi-0107", "type": "cpi", "response": "1,525.78", "correct": true, "extra": {"pred": 1525.78, "rel_err": 0.002}}
+{"id": "cpi-0108", "type": "cpi", "response": "61.11", "correct": true, "extra": {"pred": 61.11, "rel_err": 0.0002}}
+{"id": "cpi-0109", "type": "cpi", "response": "1,883.00", "correct": true, "extra": {"pred": 1883.0, "rel_err": 0.0036}}
+{"id": "cpi-0110", "type": "cpi", "response": "356.29", "correct": true, "extra": {"pred": 356.29, "rel_err": 0.002}}
+{"id": "cpi-0111", "type": "cpi", "response": "620.00", "correct": true, "extra": {"pred": 620.0, "rel_err": 0.0024}}
+{"id": "cpi-0112", "type": "cpi", "response": "466.15", "correct": true, "extra": {"pred": 466.15, "rel_err": 0.0006}}
+{"id": "cpi-0113", "type": "cpi", "response": "172.14", "correct": true, "extra": {"pred": 172.14, "rel_err": 0.003}}
+{"id": "cpi-0114", "type": "cpi", "response": "118.75", "correct": true, "extra": {"pred": 118.75, "rel_err": 0.0003}}
+{"id": "cpi-0115", "type": "cpi", "response": "200", "correct": true, "extra": {"pred": 200.0, "rel_err": 0.0004}}
+{"id": "cpi-0116", "type": "cpi", "response": "691.29", "correct": true, "extra": {"pred": 691.29, "rel_err": 0.0012}}
+{"id": "cpi-0117", "type": "cpi", "response": "7.12", "correct": true, "extra": {"pred": 7.12, "rel_err": 0.0028}}
+{"id": "cpi-0118", "type": "cpi", "response": "209.19", "correct": true, "extra": {"pred": 209.19, "rel_err": 0.0008}}
+{"id": "cpi-0119", "type": "cpi", "response": "157.3", "correct": true, "extra": {"pred": 157.3, "rel_err": 0.0052}}
+{"id": "cpi-0120", "type": "cpi", "response": "155.35", "correct": true, "extra": {"pred": 155.35, "rel_err": 0.0001}}
+{"id": "cpi-0121", "type": "cpi", "response": "17.47", "correct": true, "extra": {"pred": 17.47, "rel_err": 0.0023}}
+{"id": "cpi-0122", "type": "cpi", "response": "629.24", "correct": true, "extra": {"pred": 629.24, "rel_err": 0.0037}}
+{"id": "cpi-0123", "type": "cpi", "response": "794.44", "correct": true, "extra": {"pred": 794.44, "rel_err": 0.0014}}
+{"id": "cpi-0124", "type": "cpi", "response": "135.50", "correct": true, "extra": {"pred": 135.5, "rel_err": 0.0001}}
+{"id": "cpi-0125", "type": "cpi", "response": "292.78", "correct": true, "extra": {"pred": 292.78, "rel_err": 0.0004}}
+{"id": "cpi-0126", "type": "cpi", "response": "259.65", "correct": true, "extra": {"pred": 259.65, "rel_err": 0.0015}}
+{"id": "cpi-0127", "type": "cpi", "response": "2036.36", "correct": true, "extra": {"pred": 2036.36, "rel_err": 0.0016}}
+{"id": "cpi-0128", "type": "cpi", "response": "146.01", "correct": true, "extra": {"pred": 146.01, "rel_err": 0.0016}}
+{"id": "cpi-0129", "type": "cpi", "response": "190.18", "correct": true, "extra": {"pred": 190.18, "rel_err": 0.0015}}
+{"id": "cpi-0130", "type": "cpi", "response": "515.57", "correct": true, "extra": {"pred": 515.57, "rel_err": 0.0012}}
+{"id": "cpi-0131", "type": "cpi", "response": "178.98", "correct": true, "extra": {"pred": 178.98, "rel_err": 0.0001}}
+{"id": "cpi-0132", "type": "cpi", "response": "92.86", "correct": true, "extra": {"pred": 92.86, "rel_err": 0.0014}}
+{"id": "cpi-0133", "type": "cpi", "response": "802.50", "correct": true, "extra": {"pred": 802.5, "rel_err": 0.002}}
+{"id": "cpi-0134", "type": "cpi", "response": "863.64", "correct": true, "extra": {"pred": 863.64, "rel_err": 0.0009}}
+{"id": "cpi-0135", "type": "cpi", "response": "182.84", "correct": true, "extra": {"pred": 182.84, "rel_err": 0.0002}}
+{"id": "cpi-0136", "type": "cpi", "response": "1566.36", "correct": true, "extra": {"pred": 1566.36, "rel_err": 0.002}}
+{"id": "cpi-0137", "type": "cpi", "response": "227.85", "correct": true, "extra": {"pred": 227.85, "rel_err": 0.0002}}
+{"id": "cpi-0138", "type": "cpi", "response": "883.34", "correct": true, "extra": {"pred": 883.34, "rel_err": 0.0009}}
+{"id": "cpi-0139", "type": "cpi", "response": "209.05", "correct": true, "extra": {"pred": 209.05, "rel_err": 0.0003}}
+{"id": "cpi-0140", "type": "cpi", "response": "1,028", "correct": true, "extra": {"pred": 1028.0, "rel_err": 0.0025}}
+{"id": "cpi-0141", "type": "cpi", "response": "1,104.12", "correct": true, "extra": {"pred": 1104.12, "rel_err": 0.0009}}
+{"id": "cpi-0142", "type": "cpi", "response": "174.85", "correct": true, "extra": {"pred": 174.85, "rel_err": 0.0037}}
+{"id": "cpi-0143", "type": "cpi", "response": "2402.56", "correct": true, "extra": {"pred": 2402.56, "rel_err": 0.0012}}
+{"id": "cpi-0144", "type": "cpi", "response": "192.0", "correct": true, "extra": {"pred": 192.0, "rel_err": 0.0009}}
+{"id": "cpi-0145", "type": "cpi", "response": "33.11", "correct": true, "extra": {"pred": 33.11, "rel_err": 0.0015}}
+{"id": "cpi-0146", "type": "cpi", "response": "354.30", "correct": true, "extra": {"pred": 354.3, "rel_err": 0.0002}}
+{"id": "cpi-0147", "type": "cpi", "response": "170.18", "correct": true, "extra": {"pred": 170.18, "rel_err": 0.0046}}
+{"id": "cpi-0148", "type": "cpi", "response": "11.87", "correct": true, "extra": {"pred": 11.87, "rel_err": 0.0}}
+{"id": "cpi-0149", "type": "cpi", "response": "8.20", "correct": true, "extra": {"pred": 8.2, "rel_err": 0.0}}

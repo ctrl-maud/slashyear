@@ -11,12 +11,18 @@
 const EXPLORE = [
   { href: "/play", label: "Guess the year", hint: "a daily history puzzle" },
   { href: "/born", label: "The year you were born", hint: "prices, No. 1 songs, leaders" },
+  { href: "/asof", label: "The world on a date", hint: "events, leaders, prices, No. 1 song" },
+  { href: "/check", label: "Check a claim", hint: "against the sourced record" },
   { href: "/leaders", label: "World leaders", hint: "who ruled every country, by year" },
+  { href: "/nobel", label: "Nobel Prizes", hint: "every laureate, checked" },
   { href: "/century", label: "Centuries", hint: "the long view" },
   { href: "/in", label: "Countries", hint: "one place through time" },
   { href: "/topic", label: "Subjects", hint: "one thread through time" },
   { href: "/timeline", label: "Timelines", hint: "curated runs of events" },
   { href: "/on", label: "On this day", hint: "any calendar date" },
+  { href: "/official", label: "Official data", hint: "U.S. government series by year" },
+  { href: "/disagreements", label: "Where sources disagree", hint: "dates Wikipedia and Wikidata dispute" },
+  { href: "/bench", label: "SlashYear-Bench", hint: "how well AI models know dates" },
   { href: "/data", label: "Data", hint: "download the whole corpus" },
 ];
 

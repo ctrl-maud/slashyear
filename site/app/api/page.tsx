@@ -113,7 +113,19 @@ export default function Api() {
           <ul className="flex flex-col gap-3">
             <Row path="/api/entity/constantinople.json" note="one subject: every dated entry naming it, in order, with its Wikidata id" />
             <Row path="/api/entities.json" note="the index of every subject that has a timeline" />
-            <Row path="/api/search?q=plague&from=1300&to=1400" note="subjects matching a query and their dated entries — the one endpoint that computes" />
+            <Row path="/api/search?q=plague&from=1300&to=1400" note="subjects matching a query and their dated entries" />
+          </ul>
+          <h3 className="mb-3 mt-8 text-sm font-medium text-foreground">Dates and claims</h3>
+          <ul className="flex flex-col gap-3">
+            <Row path="/api/asof/1969-07-20" note="the world on one date: that day's entries, office holders, the No. 1 single, prices, official series, exchange rates and Nobel Prizes" />
+            <Row path="/api/check?claim=Richard%20Nixon%20was%20president%20in%201975" note="check a dated sentence: structured verdicts for leaders, No. 1 singles and Nobel Prizes, dated evidence for the rest" />
+          </ul>
+          <h3 className="mb-3 mt-8 text-sm font-medium text-foreground">Outside records</h3>
+          <ul className="flex flex-col gap-3">
+            <Row path="/api/facts/1985.json" note="one year's population, prices, leaders, No. 1 singles, official series and Nobel Prizes" />
+            <Row path="/api/nobel.json" note="every Nobel Prize, kept where the Nobel Prize API and Wikidata agree" />
+            <Row path="/api/official/index.json" note="official series (BLS, BEA, Treasury, Fed, NOAA) with their cross-checks" />
+            <Row path="/api/disagreements.json" note="where Wikipedia, Wikidata and the Nobel Prize record disagree, both sides quoted" />
           </ul>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             Years use astronomical numbering, the same as the URLs: <code>/api/year/-43.json</code>{" "}
@@ -155,8 +167,9 @@ export default function Api() {
             for the dated events — <code>search_history</code>, <code>get_year</code>,{" "}
             <code>get_day</code>, <code>get_timeline</code>, <code>get_country</code>,{" "}
             <code>list_subjects</code>, <code>list_countries</code> — plus <code>get_leaders</code>,{" "}
-            <code>get_number_one_song</code>, <code>get_year_facts</code> and{" "}
-            <code>convert_dollars</code>. Every entry carries its source (the Wikipedia revision id a
+            <code>get_number_one_song</code>, <code>get_year_facts</code>,{" "}
+            <code>convert_dollars</code>, <code>get_world_on_date</code>, <code>check_claim</code>,{" "}
+            <code>get_nobel_prizes</code>, <code>get_official_series</code> and <code>get_disagreements</code>. Every entry carries its source (the Wikipedia revision id a
             line was quoted from, or the official CPI series for prices), so the answer it writes can
             cite something that will still say the same thing next year.
           </p>

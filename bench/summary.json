@@ -1,0 +1,72 @@
+{
+ "benchmark": "SlashYear-Bench",
+ "generated": "2026-10-27",
+ "n_items": 1000,
+ "n_by_type": {
+  "event_year": 400,
+  "number_one": 200,
+  "leader": 250,
+  "cpi": 150
+ },
+ "models": {
+  "gpt-6-astra": {
+   "n": 1000,
+   "n_answered": 998,
+   "n_errors": 2,
+   "accuracy": 0.965,
+   "macro_accuracy": 0.9745,
+   "per_type": {
+    "event_year": 0.93,
+    "number_one": 0.98,
+    "leader": 0.988,
+    "cpi": 1.0
+   },
+   "event_year_within_1": 0.9475,
+   "event_year_median_abs_err": 0.0,
+   "event_year_mean_abs_err": 1.69
+  },
+  "gpt-6-luna": {
+   "n": 1000,
+   "n_answered": 998,
+   "n_errors": 2,
+   "accuracy": 0.907,
+   "macro_accuracy": 0.9101,
+   "per_type": {
+    "event_year": 0.8975,
+    "number_one": 0.78,
+    "leader": 0.976,
+    "cpi": 0.9867
+   },
+   "event_year_within_1": 0.9225,
+   "event_year_median_abs_err": 0.0,
+   "event_year_mean_abs_err": 2.31
+  },
+  "gpt-6.1-sol": {
+   "n": 1000,
+   "n_answered": 998,
+   "n_errors": 2,
+   "accuracy": 0.967,
+   "macro_accuracy": 0.9761,
+   "per_type": {
+    "event_year": 0.9325,
+    "number_one": 0.98,
+    "leader": 0.992,
+    "cpi": 1.0
+   },
+   "event_year_within_1": 0.95,
+   "event_year_median_abs_err": 0.0,
+   "event_year_mean_abs_err": 1.92
+  }
+ },
+ "notes": {
+  "prompting": "Closed book, single turn, no tools. Azure OpenAI Responses API with instructions 'Answer from memory. Be concise; give only the answer.' and max_output_tokens=4000 (retried at 16000 if a reasoning model returned no text).",
+  "accuracy": "Errors / empty responses count as incorrect; n is the full item count.",
+  "event_year": "Exact year; within_1 = |pred-gold| <= 1. Prediction = first 3-4 digit integer.",
+  "number_one": "Normalized title match (accents, case, punctuation, parentheticals ignored); artist not required.",
+  "leader": "Name matcher: last significant token, or two significant tokens, or regnal name + numeral; accent-folded with a small given-name exonym table.",
+  "cpi": "First number in the response (excluding the two years and 100), within 3% of 100*CPI[Y2]/CPI[Y1].",
+  "leader_unambiguity": "Leader items are unambiguous within slashyear's checked leader record: exactly one holder of the title is recorded for that state and year, with a tenure spanning the whole year. A year where a second holder was dropped by slashyear's cross-check could still show one recorded holder.",
+  "leader_matcher_check": "Manual read of 30 randomly sampled graded leader items (all 3 models, seed 7): 30/30 grades agreed with a human reading. All leader items graded wrong were also read (11 across the 3 models): 4 are matcher false negatives (Roshdy/Rushdi transliteration x3, 'Mahmud Bey' for Mahmud ibn Muhammad x1), 3 are a numbering convention in the gold (gold 'Francis II' [HRE numbering], models said 'Francis I of Austria', same person), 4 are genuine errors. Leader accuracy is therefore understated by up to ~1-1.2 points per model.",
+  "errors": "2 items (ev-0078, ev-0367) were rejected by the Azure content filter (HTTP 400) for all three models; they count as wrong. No other API errors after retries."
+ }
+}

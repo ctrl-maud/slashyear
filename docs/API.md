@@ -37,6 +37,18 @@ The query tokenizer in `site/edge/search.js` and the index builder in `pipeline/
 the same tokenizer written twice and **must stay in sync** — a query token the index does not hold
 returns nothing.
 
+## Dates, claims and outside records
+
+| Endpoint | What it returns |
+| --- | --- |
+| `/api/asof/{YYYY-MM-DD}` | The world on one date: entries dated that day (or a day range covering it), births and deaths that day, every state's office holders that year, the Hot 100 issue in force, U.S. prices, world population, official series, the Fed's exchange rates for that exact day, the year's Nobel Prizes |
+| `/api/check?claim=` | A verdict on one dated sentence. `supported` / `contradicted` come only from structured checks (leaders, Hot 100, Nobel), where the record is complete for the question. Free-text claims get `matched_same_year`, `matched_other_dates`, `matched_other_years`, `partial_matches`, `evidence_only` or `no_evidence`, with the entries that bear on it |
+| `/api/nobel.json` | Every Nobel Prize by year, from the Nobel Prize API, kept where Wikidata records the same prize in the same year |
+| `/api/disagreements.json` | Every date two checked sources disagree on, both quoted, no side picked |
+| `/api/official/index.json`, `/api/official/{id}.json` | Agency series with their cross-checks; `/api/official/fx/{year}.json` holds the daily exchange rates by year |
+| `/api/leaders-index/{letter}.json` | Every published office holder with the years published, filed by the first letter of each name word |
+| `/api/bench/items.jsonl`, `/api/bench/summary.json` | SlashYear-Bench questions, answers, sources and model scores |
+
 ## Bulk
 
 | file | contents |
@@ -59,6 +71,11 @@ the corpus directly instead of recalling it. Tools:
 - **get_day** — accepts `july-4`, `July 4`, `07-04` or any `YYYY-MM-DD`
 - **get_timeline** — a subject's entries by name or slug
 - **list_subjects** — browse subjects, largest record first
+- **get_world_on_date** — everything above for one `YYYY-MM-DD`
+- **check_claim** — the `/api/check` verdict and evidence
+- **get_nobel_prizes** — by year, category or name
+- **get_official_series** — list the series, or one series' annual values
+- **get_disagreements** — the ledger, filtered by person or section
 
 Every returned entry carries its `revid` and citation URL, which is the point of pointing a model
 at this rather than at a summary: the model can hand the user something checkable.

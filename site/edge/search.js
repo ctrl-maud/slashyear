@@ -70,7 +70,7 @@ async function postings(env, request, letter) {
   return table;
 }
 
-async function docShard(env, request, n) {
+export async function docShard(env, request, n) {
   if (cache.docs.has(n)) return cache.docs.get(n);
   const rows = (await asset(env, request, `/api/text/d-${n}.json`)) || [];
   cache.docs.set(n, rows);
@@ -82,7 +82,7 @@ export async function meta(env, request) {
   return cache.meta;
 }
 
-const FIELDS = ["year", "year_label", "date", "section", "text",
+export const FIELDS = ["year", "year_label", "date", "section", "text",
   "source_url", "source_title", "source_revid", "source_section"];
 
 /** Free-text search over every published sentence. */

@@ -143,7 +143,10 @@ def check_mirror(out: str, site: str) -> None:
                and os.path.basename(p) not in ("index.json", "openapi.json", "years.json",
                                                "dates.json", "entities.json", "cross.json",
                                                "search-index.json")
-               and "/api/text/" not in p.replace(os.sep, "/")]
+               and "/api/text/" not in p.replace(os.sep, "/")
+               # outside records: these are what the facts-driven pages render from, not mirrors of data/site
+               and not re.search(r"/api/(facts|play|official|leaders-index|bench)/", p.replace(os.sep, "/"))
+               and os.path.basename(p) not in ("prices.json", "hot100.json", "nobel.json", "disagreements.json")]
     if orphans:
         fail(f"MIRROR {len(orphans)} /api files have no page data behind them "
              f"(e.g. {os.path.relpath(orphans[0], out)})")
@@ -338,7 +341,7 @@ def check_doc(out: str, base: str, live: bool) -> None:
     checked = 0
     for u in ours:
         rel = u[len(base):].split("#")[0].split("?")[0]
-        if rel in ("/mcp", "/api/search") or rel.startswith("/api/search"):
+        if rel in ("/mcp", "/api/search", "/api/check") or rel.startswith(("/api/search", "/api/asof/")):
             continue
         cands = [os.path.join(out, rel.lstrip("/")),
                  os.path.join(out, rel.lstrip("/"), "index.html"),

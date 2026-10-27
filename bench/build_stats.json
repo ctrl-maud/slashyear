@@ -1,0 +1,19 @@
+{
+ "event_year": {
+  "dated_candidates": 31707,
+  "after_filters": 23446,
+  "selected": 400
+ },
+ "number_one": {
+  "selected": 200
+ },
+ "leader": {
+  "unambiguous_candidates": 26145,
+  "selected": 250
+ },
+ "cpi": {
+  "selected": 150
+ },
+ "total": 1000,
+ "seed": 20261027
+}

@@ -270,6 +270,10 @@ def write_sitemap(out: str, site: str, base: str) -> str:
     urls.append((f"{base}/on", newest))
     urls.append((f"{base}/api", newest))
     urls.append((f"{base}/data", newest))
+    for page in ("asof", "check", "disagreements", "disagreements/leaders", "disagreements/births-deaths",
+                 "disagreements/birth-death-days", "nobel", "official", "bench"):
+        if os.path.exists(os.path.join(out, f"{page}.html")):
+            urls.append((f"{base}/{page}", newest))
     # /404 is served from a directory index, so it is the one year whose canonical URL
     # carries a trailing slash; listing it without one puts a 308 in the sitemap.
     urls += [(f"{base}/404/" if y == 404 else f"{base}/{y}", retrieved[y]) for y in years]
@@ -436,11 +440,99 @@ def write_extras_api(out: str, extras: str) -> str:
         for f in os.listdir(src):
             shutil.copyfile(os.path.join(src, f), os.path.join(dst, f))
             n += 1
-    for f in ("prices.json", "hot100.json"):
+    for f in ("prices.json", "hot100.json", "nobel.json", "disagreements.json"):
         if os.path.exists(os.path.join(extras, f)):
             shutil.copyfile(os.path.join(extras, f), os.path.join(api, f))
             n += 1
-    return f"/api extras: {n} files (facts, play, prices, hot100)"
+    bench = {"bench-summary.json": "summary.json", "bench-items.jsonl": "items.jsonl"}
+    if all(os.path.exists(os.path.join(extras, f)) for f in bench):
+        os.makedirs(os.path.join(api, "bench"), exist_ok=True)
+        for f, name in bench.items():
+            shutil.copyfile(os.path.join(extras, f), os.path.join(api, "bench", name))
+            n += 1
+    # The official series, one file each with every native value (annual, monthly, daily),
+    # so /api/asof can read the exchange rate for one day without the whole collection.
+    off = os.path.join(extras, "official.json")
+    if os.path.exists(off):
+        doc = json.load(open(off, encoding="utf-8"))
+        dst = os.path.join(api, "official")
+        os.makedirs(dst, exist_ok=True)
+        index = {"retrieved": doc["retrieved"], "series": [], "fx": []}
+        for sid, ser in doc["series"].items():
+            json.dump({"id": sid, **ser}, open(os.path.join(dst, f"{sid}.json"), "w", encoding="utf-8"),
+                      ensure_ascii=False, separators=(",", ":"))
+            n += 1
+            index["series"].append({k: ser.get(k) for k in ("name", "unit", "frequency", "publisher", "url", "license")}
+                                   | {"id": sid, "span": [min(ser["annual"]), max(ser["annual"])] if ser["annual"] else None,
+                                      "file": f"/api/official/{sid}.json"})
+            if ser.get("daily"):
+                index["fx"].append(sid)
+                index.setdefault("fx_meta", {})[sid] = {k: ser.get(k) for k in ("name", "unit", "publisher", "url", "license")}
+        json.dump(index, open(os.path.join(dst, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        n += 1
+    return f"/api extras: {n} files (facts, play, prices, hot100, nobel, disagreements, official)"
+
+
+def write_leader_index(out: str, extras: str) -> str:
+    """Every published holder with the years they are published for, filed under the first
+    letter of each word of their name. /api/check reads one of these instead of thirty
+    facts files to tell "in office that year" from "in office, but other years"."""
+    facts = os.path.join(extras, "facts")
+    if not os.path.isdir(facts):
+        return "/api/leaders-index: skipped"
+    rows: dict[tuple, list[int]] = {}
+    for f in os.listdir(facts):
+        if not f[0].isdigit():
+            continue
+        d = json.load(open(os.path.join(facts, f), encoding="utf-8"))
+        for st in (d.get("leaders") or {}).get("states", []):
+            for h in st["holders"]:
+                k = (h["person"], h["name"], st["state"], st["country"], h["title"] or h["office"] or "", h["qid"], h["quote"])
+                rows.setdefault(k, []).append(d["year"])
+    shards: dict[str, list] = {}
+    for k, ys in rows.items():
+        ys.sort()
+        spans, a, b = [], ys[0], ys[0]
+        for y in ys[1:]:
+            if y == b + 1:
+                b = y
+            else:
+                spans.append([a, b])
+                a = b = y
+        spans.append([a, b])
+        letters = {w[0] for w in re.sub(r"[^a-z0-9 ]+", " ", _ascii(f"{k[0]} {k[1]}").lower()).split() if w}
+        for c in letters:
+            shards.setdefault(c, []).append([*k, spans])
+    dst = os.path.join(out, "api", "leaders-index")
+    os.makedirs(dst, exist_ok=True)
+    fields = ["person", "name", "state", "country", "post", "qid", "quote", "years"]
+    for c, rs in shards.items():
+        json.dump({"fields": fields, "rows": rs}, open(os.path.join(dst, f"{c}.json"), "w", encoding="utf-8"),
+                  ensure_ascii=False, separators=(",", ":"))
+    return f"/api/leaders-index: {len(rows)} holder rows in {len(shards)} files"
+
+
+def _ascii(s: str) -> str:
+    import unicodedata
+    return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
+
+
+def write_fx_by_year(out: str, extras: str) -> str:
+    """The Fed's daily exchange rates regrouped one file per year, so the date endpoint
+    reads one small file rather than every currency's whole history."""
+    off = os.path.join(extras, "official.json")
+    if not os.path.exists(off):
+        return "/api/official/fx: skipped"
+    doc = json.load(open(off, encoding="utf-8"))
+    years: dict[str, dict] = {}
+    for sid, ser in doc["series"].items():
+        for day, v in (ser.get("daily") or {}).items():
+            years.setdefault(day[:4], {}).setdefault(day, {})[sid] = v
+    dst = os.path.join(out, "api", "official", "fx")
+    os.makedirs(dst, exist_ok=True)
+    for y, days in years.items():
+        json.dump(days, open(os.path.join(dst, f"{y}.json"), "w", encoding="utf-8"), separators=(",", ":"))
+    return f"/api/official/fx: {len(years)} year files"
 
 
 def write_entities_api(out: str, site: str) -> str:
@@ -783,7 +875,16 @@ by us and no language model touches the wording.
 - [One country]({base}/api/place/japan.json): `/api/place/{{country}}.json`, harvested from the per-country year articles
 - [Subject index]({base}/api/entities.json), [year index]({base}/api/years.json), [date index]({base}/api/dates.json)
 - [Search]({base}/api/search?q=plague): `/api/search?q=&from=&to=&limit=` returns matching subjects and their dated entries
-- [MCP server]({base}/mcp): streamable HTTP, no auth, tools for years, days, subjects, search, year facts, world leaders, prices and No. 1 songs
+- [MCP server]({base}/mcp): streamable HTTP, no auth, tools for years, days, subjects, search, year facts, world leaders, prices, No. 1 songs, the world on a date, claim checking, Nobel Prizes, official series and source disagreements
+
+## The world on a date, and checking a claim
+
+- [The world on one date]({base}/api/asof/1969-07-20): `/api/asof/{{YYYY-MM-DD}}` -- that day's dated entries, births and deaths, every state's office holders that year, the Hot 100 No. 1 in force, U.S. prices, world population, official series, Federal Reserve exchange rates that day and the year's Nobel Prizes, each with its source. [Page]({base}/asof)
+- [Check a claim]({base}/api/check?claim=Richard%20Nixon%20was%20president%20in%201975): `/api/check?claim=` -- leaders, No. 1 singles and Nobel Prizes get a structured verdict (supported / contradicted) with the source; other claims get the dated entries that hold their key words and where the record dates them. No model writes the verdict. [Page]({base}/check)
+
+## Where the sources disagree
+
+slashyear publishes a date only when two independent sources agree. [The ledger of where they don't]({base}/disagreements) ([JSON]({base}/api/disagreements.json)) lists leaders' terms that Wikipedia's state-leader lists and Wikidata date differently, births and deaths that Wikipedia's year articles file under a different year or day than Wikidata, and Nobel Prizes where the Nobel Prize API and Wikidata differ. Each row quotes both sources and links the exact revision; none says which is right.
 
 ## Year facts (outside series, not Wikipedia prose)
 
@@ -799,6 +900,9 @@ Hot 100 No. 1 by issue date (quoted from cited Wikipedia revisions).
 - [World leaders in a year]({base}/leaders/1985): every state's heads of state and government
 - [Prices]({base}/api/prices.json), [Hot 100 No. 1s]({base}/api/hot100.json)
 - [Daily guess-the-year puzzle]({base}/play), data at `/api/play/{{YYYY-MM}}.json`
+- [Nobel Prizes by year]({base}/nobel) ([JSON]({base}/api/nobel.json)): from the Nobel Prize API (CC0), each kept only where Wikidata records the same prize in the same year
+- [SlashYear-Bench]({base}/bench): a closed-book test of what language models remember about dated history, built from this record; questions at `/api/bench/items.jsonl`
+- [Official series]({base}/official) ([index]({base}/api/official/index.json)): U.S. unemployment, interest rates, GDP, population, federal debt, Mauna Loa CO2, global temperature and Federal Reserve exchange rates, from the publishing agency and checked against a second copy
 
 ## Terms
 
@@ -916,6 +1020,16 @@ def write_manifest(out: str, base: str) -> str:
         ("/api/prices.json", "U.S. CPI and average prices by year (BLS, Census, DOL via FRED)"),
         ("/api/hot100.json", "every Billboard Hot 100 No. 1 by issue date, with its Wikipedia revision"),
         ("/api/play/{month}.json", "the guess-the-year puzzles for one month (YYYY-MM)"),
+        ("/api/asof/{date}", "the world on one date (YYYY-MM-DD): that day's entries, office holders that year, "
+                             "the Hot 100 No. 1 in force, prices, population, official series, Fed exchange "
+                             "rates and Nobel Prizes, each with its source"),
+        ("/api/check?claim={claim}", "check one dated sentence against the record: structured verdicts for "
+                                     "leaders, No. 1 singles and Nobel Prizes, dated evidence for anything else"),
+        ("/api/nobel.json", "every Nobel Prize by year, from the Nobel Prize API, kept where Wikidata agrees"),
+        ("/api/disagreements.json", "where Wikipedia, Wikidata and the Nobel Prize record disagree, both sides quoted"),
+        ("/api/official/index.json", "official data series (BLS, BEA, Treasury, Fed, NOAA...) and their cross-checks"),
+        ("/api/official/{series}.json", "one official series with every native value (annual, monthly, daily)"),
+        ("/api/bench/summary.json", "SlashYear-Bench: closed-book scores of language models on dated history"),
         ("/dump/events.ndjson.gz", "every dated entry on the site, gzipped newline-delimited JSON"),
         ("/dump/years.ndjson.gz", "one record per year"),
         ("/dump/entities.ndjson.gz", "one record per subject timeline"),
@@ -941,13 +1055,16 @@ def write_manifest(out: str, base: str) -> str:
         "endpoints": [{"path": p, "description": d} for p, d in endpoints],
     }, open(os.path.join(api, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
-    samples = {"year": "1969", "month-day": "july-20", "country": "france", "month": "2026-10"}
+    samples = {"year": "1969", "month-day": "july-20", "country": "france", "month": "2026-10",
+               "date": "1969-07-20", "series": "unemployment_rate"}
     slug_samples = {"century": "20th-century", "decade": "1960s", "topic": "climate-and-environment",
                     "entity": "apollo-program"}
     paths = {}
     for p, d in endpoints:
         path_only = p.split("?")[0]
         names = re.findall(r"{([a-z-]+)}", path_only)
+        if path_only == "/api/check":
+            names = []
         values = {n: samples.get(n) for n in names}
         if "slug" in values:
             values["slug"] = slug_samples.get(path_only.split("/")[2])
@@ -955,7 +1072,11 @@ def write_manifest(out: str, base: str) -> str:
             values["century"] = "20th-century"
         params = [{"name": n, "in": "path", "required": True, "schema": {"type": "string"},
                    **({"example": values[n]} if values[n] else {})} for n in names]
-        if "?" in p:
+        if path_only == "/api/check":
+            params = [{"name": "claim", "in": "query", "required": True, "schema": {"type": "string"},
+                       "example": "Richard Nixon was president of the United States in 1975",
+                       "description": "a sentence naming a year (and optionally a day)"}]
+        elif "?" in p:
             params += [
                 {"name": "q", "in": "query", "required": True, "schema": {"type": "string"}, "example": "apollo",
                  "description": "free text; matched against subject names and descriptions"},
@@ -1100,6 +1221,8 @@ def main() -> int:
     print(" ", write_api(a.out, a.site))
     print(" ", write_entities_api(a.out, a.site))
     print(" ", write_extras_api(a.out, a.extras))
+    print(" ", write_leader_index(a.out, a.extras))
+    print(" ", write_fx_by_year(a.out, a.extras))
     print(" ", write_search_index(a.out, a.site))
     print(" ", write_text_index(a.out, a.site))
     print(" ", write_dumps(a.out, a.site, base))

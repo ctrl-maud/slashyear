@@ -14,6 +14,7 @@
 
 import { CORS as BASE_CORS, asset, norm, rankSubjects, searchText, subjects }
   from "../edge/search.js";
+import { checkClaim, snapshot } from "../edge/asof.js";
 
 const PROTOCOL = "2025-06-18";
 
@@ -167,6 +168,78 @@ const TOOLS = [
         to_year: { type: "integer", description: "optional; default is the latest CPI month" },
       },
       required: ["amount", "from_year"],
+    },
+  },
+  {
+    name: "get_world_on_date",
+    description:
+      "The world on one date in a single answer: the dated entries for that exact day, births " +
+      "and deaths that day, every state's office holders that year, the Billboard Hot 100 No. 1 " +
+      "in force, U.S. prices and CPI, world population, official series (unemployment, rates, " +
+      "GDP, debt, CO2, temperature), Federal Reserve exchange rates for that day, and that " +
+      "year's Nobel Prizes. Each part carries its source; parts no source covers are absent.",
+    inputSchema: {
+      type: "object",
+      properties: { date: { type: "string", description: "YYYY-MM-DD, e.g. 1969-07-20" } },
+      required: ["date"],
+    },
+  },
+  {
+    name: "check_claim",
+    description:
+      "Check one dated sentence against the record before stating it. Leaders, Billboard No. 1 " +
+      "singles and Nobel Prizes get a structured check that can return 'supported' or " +
+      "'contradicted' with the source. Other claims are matched against the dated entries and " +
+      "the answer says where the record dates sentences holding the claim's key words " +
+      "(matched_same_year, matched_other_years, ...), with the entries as evidence.",
+    inputSchema: {
+      type: "object",
+      properties: { claim: { type: "string", description: "e.g. 'Richard Nixon was president of the United States in 1975'" } },
+      required: ["claim"],
+    },
+  },
+  {
+    name: "get_nobel_prizes",
+    description:
+      "Nobel laureates for a year (1901 on) or for a category across years, from the Nobel " +
+      "Prize API and kept only where Wikidata records the same prize in the same year.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        year: { type: "integer" },
+        category: { type: "string", description: "Physics, Chemistry, Physiology or Medicine, Literature, Peace, Economic Sciences" },
+        name: { type: "string", description: "optional: laureate name to find" },
+      },
+    },
+  },
+  {
+    name: "get_official_series",
+    description:
+      "Official data series by year from the agencies that publish them, each cross-checked " +
+      "against a second copy: U.S. unemployment, federal funds rate, GDP, population, federal " +
+      "debt, Mauna Loa CO2, global temperature anomaly, Fed exchange rates. Omit series to list them.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        series: { type: "string", description: "series id from the list, e.g. 'unemployment_rate'" },
+        from_year: { type: "integer" },
+        to_year: { type: "integer" },
+      },
+    },
+  },
+  {
+    name: "get_disagreements",
+    description:
+      "Where two sources slashyear checks against each other disagree: leaders' terms " +
+      "(Wikipedia lists vs Wikidata), birth and death dates (Wikipedia year articles vs " +
+      "Wikidata), Nobel Prizes (Nobel API vs Wikidata). Useful before trusting either source.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        person: { type: "string", description: "optional: name to look for" },
+        section: { type: "string", description: "optional: leaders, life_years, life_days or nobel" },
+        limit: { type: "integer", description: "default 50, max 500" },
+      },
     },
   },
   {
@@ -394,6 +467,62 @@ async function call(name, args, env, request) {
     });
   }
 
+  if (name === "get_world_on_date") return text(await snapshot(env, request, args?.date, origin));
+
+  if (name === "check_claim") return text(await checkClaim(env, request, args?.claim, origin));
+
+  if (name === "get_nobel_prizes") {
+    const doc = await asset(env, request, "/api/nobel.json");
+    if (!doc) return text({ error: "Nobel data not available" });
+    const y = args?.year != null ? String(parseInt(args.year, 10)) : null;
+    const cat = norm(args?.category || "");
+    const who = norm(args?.name || "");
+    const rows = [];
+    for (const [yy, ps] of Object.entries(doc.years)) {
+      if (y && yy !== y) continue;
+      for (const p of ps) {
+        if (cat && !norm(p.category).includes(cat)) continue;
+        if (who && !norm(p.name).includes(who)) continue;
+        rows.push({ year: +yy, ...p });
+      }
+    }
+    if (!y && !cat && !who) return text({ error: "pass a year, a category or a name" });
+    return text({
+      prizes: rows.slice(0, 300), total: rows.length,
+      not_awarded: y ? doc.not_awarded[y] : undefined,
+      source: doc.source, checked_against: doc.checked_against, page: `${origin}/nobel`,
+    });
+  }
+
+  if (name === "get_official_series") {
+    const idx = await asset(env, request, "/api/official/index.json");
+    if (!idx) return text({ error: "official series not available" });
+    if (!args?.series) return text({ series: idx.series.map(({ id, name: n, unit, publisher, span }) => ({ id, name: n, unit, publisher, span })) });
+    const hit = idx.series.find((x) => x.id === args.series || norm(x.name).includes(norm(args.series)));
+    if (!hit) return text({ error: `no series "${args.series}"`, ids: idx.series.map((x) => x.id) });
+    const s = await asset(env, request, `/api/official/${hit.id}.json`);
+    const annual = Object.fromEntries(Object.entries(s.annual).filter(([k]) => inRange(+k, from, to)));
+    return text({
+      id: hit.id, name: s.name, unit: s.unit, annual_method: s.annual_method, annual,
+      source: { publisher: s.publisher, url: s.url, license: s.license }, cross_check: s.cross_check,
+      more: `${origin}/api/official/${hit.id}.json has the native ${s.frequency} values`,
+    });
+  }
+
+  if (name === "get_disagreements") {
+    const doc = await asset(env, request, "/api/disagreements.json");
+    if (!doc) return text({ error: "ledger not available" });
+    const who = norm(args?.person || "");
+    const limit = cap(args?.limit, 50, 500);
+    const out = {};
+    for (const [k, sec] of Object.entries(doc.sections)) {
+      if (args?.section && k !== args.section) continue;
+      const rows = who ? sec.rows.filter((r) => norm(r.person || r.name || "").includes(who)) : sec.rows;
+      out[k] = { title: sec.title, rule: sec.rule, total: rows.length, rows: rows.slice(0, limit) };
+    }
+    return text({ what: doc.what, sections: out, page: `${origin}/disagreements` });
+  }
+
   if (name === "list_subjects") {
     const rows = await subjects(env, request);
     const p = norm(args?.starts_with || "");
@@ -460,7 +589,7 @@ export async function onRequest({ request, env }) {
         return ok({
           protocolVersion: PROTOCOL,
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "slashyear", version: "1.2.0" },
+          serverInfo: { name: "slashyear", version: "1.3.0" },
           instructions:
             "Sourced history. Every entry is a sentence quoted verbatim from a specific English " +
             "Wikipedia revision and carries that revision id, so a claim built on it stays " +

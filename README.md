@@ -87,6 +87,26 @@ instead, start at `pipeline/harvest.py` and follow the stage order in
 - **MCP server** — `https://slashyear.com/mcp`, so a model can query the corpus directly. No key;
   client setup in [llms-install.md](llms-install.md).
 
+## Beyond the year pages
+
+- **The world on a date** — `/api/asof/1969-07-20` ([page](https://slashyear.com/asof)): the
+  entries dated to that day, every state's office holders that year, the Hot 100 No. 1 in force,
+  U.S. prices, world population, official series, Federal Reserve exchange rates for that day and
+  the year's Nobel Prizes, each part with its source. `site/edge/asof.js`.
+- **Claim checking** — `/api/check?claim=…` ([page](https://slashyear.com/check)). Leaders,
+  No. 1 singles and Nobel Prizes get a structured verdict, because there the record is complete
+  enough to say "contradicted". Any other claim gets the dated entries holding its key words and
+  where the record dates them. No model writes a verdict.
+- **Where the sources disagree** — `pipeline/disagreements.py` → `/api/disagreements.json`
+  ([page](https://slashyear.com/disagreements)). Every date the build's cross-checks found in
+  conflict: state-leader lists vs Wikidata, year-article births and deaths vs Wikidata, the Nobel
+  Prize API vs Wikidata. Both sides quoted with their revision or item; no side picked.
+- **Nobel Prizes** — `/api/nobel.json`, from the Nobel Prize API (CC0), each laureate kept only
+  where Wikidata records the same prize in the same year.
+- **Official series** — `/api/official/index.json` ([page](https://slashyear.com/official)):
+  U.S. and scientific series taken from the publishing agency and checked against a second copy
+  before they go out.
+
 ## Licensing
 
 - **Code** — Apache-2.0 ([LICENSE](LICENSE)).

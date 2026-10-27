@@ -201,6 +201,9 @@ def main() -> int:
             checked_links += 1
             if href in paths or href.rstrip("/") + "/" in paths:
                 continue
+            # Answered by a Pages Function (site/functions/api/asof), not a file.
+            if re.match(r"^/api/asof/-?\d{1,4}-\d{2}-\d{2}$", href):
+                continue
             fail["links"].append(f"{url} -> {href}")
 
         # 3. head

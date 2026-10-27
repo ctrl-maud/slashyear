@@ -152,6 +152,34 @@ def prices_for(doc: dict, year: int) -> dict | None:
     }
 
 
+def nobel_for(doc: dict, year: int) -> dict | None:
+    """The year's Nobel laureates, each kept only where Wikidata independently records the
+    same prize in the same year (staging build in data/extras/nobel.json)."""
+    prizes = doc["years"].get(str(year))
+    none = doc.get("not_awarded", {}).get(str(year))
+    if not prizes and not none:
+        return None
+    out = {"prizes": [{k: p[k] for k in ("category", "name", "kind", "qid", "motivation", "share", "nobel_url", "prize_status") if p.get(k)}
+                      for p in prizes or []],
+           "source": doc["source"], "checked_against": doc["checked_against"]}
+    if none:
+        out["not_awarded"] = none
+    return out
+
+
+def official_for(doc: dict, year: int) -> dict | None:
+    """Annual values of the official series (data/extras/official.json), each with its
+    publisher and the cross-check it passed. A series with no value for the year is absent."""
+    out = {}
+    for sid, s in doc["series"].items():
+        v = s["annual"].get(str(year))
+        if v is None:
+            continue
+        out[sid] = {"name": s["name"], "unit": s["unit"], "value": v, "annual_method": s.get("annual_method"),
+                    "source": {"publisher": s["publisher"], "url": s["url"], "license": s["license"]}}
+    return out or None
+
+
 def famous_births(claims_dir: str, notability: dict, year: int, n: int = 15) -> list[dict]:
     """The year's births ranked by the length of the person's own article, the same
     proxy notability.py uses for everything else. The published year page shows only a
@@ -191,6 +219,8 @@ def main() -> int:
     prices = load(os.path.join(a.extras, "prices.json"))
     leaders = load(os.path.join(a.extras, "stateleaders.json"))
     hot100 = load(os.path.join(a.extras, "hot100.json"))
+    nobel = load(os.path.join(a.extras, "nobel.json"))
+    official = load(os.path.join(a.extras, "official.json"))
     notability = load(os.path.join(ROOT, "data", "notability.json")) or {}
     claims = os.path.join(ROOT, "data", "claims")
     out = os.path.join(a.extras, "facts")
@@ -214,6 +244,14 @@ def main() -> int:
             h = hot100_for(hot100, year)
             if h:
                 rec["hot100"] = h
+        if official:
+            o = official_for(official, year)
+            if o:
+                rec["official"] = o
+        if nobel:
+            n = nobel_for(nobel, year)
+            if n:
+                rec["nobel"] = n
         if len(rec) == 1:
             continue
         births = famous_births(claims, notability, year)
@@ -227,6 +265,8 @@ def main() -> int:
             "prices": "prices" in rec,
             "leaders": len(rec.get("leaders", {}).get("states", [])),
             "hot100": "hot100" in rec,
+            "nobel": len(rec.get("nobel", {}).get("prizes", [])),
+            "official": sorted(rec.get("official", {})),
         })
     with open(os.path.join(out, "index.json"), "w", encoding="utf-8") as fh:
         json.dump({"built": dt.date.today().isoformat(), "years": index}, fh,
